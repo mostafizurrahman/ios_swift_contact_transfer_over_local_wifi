@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
             endingLineNumber = "35"
-            landmarkName = "getSocket(FromIP:serverPort:)"
+            landmarkName = "receive(OutData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -20,7 +20,7 @@
 int udpsocket_server(const char *, int);
 int udpsocket_sentto(int,char *, int,
                      char *, int);
-int udpsocket_recive(int, char *, int,
+int udpsocket_receive(int, char *, int,
                      char *, int *);
 int udpsocket_close(int);
 int udpsocket_client(void);

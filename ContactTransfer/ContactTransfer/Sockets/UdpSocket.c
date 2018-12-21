@@ -58,7 +58,7 @@ int udpsocket_sentto(int socket_fd,char *msg,int len, char *toaddr, int topotr) 
 }
 
 #pragma -mark udp RECEIVE
-int udpsocket_recive(int socket_fd, char *outdata, int expted_len,
+int udpsocket_receive(int socket_fd, char *outdata, int expted_len,
                      char *remoteip, int* remoteport) {
     struct sockaddr_in  cli_addr;
     socklen_t clilen = sizeof(cli_addr);
@@ -67,8 +67,7 @@ int udpsocket_recive(int socket_fd, char *outdata, int expted_len,
     struct timeval tv;
     tv.tv_sec = 0;
     tv.tv_usec = 200000;
-    if (setsockopt(socket_fd, SOL_SOCKET, SO_RCVTIMEO,&tv,sizeof(tv)) < 0)
-    {
+    if (setsockopt(socket_fd, SOL_SOCKET, SO_RCVTIMEO,&tv,sizeof(tv)) < 0) {
         perror("Error");
     }
     int len=(int)recvfrom(socket_fd, outdata, expted_len, 0, (struct sockaddr *)&cli_addr, &clilen);    
