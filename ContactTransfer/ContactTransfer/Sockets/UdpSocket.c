@@ -3,7 +3,7 @@
 //  Contact Search
 //
 //  Created by Mostafizur Rahman on 4/16/16.
-//  Copyright © 2016 Dotsoft.inc.. All rights reserved.
+//  Copyright © 2016 DataApp.. All rights reserved.
 //
 
 

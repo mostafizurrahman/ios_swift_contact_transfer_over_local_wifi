@@ -2,13 +2,15 @@
 #import <Foundation/Foundation.h>
 
 
-#define NEW_ERROR(num, str) [[NSError alloc] initWithDomain:@"CSSocketErrorDomain" code:(num) userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", (str)] forKey:NSLocalizedDescriptionKey]]
+#define NEW_ERROR(num, str) [[NSError alloc] initWithDomain:@"CSSocketErrorDomain"\
+code:(num) userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s",\
+(str)] forKey:NSLocalizedDescriptionKey]]
 
 @interface CSClientSocket : NSObject
 
 #pragma mark - Properties
 
-@property (nonatomic, readonly) int sockfd;
+@property (nonatomic, readonly) int socket_descriptor;
 @property (nonatomic, readonly) NSString *host;
 @property (nonatomic, readonly) NSString *port;
 @property (nonatomic, readonly) NSError *lastError;

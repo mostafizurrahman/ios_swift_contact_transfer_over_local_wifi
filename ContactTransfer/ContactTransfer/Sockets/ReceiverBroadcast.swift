@@ -23,24 +23,19 @@ class ReceiverBroadcast {
     
     public init(self_address ip_address:String, broadcast_port port:Int)  {
         
-        let remote_ip = UnsafeMutablePointer<Int8>.allocate(capacity: 16)
-        memset(remote_ip, 0, 16)
         let client_ip = UnsafeMutablePointer<Int8>.allocate(capacity: 16)
         memset(client_ip, 0, 16)
         let __data = Array(ip_address.utf8)
         memcpy(client_ip, __data, __data.count)
-//        let status = udpsocket_get_server_ip(client_ip, remote_ip)
-//        if status == 0 {
-            self.remote_address = ServerSocket.getBroadcastAddress()
-            self.remote_port = port
-            self.socket_descriptor = udpsocket_client()
-            udpsocket_enable_broadcast(self.socket_descriptor)
-            memset(client_ip, 0, 16)
-            udpsocket_self_ip(client_ip)
-            self.device_address = String.init(cString: client_ip)
-//        }
+        
+        self.remote_address = ServerSocket.getBroadcastAddress()
+        self.remote_port = port
+        self.socket_descriptor = udpsocket_client()
+        udpsocket_enable_broadcast(self.socket_descriptor)
+        memset(client_ip, 0, 16)
+        udpsocket_self_ip(client_ip)
+        self.device_address = String.init(cString: client_ip)
         free(client_ip)
-        free(remote_ip)
     }
     
     func send(Data socketData:SocketData) -> Int {
@@ -56,6 +51,7 @@ class ReceiverBroadcast {
             print("sending success")
         }
         free(client_ip)
+            
         free(raw_data)
         return Int(send_len)
     }
