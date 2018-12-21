@@ -67,8 +67,9 @@ typealias SD = SocketData
             while self.receiveBraodcast {
                 let recv_data = receiverSocket.receive(OutData:dataPointer)
                 if recv_data > 0 {
-                    self.reveivedLabel.text = "received_data \(recv_data)"
-                    break
+                    DispatchQueue.main.async {
+                        self.reveivedLabel.text = "received_data \(recv_data)"
+                    }
                 }
                 sleep(1)
             }

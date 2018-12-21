@@ -10,7 +10,7 @@ code:(num) userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithForma
 
 #pragma mark - Properties
 
-@property (nonatomic, readonly) int socket_descriptor;
+@property (nonatomic, readonly) int client_socket;
 @property (nonatomic, readonly) NSString *host;
 @property (nonatomic, readonly) NSString *port;
 @property (nonatomic, readonly) NSError *lastError;
@@ -18,11 +18,12 @@ code:(num) userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithForma
 #pragma mark - Initializers
 
 
-- (id)initWithHost:(NSString *)host andPort:(NSString *)port __attribute__((nonnull));
+- (instancetype)initWithHost:(NSString *)remoteHost
+                        port:(NSString *)remotePort;
 
-- (id)initWithFileDescriptor:(int)fd;
+- (instancetype)initWithFileDescriptor:(int)socket_descriptor;
 
-- (void)buffer:(void **)buf size:(long *)size __attribute__((nonnull));
+- (void)getBuffer:(char *)outBuffer size:(long *)outSize;
 
 #pragma mark - Actions
 
@@ -32,7 +33,9 @@ code:(num) userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithForma
 
 - (BOOL)close;
 
-- (long)sendBytes:(const void *)buf count:(long)count __attribute__((nonnull));
+- (long)sendBytes:(const char *)sendBuffer
+           length:(const long)dataLength;
 
-- (long)receiveBytes:(void *)buf limit:(long)limit __attribute__((nonnull));
+- (long)receiveBytes:(void *)outBuffer
+              length:(const long)dataLength;
 @end

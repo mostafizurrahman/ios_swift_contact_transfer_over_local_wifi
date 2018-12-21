@@ -16,11 +16,11 @@
 
 #pragma mark - Properties
 
-@property (nonatomic, readonly) int sockfd;
+@property (nonatomic, readonly) int server_socket;
 @property (nonatomic, readonly) NSString *port;
 @property (nonatomic, readonly) NSError *lastError;
 @property (readonly) BOOL isTimeOut;
-- (id)initWithPort:(NSString *)port __attribute__((nonnull));
+- (instancetype)initWithPort:(NSString *)port __attribute__((nonnull));
 - (BOOL)listen;
 - (CSClientSocket *)accept:(int)timeOut;
 - (BOOL)close;
