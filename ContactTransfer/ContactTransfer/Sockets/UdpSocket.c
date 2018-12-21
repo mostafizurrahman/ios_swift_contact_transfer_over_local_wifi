@@ -65,7 +65,7 @@ int udpsocket_receive(int socket_fd, char *outdata, int expted_len,
     memset(&cli_addr, 0x0, sizeof(struct sockaddr_in));
     
     struct timeval tv;
-    tv.tv_sec = 0;
+    tv.tv_sec = 5;
     tv.tv_usec = 200000;
     if (setsockopt(socket_fd, SOL_SOCKET, SO_RCVTIMEO,&tv,sizeof(tv)) < 0) {
         perror("Error");
@@ -99,7 +99,7 @@ void udpsocket_enable_broadcast(int socket_fd) {
 }
 
 #pragma -mark udp SERVER IP
-int udpsocket_get_server_ip(char *host,char *ip) {
+int udpsocket_get_server_ip(const char *host, const char *ip) {
     struct hostent *hp;
     struct sockaddr_in addr;
     hp = gethostbyname(host);

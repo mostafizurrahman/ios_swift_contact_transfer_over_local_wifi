@@ -25,6 +25,6 @@ int udpsocket_receive(int, char *, int,
 int udpsocket_close(int);
 int udpsocket_client(void);
 void udpsocket_enable_broadcast(int);
-int udpsocket_get_server_ip(char *,char *);
+int udpsocket_get_server_ip(const char *, const char *);
 void udpsocket_self_ip(char *);
 #endif /* UdpSocket_h */

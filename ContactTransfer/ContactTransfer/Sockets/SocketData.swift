@@ -59,7 +59,7 @@ class SocketData: NSObject {
     
     convenience init(dictionary data:[String:AnyObject]) {
         self.init()
-        let os_type = Int(data["DEVICE_OS"] as? String ?? "0") ?? 0
+        let os_type = Int(data["DEVICE_OS"] as? Int32 ?? 0 )
         self.deviceOSType = OSType.init(rawValue: os_type)!  // must be 4 chaR LONG
         self.deviceModel = data["DEVICE_MODEL"] as? String ?? "UNKNOWN"
         self.senderIp = data["SENDER_IP"] as? String ?? "UNKNOWN"
@@ -70,7 +70,7 @@ class SocketData: NSObject {
         
         let value = data["COMM_STATUS"] as? String ?? "11"
         self.commStatus = SOStatus.init(rawValue: (value) ) ?? SOStatus.unknown
-        self.commPort = Int(data["COMM_PORT"] as? String ?? "0") ?? 0
+        self.commPort = Int(data["COMM_PORT"] as? Int ?? 0 )
     }
     
     fileprivate func get(rawChar pointer:UnsafeMutablePointer<Int8>,
@@ -188,7 +188,7 @@ class SocketData: NSObject {
                             end: SD.DATA_SIZE)
         let intPort = Int(port) ?? 0
         self.commPort = intPort
-        free(dataPointer)//it is not safe to free here, calling function should be responsible to free is data
+//        free(dataPointer)//it is not safe to free here, calling function should be responsible to free is data
     }
     
     func toByteArray<T>(_ value: T) -> [UInt8] {

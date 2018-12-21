@@ -24,4 +24,5 @@
 - (BOOL)listen;
 - (CSClientSocket *)accept:(int)timeOut;
 - (BOOL)close;
++(NSString *)getBroadcastAddress;
 @end
