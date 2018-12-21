@@ -24,6 +24,7 @@ enum OSType : Int {
 class SocketData: NSObject {
     typealias SD = SocketData
     static let BRDCAST_PORT = 8888
+    static let DATAREQ_PORT = 4444
     static let DATA_SIZE = 70 // total length of the data
     
     
@@ -66,8 +67,6 @@ class SocketData: NSObject {
         self.senderName = data["SENDER_NAME"] as? String ?? "UNKNOWN"
         self.receiverIp = data["RECEIV_IP"] as? String ?? "UNKNOWN"
         self.receiverName = data["RECEIV_NAME"] as? String ?? "UNKNOWN"
-        
-        
         let value = data["COMM_STATUS"] as? String ?? "11"
         self.commStatus = SOStatus.init(rawValue: (value) ) ?? SOStatus.unknown
         self.commPort = Int(data["COMM_PORT"] as? Int ?? 0 )

@@ -27,7 +27,6 @@ class ReceiverBroadcast {
         memset(client_ip, 0, 16)
         let __data = Array(ip_address.utf8)
         memcpy(client_ip, __data, __data.count)
-        
         self.remote_address = ServerSocket.getBroadcastAddress()
         self.remote_port = port
         self.socket_descriptor = udpsocket_client()
@@ -51,7 +50,6 @@ class ReceiverBroadcast {
             print("sending success")
         }
         free(client_ip)
-            
         free(raw_data)
         return Int(send_len)
     }

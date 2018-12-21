@@ -21,7 +21,6 @@ class SenderBroadcast: NSObject {
     }
 
     
-    
     func receive(OutData dataPointer:UnsafeMutablePointer<Int8>) -> Int{
         let remote_ip = UnsafeMutablePointer<Int8>.allocate(capacity: 16)
         let remote_port = UnsafeMutablePointer<Int32>.allocate(capacity: 1)
