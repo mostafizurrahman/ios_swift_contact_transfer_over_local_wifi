@@ -13,6 +13,7 @@
 		BE02EECA21CAD654004CB9CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE02EEC821CAD654004CB9CD /* Main.storyboard */; };
 		BE02EECC21CAD656004CB9CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE02EECB21CAD656004CB9CD /* Assets.xcassets */; };
 		BE02EECF21CAD656004CB9CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE02EECD21CAD656004CB9CD /* LaunchScreen.storyboard */; };
+		BE040A6821CE65F100D826E8 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE040A6721CE65F100D826E8 /* BorderButton.swift */; };
 		BE886F1421CC0C8100F6534F /* CSClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0821CC0C8000F6534F /* CSClientSocket.m */; };
 		BE886F1521CC0C8100F6534F /* ServerSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0921CC0C8000F6534F /* ServerSocket.m */; };
 		BE886F1621CC0C8100F6534F /* TCPContactSend.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0A21CC0C8000F6534F /* TCPContactSend.m */; };
@@ -33,6 +34,7 @@
 		BE02EECB21CAD656004CB9CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE02EECE21CAD656004CB9CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE02EED021CAD656004CB9CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE040A6721CE65F100D826E8 /* BorderButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
 		BE886F0721CC0C7F00F6534F /* ContactTransfer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ContactTransfer-Bridging-Header.h"; sourceTree = "<group>"; };
 		BE886F0821CC0C8000F6534F /* CSClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSClientSocket.m; sourceTree = "<group>"; };
 		BE886F0921CC0C8000F6534F /* ServerSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerSocket.m; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		BE02EEC321CAD654004CB9CD /* ContactTransfer */ = {
 			isa = PBXGroup;
 			children = (
+				BE040A6721CE65F100D826E8 /* BorderButton.swift */,
 				BE02EEC421CAD654004CB9CD /* AppDelegate.swift */,
 				BE02EEC621CAD654004CB9CD /* ViewController.swift */,
 				BE02EEC821CAD654004CB9CD /* Main.storyboard */,
@@ -233,13 +236,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ContactTransfer/Pods-ContactTransfer-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/SwiftSocket/SwiftSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/Pulsator/Pulsator.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pulsator.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -257,6 +260,7 @@
 				BE886F1421CC0C8100F6534F /* CSClientSocket.m in Sources */,
 				BE886F1821CC0C8100F6534F /* TCPReceiveContact.m in Sources */,
 				BE886F1521CC0C8100F6534F /* ServerSocket.m in Sources */,
+				BE040A6821CE65F100D826E8 /* BorderButton.swift in Sources */,
 				BE886F1621CC0C8100F6534F /* TCPContactSend.m in Sources */,
 				BE886F2021CCDE6300F6534F /* SenderBroadcast.swift in Sources */,
 				BE02EEC721CAD654004CB9CD /* ViewController.swift in Sources */,

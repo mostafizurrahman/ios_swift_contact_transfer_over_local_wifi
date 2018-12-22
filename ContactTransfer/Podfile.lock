@@ -1,16 +1,16 @@
 PODS:
-  - SwiftSocket (2.0.2)
+  - Pulsator (0.5.1)
 
 DEPENDENCIES:
-  - SwiftSocket
+  - Pulsator
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - SwiftSocket
+    - Pulsator
 
 SPEC CHECKSUMS:
-  SwiftSocket: 6f4c9c63fbc5c1d61188936bb3c599fd546f40ae
+  Pulsator: f465ca37212d826523fe8c79b07c1a4c1a941f5e
 
-PODFILE CHECKSUM: 89c91387dd230c23262c99096cac4ff608f90586
+PODFILE CHECKSUM: d67bd54c789ad16709692ccf75e60bf9656b1686
 
 COCOAPODS: 1.5.3

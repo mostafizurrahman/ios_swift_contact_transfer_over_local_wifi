@@ -7,13 +7,20 @@
 //
 
 import UIKit
-import SwiftSocket
+import Pulsator
 
 class ViewController: UIViewController {
     
+    typealias HVC = ViewController
+    static let MSW = UIScreen.main.bounds.width
+    static let MSH = UIScreen.main.bounds.height
+    @IBOutlet weak var trailingSpace: NSLayoutConstraint!
+    @IBOutlet weak var leadingSpace: NSLayoutConstraint!
     
+    let pulsator = Pulsator()
     var receiverArray = [SocketData]()
     @IBOutlet weak var reveivedLabel: UILabel!
+    @IBOutlet weak var pulsView: UIView!
     
     
 typealias SD = SocketData
@@ -22,6 +29,8 @@ typealias SD = SocketData
     var receiveBraodcast = true
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.trailingSpace.constant = -HVC.MSW
+        self.view.layoutIfNeeded()
     }
     
     
@@ -90,13 +99,26 @@ typealias SD = SocketData
                             self.receiverArray.append(socketData)
                             self.createReceiverButton(socketData)
                         }
-                        self.reveivedLabel.text = "received_data \(recv_data)"
+//                        self.reveivedLabel.text = "received_data \(recv_data)"
                     }
                 }
                 sleep(1)
             }
         }
     }
+    
+    @IBAction func exitDataTransfer(_ sender: Any) {
+        self.leadingSpace.constant = 0
+        self.trailingSpace.constant = -HVC.MSW
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        }) { (_finished) in
+            
+            self.pulsator.removeAllAnimations()
+            self.pulsator.removeFromSuperlayer()
+        }
+    }
+    
     
     fileprivate func createReceiverButton(_ socketData:SocketData) {
         let receiver = UIButton(frame: CGRect(x:30, y:100,width:75,height:75))
@@ -112,10 +134,25 @@ typealias SD = SocketData
     
     @IBAction func sendData(_ sender: Any) {
         self.startBroadcastReciever()
+        self.leadingSpace.constant = -HVC.MSW / 4
+        self.trailingSpace.constant = 0
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        }) { (_finished) in
+            self.startPulse()
+        }
     }
     
     @IBAction func receiveData(_ sender: Any) {
         self.startBroadCastSender()
+        self.leadingSpace.constant = -HVC.MSW / 4
+        self.trailingSpace.constant = 0
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+            
+        }) { (_finished) in
+            self.startPulse()
+        }
     }
     
     @objc func startSendingData(_ sender:UIButton){
@@ -141,6 +178,13 @@ typealias SD = SocketData
             }
             self.performSegue(withIdentifier: "SenderSegue", sender: data)
         }
+    }
+    func startPulse(){
+        pulsator.backgroundColor = UIColor.init(rgb: 0xFF0066).cgColor
+        pulsator.position = CGPoint(x: self.pulsView.bounds.midX,
+                                    y: self.pulsView.bounds.midY)
+        self.pulsView.layer.addSublayer(pulsator)
+        pulsator.start()
     }
     
 }
