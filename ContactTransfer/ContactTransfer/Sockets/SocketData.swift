@@ -25,15 +25,15 @@ class SocketData: NSObject {
     typealias SD = SocketData
     static let BRDCAST_PORT = 8888
     static let DATAREQ_PORT = 4444
-    static let DATA_SIZE = 70 // total length of the data
+    static let DATA_SIZE = 71 // total length of the data
     
     
     static let LOC_DEVICE_OS = 0 //0-1 index // i dont know what is the index, find it later
     static let LOC_DEVICE_MODEL = 1  // 1-3 // name code of the data transfer // idont know exactly
     static let LOC_SENDER_IP = 9 // ip address of the sender
-    static let LOC_SENDER_NAME = 21 // name of the sender //20 char long
+    static let LOC_SENDER_NAME = 24 // name of the sender //20 char long
     static let LOC_RECEIV_IP = 37 // ip of the receiver
-    static let LOC_RECEIV_NAME = 49 // name of the receiver//20 char long
+    static let LOC_RECEIV_NAME = 51 // name of the receiver//20 char long
     static let LOC_STATUS = 65 // status of the data transfer 2 bytes
     static let LOC_COMPORT = 67//port location in data port is 4 digit long
     
@@ -45,7 +45,6 @@ class SocketData: NSObject {
     internal var receiverName:String = ""
     internal var commStatus:SOStatus = SOStatus.unknown
     internal var commPort:Int = -1
-    
     
     
     
@@ -89,12 +88,12 @@ class SocketData: NSObject {
     public func getData()->UnsafeMutablePointer<Int8> {
         let pointerData  = UnsafeMutablePointer<Int8>.allocate(capacity: SD.DATA_SIZE)
         memset(pointerData, 0, SD.DATA_SIZE)
-        
+       
         //os type + model to int8
-        pointerData.pointee = Int8(self.deviceOSType.rawValue)
+        memcpy(pointerData, "\(self.deviceOSType.rawValue)".toUInt8(), 1)
+        
         let modelPointer = pointerData.advanced(by: SD.LOC_DEVICE_MODEL)
         if let __model = self.deviceModel.toUInt8() {
-            memset(modelPointer, 0, self.deviceModel.count)
             memcpy(modelPointer, __model, self.deviceModel.count)
             free(__model)
         }
@@ -139,8 +138,10 @@ class SocketData: NSObject {
         
         //convert comm port to [UInt8]
         let portPointer = pointerData.advanced(by: SD.LOC_COMPORT)
-        let __port = self.toByteArray( self.commPort)
-        memcpy(portPointer, __port, __port.count)
+        if let __port = "\(self.commPort)".toUInt8() {
+            memcpy(portPointer, __port, "\(self.commPort)".count)
+            
+        }
         
         return pointerData
     }

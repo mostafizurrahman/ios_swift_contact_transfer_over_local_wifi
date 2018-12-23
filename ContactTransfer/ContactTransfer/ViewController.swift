@@ -97,7 +97,14 @@ class ViewController: UIViewController {
                             guard let __receiver = self.receiveContact else {
                                 continue
                             }
-                            is_connected = __receiver.initiateConnection("3333", timeOut: 5)
+                            is_connected = __receiver.initiateConnection("3333", timeOut: 15)
+                            
+                        }
+                        if is_connected {
+                            guard let __receiver = self.receiveContact else {
+                                return
+                            }
+                            __receiver.receiveContact()
                         }
                         break
                     }

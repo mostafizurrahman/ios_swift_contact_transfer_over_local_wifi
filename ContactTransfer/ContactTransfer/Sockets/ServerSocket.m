@@ -143,6 +143,9 @@
         }
     }
     freeifaddrs(interfaces);
+    if ([@"192.168.0.101" isEqualToString:broadcastAddr]){
+        NSLog(@"fk");
+    }
     return broadcastAddr;
 }
 @end
