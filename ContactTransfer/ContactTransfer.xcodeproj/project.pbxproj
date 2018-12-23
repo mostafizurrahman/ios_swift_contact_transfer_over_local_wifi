@@ -13,7 +13,12 @@
 		BE02EECA21CAD654004CB9CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE02EEC821CAD654004CB9CD /* Main.storyboard */; };
 		BE02EECC21CAD656004CB9CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE02EECB21CAD656004CB9CD /* Assets.xcassets */; };
 		BE02EECF21CAD656004CB9CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE02EECD21CAD656004CB9CD /* LaunchScreen.storyboard */; };
+		BE03D33221CF3B8E0022B2F5 /* TCPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03D32F21CF3B8E0022B2F5 /* TCPClient.m */; };
+		BE03D33321CF3B8E0022B2F5 /* TCPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03D33121CF3B8E0022B2F5 /* TCPServer.m */; };
 		BE040A6821CE65F100D826E8 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE040A6721CE65F100D826E8 /* BorderButton.swift */; };
+		BE1F1F5C21CEA45A007D2123 /* TransmitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F1F5B21CEA45A007D2123 /* TransmitterViewController.swift */; };
+		BE1F1F5E21CEA466007D2123 /* ReceiverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */; };
+		BE1F1F6021CEA775007D2123 /* IMG_6709.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BE1F1F5F21CEA775007D2123 /* IMG_6709.jpeg */; };
 		BE886F1421CC0C8100F6534F /* CSClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0821CC0C8000F6534F /* CSClientSocket.m */; };
 		BE886F1521CC0C8100F6534F /* ServerSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0921CC0C8000F6534F /* ServerSocket.m */; };
 		BE886F1621CC0C8100F6534F /* TCPContactSend.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0A21CC0C8000F6534F /* TCPContactSend.m */; };
@@ -34,7 +39,14 @@
 		BE02EECB21CAD656004CB9CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE02EECE21CAD656004CB9CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE02EED021CAD656004CB9CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE03D32E21CF3B8E0022B2F5 /* TCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPServer.h; sourceTree = "<group>"; };
+		BE03D32F21CF3B8E0022B2F5 /* TCPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPClient.m; sourceTree = "<group>"; };
+		BE03D33021CF3B8E0022B2F5 /* TCPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPClient.h; sourceTree = "<group>"; };
+		BE03D33121CF3B8E0022B2F5 /* TCPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPServer.m; sourceTree = "<group>"; };
 		BE040A6721CE65F100D826E8 /* BorderButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
+		BE1F1F5B21CEA45A007D2123 /* TransmitterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmitterViewController.swift; sourceTree = "<group>"; };
+		BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverViewController.swift; sourceTree = "<group>"; };
+		BE1F1F5F21CEA775007D2123 /* IMG_6709.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_6709.jpeg; sourceTree = "<group>"; };
 		BE886F0721CC0C7F00F6534F /* ContactTransfer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ContactTransfer-Bridging-Header.h"; sourceTree = "<group>"; };
 		BE886F0821CC0C8000F6534F /* CSClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSClientSocket.m; sourceTree = "<group>"; };
 		BE886F0921CC0C8000F6534F /* ServerSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerSocket.m; sourceTree = "<group>"; };
@@ -105,12 +117,15 @@
 				BE040A6721CE65F100D826E8 /* BorderButton.swift */,
 				BE02EEC421CAD654004CB9CD /* AppDelegate.swift */,
 				BE02EEC621CAD654004CB9CD /* ViewController.swift */,
+				BE1F1F5F21CEA775007D2123 /* IMG_6709.jpeg */,
 				BE02EEC821CAD654004CB9CD /* Main.storyboard */,
 				BE02EECB21CAD656004CB9CD /* Assets.xcassets */,
 				BE02EECD21CAD656004CB9CD /* LaunchScreen.storyboard */,
 				BE02EED021CAD656004CB9CD /* Info.plist */,
 				BE886F0721CC0C7F00F6534F /* ContactTransfer-Bridging-Header.h */,
 				BE886F1A21CC0C8B00F6534F /* Sockets */,
+				BE1F1F5B21CEA45A007D2123 /* TransmitterViewController.swift */,
+				BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */,
 			);
 			path = ContactTransfer;
 			sourceTree = "<group>";
@@ -118,6 +133,10 @@
 		BE886F1A21CC0C8B00F6534F /* Sockets */ = {
 			isa = PBXGroup;
 			children = (
+				BE03D33021CF3B8E0022B2F5 /* TCPClient.h */,
+				BE03D32F21CF3B8E0022B2F5 /* TCPClient.m */,
+				BE03D32E21CF3B8E0022B2F5 /* TCPServer.h */,
+				BE03D33121CF3B8E0022B2F5 /* TCPServer.m */,
 				BE886F1121CC0C8100F6534F /* CSClientSocket.h */,
 				BE886F0821CC0C8000F6534F /* CSClientSocket.m */,
 				BE886F0C21CC0C8100F6534F /* ServerSocket.h */,
@@ -199,6 +218,7 @@
 				BE02EECF21CAD656004CB9CD /* LaunchScreen.storyboard in Resources */,
 				BE02EECC21CAD656004CB9CD /* Assets.xcassets in Resources */,
 				BE02EECA21CAD654004CB9CD /* Main.storyboard in Resources */,
+				BE1F1F6021CEA775007D2123 /* IMG_6709.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,12 +257,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ContactTransfer/Pods-ContactTransfer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Pulsator/Pulsator.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSocket/SwiftSocket.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pulsator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSocket.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -266,6 +288,10 @@
 				BE02EEC721CAD654004CB9CD /* ViewController.swift in Sources */,
 				BE02EEC521CAD654004CB9CD /* AppDelegate.swift in Sources */,
 				BE886F1E21CC2BBA00F6534F /* SocketData.swift in Sources */,
+				BE03D33221CF3B8E0022B2F5 /* TCPClient.m in Sources */,
+				BE1F1F5E21CEA466007D2123 /* ReceiverViewController.swift in Sources */,
+				BE1F1F5C21CEA45A007D2123 /* TransmitterViewController.swift in Sources */,
+				BE03D33321CF3B8E0022B2F5 /* TCPServer.m in Sources */,
 				BE886F1C21CC169100F6534F /* ReceiverBroadcast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

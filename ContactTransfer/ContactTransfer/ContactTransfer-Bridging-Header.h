@@ -5,3 +5,5 @@
 #include <ifaddrs.h>
 #include "UdpSocket.h"
 #import "ServerSocket.h"
+#import "TCPReceiveContact.h"
+#import "TCPContactSend.h"

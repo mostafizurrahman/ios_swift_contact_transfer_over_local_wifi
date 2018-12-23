@@ -110,7 +110,7 @@
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waf-Or-jfE">
                                         <rect key="frame" x="62.5" y="198.5" width="250" height="250"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="250" id="17a-IS-omc"/>
                                             <constraint firstAttribute="width" constant="250" id="MPF-G8-YbF"/>
@@ -125,6 +125,9 @@
                                     <constraint firstItem="Zrp-Ng-CA3" firstAttribute="leading" secondItem="okX-n5-9Hq" secondAttribute="leading" constant="16" id="urT-zU-WYh"/>
                                 </constraints>
                             </view>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zD8-6t-62k">
+                                <rect key="frame" x="16" y="20" width="343" height="627"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -132,31 +135,49 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="okX-n5-9Hq" secondAttribute="bottom" id="N1a-87-fNK"/>
                             <constraint firstItem="okX-n5-9Hq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="NLX-uo-pUB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="q1I-Qx-uIJ" secondAttribute="top" id="Oia-Mf-f8t"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zD8-6t-62k" secondAttribute="trailing" constant="16" id="UKD-jf-ZaU"/>
+                            <constraint firstItem="zD8-6t-62k" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fwk-74-h1W"/>
+                            <constraint firstItem="zD8-6t-62k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="iq1-Xz-3f5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="okX-n5-9Hq" secondAttribute="trailing" id="jEF-9y-b47"/>
                             <constraint firstItem="q1I-Qx-uIJ" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="jxs-zK-XY1"/>
                             <constraint firstItem="q1I-Qx-uIJ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="l4i-fw-Pt3"/>
                             <constraint firstItem="okX-n5-9Hq" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="uJf-bo-8PP"/>
                             <constraint firstItem="q1I-Qx-uIJ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="ub5-zi-cRi"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zD8-6t-62k" secondAttribute="bottom" constant="20" id="znh-jX-k8j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="leadingSpace" destination="E5G-BO-pex" id="UxK-0q-P2t"/>
                         <outlet property="pulsView" destination="waf-Or-jfE" id="i3F-A8-DO4"/>
+                        <outlet property="receivedImageView" destination="zD8-6t-62k" id="tRA-hK-GlB"/>
                         <outlet property="trailingSpace" destination="jEF-9y-b47" id="ahU-e5-8IY"/>
+                        <outlet property="transferView" destination="okX-n5-9Hq" id="eD6-Xc-4Ua"/>
+                        <segue destination="Cr1-AN-Cvg" kind="show" identifier="ReceiveSegue" id="Mfy-2f-mF4"/>
+                        <segue destination="Cn3-od-0GI" kind="show" identifier="SenderSegue" id="BN4-Rv-gGc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="98" y="358"/>
+            <point key="canvasLocation" x="96.799999999999997" y="357.57121439280365"/>
         </scene>
-        <!--View Controller-->
+        <!--Transmitter View Controller-->
         <scene sceneID="Sb2-qi-Y9t">
             <objects>
-                <viewController id="Cn3-od-0GI" sceneMemberID="viewController">
+                <viewController id="Cn3-od-0GI" customClass="TransmitterViewController" customModule="ContactTransfer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FCZ-Eg-7Xa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGs-qp-q8D">
+                                <rect key="frame" x="76" y="214" width="82" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Send Image"/>
+                                <connections>
+                                    <action selector="sendData:" destination="Cn3-od-0GI" eventType="touchUpInside" id="bcj-Z4-yKN"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="1SS-lS-nSG"/>
                     </view>
@@ -165,20 +186,34 @@
             </objects>
             <point key="canvasLocation" x="961" y="755"/>
         </scene>
-        <!--View Controller-->
+        <!--Receiver View Controller-->
         <scene sceneID="JfQ-nq-tGv">
             <objects>
-                <viewController id="Cr1-AN-Cvg" sceneMemberID="viewController">
+                <viewController id="Cr1-AN-Cvg" customClass="ReceiverViewController" customModule="ContactTransfer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1ei-gH-yIT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uN0-Tq-HMe">
+                                <rect key="frame" x="16" y="36" width="343" height="615"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6aX-le-kxA" firstAttribute="bottom" secondItem="uN0-Tq-HMe" secondAttribute="bottom" constant="16" id="5FI-D9-L7u"/>
+                            <constraint firstItem="6aX-le-kxA" firstAttribute="trailing" secondItem="uN0-Tq-HMe" secondAttribute="trailing" constant="16" id="IuW-ri-Zrl"/>
+                            <constraint firstItem="uN0-Tq-HMe" firstAttribute="top" secondItem="6aX-le-kxA" secondAttribute="top" constant="16" id="ahH-a4-rSV"/>
+                            <constraint firstItem="uN0-Tq-HMe" firstAttribute="leading" secondItem="6aX-le-kxA" secondAttribute="leading" constant="16" id="jfY-FD-Hpz"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6aX-le-kxA"/>
                     </view>
+                    <connections>
+                        <outlet property="receivedImageView" destination="uN0-Tq-HMe" id="pKA-SM-ySi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xUi-yh-t2F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="961" y="-13"/>
+            <point key="canvasLocation" x="960.79999999999995" y="-13.043478260869566"/>
         </scene>
     </scenes>
 </document>

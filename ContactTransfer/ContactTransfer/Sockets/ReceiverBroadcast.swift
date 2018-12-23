@@ -53,5 +53,8 @@ class ReceiverBroadcast {
         free(raw_data)
         return Int(send_len)
     }
-    
+    deinit {
+        print("deinit called")
+        udpsocket_close(self.socket_descriptor)
+    }
 }

@@ -10,22 +10,21 @@
 #import "CSClientSocket.h"
 #import "ServerSocket.h"
 
-@protocol ContactSendDelegate <NSObject>
--(void)contactSendWithLen:(int)dataLength;
--(void)contactSendWithErr:(NSError *)sendError;
--(void)contactSendStatus:(int)count;
+@protocol TCPSendContactDelegate <NSObject>
+-(void)onContactSendSuccess:(int)length;
+-(void)onContactSendError:(NSError *)sendError;
+-(void)onSendStatusReceived:(int)count;
 @end
 
 @interface TCPContactSend : NSObject
 
 @property (readonly)            BOOL isConnected;
-@property (weak, readwrite)     id<ContactSendDelegate> sendDelegate;
+@property (weak, readwrite)     id<TCPSendContactDelegate> sendDelegate;
 
 
--(void) sendContactData:(NSData *)data;
+-(void) sendContact:(NSData *)data;
 -(BOOL) close;
--(long) receiveStatus;
--(BOOL) initiateConnection:(NSString *)ipAddress
-             incommingPort:(NSString *)port;
+-(long)  receiveStatus;
+-(BOOL) initiateConnection:(NSString *)ipAddress incommingPort:(NSString *)port;
 
 @end

@@ -65,7 +65,7 @@ int udpsocket_receive(int socket_fd, char *outdata, int expted_len,
     memset(&cli_addr, 0x0, sizeof(struct sockaddr_in));
     
     struct timeval tv;
-    tv.tv_sec = 5;
+    tv.tv_sec = 0;
     tv.tv_usec = 200000;
     if (setsockopt(socket_fd, SOL_SOCKET, SO_RCVTIMEO,&tv,sizeof(tv)) < 0) {
         perror("Error");
@@ -108,7 +108,7 @@ int udpsocket_get_server_ip(const char *host, const char *ip) {
     }
     bcopy((char *)hp->h_addr, (char *)&addr.sin_addr, hp->h_length);
     char *clientip = inet_ntoa(addr.sin_addr);
-    memcpy(ip, clientip, strlen(clientip));
+    memcpy((void *)ip, clientip, strlen(clientip));
     return 0;
 }
 

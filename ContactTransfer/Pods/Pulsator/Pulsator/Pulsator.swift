@@ -73,7 +73,7 @@ open class Pulsator: CAReplicatorLayer, CAAnimationDelegate {
     }
     
     /// The animation duration in seconds.
-   @objc  open var animationDuration: TimeInterval = 3 {
+   @objc  open var animationDuration: TimeInterval = 1.5 {
         didSet {
             updateInstanceDelay()
         }
@@ -132,7 +132,7 @@ open class Pulsator: CAReplicatorLayer, CAAnimationDelegate {
         
         instanceDelay = 1
         repeatCount = MAXFLOAT
-        backgroundColor = Color(red: 0, green: 0.455, blue: 0.756, alpha: 0.45).cgColor
+//        backgroundColor = Color(red: 0, green: 0.455, blue: 0.756, alpha: 0.45).cgColor
         
         
         

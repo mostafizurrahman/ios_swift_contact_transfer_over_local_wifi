@@ -10,7 +10,6 @@
 
 @interface TCPReceiveContact(){
     ServerSocket *serverSocket;
-    CSClientSocket *incomingSocket;
 }
 
 @end
@@ -18,52 +17,63 @@
 @implementation TCPReceiveContact
 @synthesize receiveDelegate;
 
--(instancetype)init{
-    self = [super init];
-    return self;
+-(void)receiveContact
+{
+    long dataCount = MAX_DATA_LENGTH;
+    char data[dataCount];
+    NSMutableData *incomingData = [NSMutableData data];
+    long receiveDataLength;
+    while ((receiveDataLength = [incomingSocket receiveBytes:data limit:dataCount]) > 0)
+    {
+        [incomingData appendBytes:data length:receiveDataLength];
+    }
+    if ([incomingData length] && !incomingSocket.lastError)
+    {
+        [receiveDelegate onContactReceivedSuccess:incomingData];
+        incomingData = nil;
+    }
+    else
+    {
+        
+        NSLog(@"error starts");
+        [receiveDelegate onContactReceiveError:incomingSocket.lastError];
+        
+        NSLog(@"error ends");
+        
+    }
 }
 
--(BOOL)initiateConnection:(NSString *)port timeOut:(int)timeOut {
+
+
+-(BOOL)initiateConnection:(NSString *)port timeOut:(int)timeOut
+{
     
     serverSocket = [[ServerSocket alloc] initWithPort:port];
     [serverSocket listen];
     incomingSocket = [serverSocket accept:timeOut];
     _isConnected = !serverSocket.isTimeOut && incomingSocket;
-    if (!_isConnected) {
-        [self.receiveDelegate contactReceiveWithError:incomingSocket.lastError];
+    if (!_isConnected)
+    {
+        [receiveDelegate onContactReceiveError:incomingSocket.lastError];
+        NSLog(@"time out occured thanks");
     }
     return _isConnected;
 }
 
--(void)receiveContact {
-    const long dataCount = MAX_DATA_LENGTH;
-    char data[dataCount];
-    NSMutableData *incomingData = [NSMutableData data];
-    long dataLength = -1;
-    while ((dataLength = [incomingSocket receiveBytes:data length:dataLength]) > 0) {
-        [incomingData appendBytes:data length:dataLength];
-    }
-    if ([incomingData length] > 0 && !incomingSocket.lastError) {
-        [self.receiveDelegate contactReceivedWithData:incomingData];
-        incomingData = nil;
-    } else  {
-        [self.receiveDelegate contactReceiveWithError:incomingSocket.lastError];
-    }
-}
-
--(BOOL)closeConnection {
+-(BOOL)closeConnection
+{
     return [incomingSocket close];
 }
 
--(int)sendStatus:(NSString *)status {
+-(int)sendStatus:(NSString *)status
+{
+    NSLog(@"send status ends");
     char *data;
     data = (char *) malloc(4);
     memset(data,' ',4);
     const char *statusByte = status.UTF8String;
-    memcpy( data, statusByte, 4 );
-    const long _ret_val = [incomingSocket sendBytes:data length:4];
-    free(data);
-    return (int)_ret_val;
+    memcpy( &data[0], &statusByte[0], 4 );
+    return (int)[incomingSocket sendBytes:data count:4];
 }
 
 @end

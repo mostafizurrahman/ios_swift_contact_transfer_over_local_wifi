@@ -85,7 +85,8 @@
 }
 
 
-- (BOOL)sendBytes:(NSData *) buf {
+- (BOOL)sendBytes:(NSData *) buf
+{
 	long sent;
 	if ((sent = send(_sockfd, [buf bytes], buf.length, 0)) <= 0) {
 		_lastError = NEW_ERROR(errno, strerror(errno));

@@ -15,14 +15,13 @@
 }
 
 #pragma mark - Properties
-
-@property (nonatomic, readonly) int server_socket;
++(NSString *)getBroadcastAddress;
+@property (nonatomic, readonly) int sockfd;
 @property (nonatomic, readonly) NSString *port;
 @property (nonatomic, readonly) NSError *lastError;
 @property (readonly) BOOL isTimeOut;
-- (instancetype)initWithPort:(NSString *)port __attribute__((nonnull));
+- (id)initWithPort:(NSString *)port __attribute__((nonnull));
 - (BOOL)listen;
 - (CSClientSocket *)accept:(int)timeOut;
 - (BOOL)close;
-+(NSString *)getBroadcastAddress;
 @end

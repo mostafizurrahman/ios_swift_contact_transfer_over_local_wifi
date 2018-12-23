@@ -3,12 +3,14 @@
 //  Contact Search
 //
 //  Created by Mostafizur Rahman on 8/10/16.
-//  Copyright © 2016 Image-App. All rights reserved.
+//  Copyright © 2016 Dotsoft.inc. All rights reserved.
 //
 
 #import "TCPContactSend.h"
 
-@interface TCPContactSend() {
+@interface TCPContactSend()
+{
+    
     CSClientSocket *clientSocket;
 }
 
@@ -18,43 +20,44 @@
 
 @synthesize sendDelegate;
 
-- (instancetype)init {
-    self = [super init];
-    
-    return self;
+-(void)sendContact:(NSData *)data
+{
+    NSLog(@"send starts");
+    int32_t contactDataLength = (int32_t)[data length];
+    int32_t sendDataLength = (int32_t)[clientSocket sendBytes:[data bytes] count:contactDataLength];
+    if (sendDataLength >= 0)
+    {
+        [sendDelegate onContactSendSuccess:sendDataLength];
+    }
+    else
+    {
+        [sendDelegate onContactSendError:clientSocket.lastError];
+    }
+    NSLog(@"send ends");
 }
 
-
--(BOOL)initiateConnection:(NSString *)ipAddress
-            incommingPort:(NSString *)port {
-    clientSocket = [[CSClientSocket alloc] initWithHost:ipAddress port:port];
+-(BOOL)initiateConnection:(NSString *)ipAddress incommingPort:(NSString *)port
+{
+    clientSocket = [[CSClientSocket alloc] initWithHost:ipAddress andPort:port];
     _isConnected = [clientSocket connect];
     return _isConnected;
 }
 
--(void)sendContactData:(NSData *)data {
-    const int32_t dataLength = (int32_t)[data length];
-    const int32_t sendLength = (int32_t)[clientSocket sendBytes:[data bytes] length:dataLength];
-    if (sendLength >= 0) {
-        [self.sendDelegate contactSendWithLen:sendLength];
-    } else {
-        [self.sendDelegate contactSendWithErr:clientSocket.lastError];
-    }
-}
-
--(BOOL)close {
+-(BOOL)close
+{
     return [clientSocket close];
 }
 
--(long)receiveStatus {
+-(long)receiveStatus
+{
     char data[4];
     memset(data, ' ', 4);
-    const long dataLength = [clientSocket receiveBytes:data length:4];
-    if (dataLength > 0) {
+    long dataLength = [clientSocket receiveBytes:data limit:4];
+    if (dataLength > 0)
+    {
         NSData* nsdata = [NSData dataWithBytes:(const void *)data length:4];
-        const int count = [[[NSString alloc] initWithData:nsdata
-                                           encoding:NSUTF8StringEncoding] intValue];
-        [sendDelegate contactSendStatus:count];
+        int count = [[[NSString alloc] initWithData:nsdata encoding:NSUTF8StringEncoding] intValue];
+        [sendDelegate onSendStatusReceived:count];
     }
     return dataLength;
 }

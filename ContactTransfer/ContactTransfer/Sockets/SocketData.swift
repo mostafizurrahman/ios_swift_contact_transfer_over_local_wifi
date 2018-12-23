@@ -94,6 +94,7 @@ class SocketData: NSObject {
         pointerData.pointee = Int8(self.deviceOSType.rawValue)
         let modelPointer = pointerData.advanced(by: SD.LOC_DEVICE_MODEL)
         if let __model = self.deviceModel.toUInt8() {
+            memset(modelPointer, 0, self.deviceModel.count)
             memcpy(modelPointer, __model, self.deviceModel.count)
             free(__model)
         }
@@ -101,6 +102,7 @@ class SocketData: NSObject {
         //sender ip to int8
         let senderIPPointer = pointerData.advanced(by: SD.LOC_SENDER_IP)
         if let __senderIP = self.senderIp.toUInt8() {
+            memset(senderIPPointer, 0, self.deviceModel.count)
             memcpy(senderIPPointer, __senderIP, self.senderIp.count)
             free(__senderIP)
         }

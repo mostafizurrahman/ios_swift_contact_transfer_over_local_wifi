@@ -7,75 +7,126 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		159399A1C53488907230DCCBA8545EFB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E839864EE09C8CE0528DE01FD9241A /* QuartzCore.framework */; };
-		3A38C82F579D798509D0420974FD74FA /* Pulsator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204F3B83EC44A2C48B0A2CEDA17F6FC /* Pulsator.swift */; };
-		58DEFA393BC3419003AEE1DEA3B8525F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E826AE0196CB3540E72242664FBD3F32 /* UIKit.framework */; };
-		5FCF5303B1BAAF8099AC889B5C12660A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C7A160ABE5DAC85DC33E762CF55AE1 /* Foundation.framework */; };
-		665D42CD85727CEDB22B5C4D809E310D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C7A160ABE5DAC85DC33E762CF55AE1 /* Foundation.framework */; };
-		AF094A72B38430B728A2E8674673B70C /* Pulsator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C62ABC2D9DA56A304DEAAF29B5F7EA35 /* Pulsator-dummy.m */; };
-		B765837709427CAED69E3E578309A8DE /* Pulsator-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2D960ABB5D7EEBD4F465C1C08927AF /* Pulsator-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DE5B2BD3881AD6CD8BE7496BDF9129F0 /* Pods-ContactTransfer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 541C5424CAAA00622119CA42AEC670B1 /* Pods-ContactTransfer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F77EAC47EC33CCD777C00A2CF970E920 /* Pods-ContactTransfer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA40AF3FD3216FFCFF99DF98FE865E /* Pods-ContactTransfer-dummy.m */; };
+		05F9861464A41834A784829BA8C46C87 /* ytcpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 545D96A6C543528629999CEF8FE6E9F1 /* ytcpsocket.c */; };
+		0CABA8C6D96F2FEA5278A1A369CE7A7E /* Pulsator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC98AC33762AE3457B87B9BFD7671D4 /* Pulsator-dummy.m */; };
+		2FC7FDE7DEC2633FE0BF5AB5D66B30A5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E826AE0196CB3540E72242664FBD3F32 /* UIKit.framework */; };
+		36428561E37A2695D94E4FC99609A389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C7A160ABE5DAC85DC33E762CF55AE1 /* Foundation.framework */; };
+		3C6A69B2ABF0FA4551C5C1284D4E5558 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256ACAA1C5C8FA10F73FD363DBA3EB6 /* Socket.swift */; };
+		4B0C18E076AF63038983C0913BEB5E5B /* SwiftSocket-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FD4D58249862CD8F85C7283FB3B78827 /* SwiftSocket-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5BD66DED662130B9202814C4AF381E3F /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AFFFCCA719EE208AD28943F72ED288 /* Result.swift */; };
+		5EB62145A00F9EF54C75487425EB6AE4 /* Pulsator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA9EA017243D8BAE3BFD6BA5DAC34FC /* Pulsator.swift */; };
+		67E0B442E66F1756D3D2C4A8D1EDA41B /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 5E234106DDB38601278D8B1C1B4D10DA /* yudpsocket.c */; };
+		B01C54BB896C7A2154F497BDD36824DE /* Pods-ContactTransfer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA40AF3FD3216FFCFF99DF98FE865E /* Pods-ContactTransfer-dummy.m */; };
+		BEB1F1DF97FB151D8ED57141F6FB35FB /* UDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E37B46C6512473415D26BA204120730 /* UDPClient.swift */; };
+		BF191BFC25D1B83CE368CA16F9BE84AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E839864EE09C8CE0528DE01FD9241A /* QuartzCore.framework */; };
+		C0AD549A7ED5A4D63FDA5F77AE9E3259 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C7A160ABE5DAC85DC33E762CF55AE1 /* Foundation.framework */; };
+		C130671448CD17ED9C0831708263B560 /* Pulsator-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 38AAB9A93E63CD586A4D37D5A47ADDF6 /* Pulsator-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C25A4ABB598A92BBD12F5895C3E9CE2B /* TCPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C1C5C26A66586B1CE90042EA5D847 /* TCPClient.swift */; };
+		C79D5A4A3DE36F1E44E2D8FC7BEDCB63 /* Pods-ContactTransfer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 541C5424CAAA00622119CA42AEC670B1 /* Pods-ContactTransfer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2382607CD69BD3A0FDE62DC96D92E39 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C7A160ABE5DAC85DC33E762CF55AE1 /* Foundation.framework */; };
+		E5E6E2914FE4F6EF0B90BA610E2FBBE5 /* SwiftSocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9B67D96F6FA6C4216ED4311A3829F2 /* SwiftSocket-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B27F8C562FD07BC688B6E01EE202BE10 /* PBXContainerItemProxy */ = {
+		314800BA0D3430B4B1E01439F60DE8CE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A839E455406D669510429876E8A3BC40;
+			remoteGlobalIDString = 98BA575E03BD1A44A8036D4AF3BC4C5E;
+			remoteInfo = SwiftSocket;
+		};
+		5038613CAE8F3A5D12141F0F62039D68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5E0A8804ABF0C66BC054C54BE4AB4751;
 			remoteInfo = Pulsator;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0204F3B83EC44A2C48B0A2CEDA17F6FC /* Pulsator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Pulsator.swift; path = Pulsator/Pulsator.swift; sourceTree = "<group>"; };
+		012486DABA52A641FA8D30B2BEC71D8F /* Pulsator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pulsator.framework; path = Pulsator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		067C4F384B221F8D968FBA8D2CDE4573 /* SwiftSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftSocket.framework; path = SwiftSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		13BE905B81E90F927701E8B72C062B41 /* Pulsator.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pulsator.xcconfig; sourceTree = "<group>"; };
 		15FEBB3215A481E4A4EE4E4E5134DF92 /* Pods-ContactTransfer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ContactTransfer.release.xcconfig"; sourceTree = "<group>"; };
-		29874CE931E00749B8D3F1986C9325C9 /* Pods_ContactTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ContactTransfer.framework; path = "Pods-ContactTransfer.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A4E8DF3B406307A81835B5E860CC51A /* Pods-ContactTransfer-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ContactTransfer-frameworks.sh"; sourceTree = "<group>"; };
+		38AAB9A93E63CD586A4D37D5A47ADDF6 /* Pulsator-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pulsator-umbrella.h"; sourceTree = "<group>"; };
 		3CFA40AF3FD3216FFCFF99DF98FE865E /* Pods-ContactTransfer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ContactTransfer-dummy.m"; sourceTree = "<group>"; };
+		4425F9369CBD8A097F72202BF3BAAC82 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E37B46C6512473415D26BA204120730 /* UDPClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UDPClient.swift; path = Sources/UDPClient.swift; sourceTree = "<group>"; };
 		541C5424CAAA00622119CA42AEC670B1 /* Pods-ContactTransfer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ContactTransfer-umbrella.h"; sourceTree = "<group>"; };
-		5ABB947C275108ADFF4857EBCA7AFDA0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5C2D960ABB5D7EEBD4F465C1C08927AF /* Pulsator-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pulsator-umbrella.h"; sourceTree = "<group>"; };
+		545D96A6C543528629999CEF8FE6E9F1 /* ytcpsocket.c */ = {isa = PBXFileReference; includeInIndex = 1; name = ytcpsocket.c; path = Sources/ytcpsocket.c; sourceTree = "<group>"; };
+		5E234106DDB38601278D8B1C1B4D10DA /* yudpsocket.c */ = {isa = PBXFileReference; includeInIndex = 1; name = yudpsocket.c; path = Sources/yudpsocket.c; sourceTree = "<group>"; };
+		5EE5AC945435737723C5CFF2A7D3D2F3 /* SwiftSocket.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftSocket.modulemap; sourceTree = "<group>"; };
+		6337C96C1271910BF99819D6B94D375E /* Pulsator.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Pulsator.modulemap; sourceTree = "<group>"; };
 		65A1BB883C42573275FFFA89B796A800 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		661AF3434FD40CD399122C21D377BC55 /* Pulsator-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pulsator-prefix.pch"; sourceTree = "<group>"; };
+		6FC98AC33762AE3457B87B9BFD7671D4 /* Pulsator-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pulsator-dummy.m"; sourceTree = "<group>"; };
 		732F3FCE2CEE589032D2BEFED59A0669 /* Pods-ContactTransfer-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ContactTransfer-acknowledgements.markdown"; sourceTree = "<group>"; };
 		7721945EBA74F2F0E0F11F4D1748BAA9 /* Pods-ContactTransfer-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ContactTransfer-resources.sh"; sourceTree = "<group>"; };
 		90C7A160ABE5DAC85DC33E762CF55AE1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		918278D776296F39B7572B7F76480667 /* SwiftSocket-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftSocket-prefix.pch"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		985B973CFDB46C3D40DECDB655173FDC /* Pulsator-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pulsator-prefix.pch"; sourceTree = "<group>"; };
-		9B97E8E6D50092B8E5D7E8A2035D906E /* Pulsator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pulsator.framework; path = Pulsator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A3EA75E4B1DB9DCE4ECAEC6CB5468333 /* Pulsator.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pulsator.xcconfig; sourceTree = "<group>"; };
-		C62ABC2D9DA56A304DEAAF29B5F7EA35 /* Pulsator-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pulsator-dummy.m"; sourceTree = "<group>"; };
+		B4B2BEFD153643DAB101830B0A6A571E /* SwiftSocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftSocket.xcconfig; sourceTree = "<group>"; };
+		BA9B67D96F6FA6C4216ED4311A3829F2 /* SwiftSocket-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftSocket-dummy.m"; sourceTree = "<group>"; };
+		BE3C1C5C26A66586B1CE90042EA5D847 /* TCPClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TCPClient.swift; path = Sources/TCPClient.swift; sourceTree = "<group>"; };
+		BFED44E0F1850E2A114D1EBC89A5C2B6 /* Pods_ContactTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ContactTransfer.framework; path = "Pods-ContactTransfer.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D256ACAA1C5C8FA10F73FD363DBA3EB6 /* Socket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Socket.swift; path = Sources/Socket.swift; sourceTree = "<group>"; };
 		D6E839864EE09C8CE0528DE01FD9241A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		E372C52F63009D82F9B97910626CF9D1 /* Pulsator.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Pulsator.modulemap; sourceTree = "<group>"; };
+		E665C6507DBFB8C1621AD39AB62F20C7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6E7F4A0D9D7175B1D026E2C212027B3 /* Pods-ContactTransfer-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ContactTransfer-acknowledgements.plist"; sourceTree = "<group>"; };
 		E826AE0196CB3540E72242664FBD3F32 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		ED55D5A811A52728DB92186807666BC0 /* Pods-ContactTransfer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ContactTransfer.modulemap"; sourceTree = "<group>"; };
+		F0AFFFCCA719EE208AD28943F72ED288 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Sources/Result.swift; sourceTree = "<group>"; };
 		F14BC820B0C2DEB1DD8E4CDBAD0AA8AD /* Pods-ContactTransfer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ContactTransfer.debug.xcconfig"; sourceTree = "<group>"; };
+		FBA9EA017243D8BAE3BFD6BA5DAC34FC /* Pulsator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Pulsator.swift; path = Pulsator/Pulsator.swift; sourceTree = "<group>"; };
+		FD4D58249862CD8F85C7283FB3B78827 /* SwiftSocket-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftSocket-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2C3AF6B7D5D01C2485EC8440C560ABB1 /* Frameworks */ = {
+		564BCA2D54DC3A382B3A8583508B2F8C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				665D42CD85727CEDB22B5C4D809E310D /* Foundation.framework in Frameworks */,
-				159399A1C53488907230DCCBA8545EFB /* QuartzCore.framework in Frameworks */,
-				58DEFA393BC3419003AEE1DEA3B8525F /* UIKit.framework in Frameworks */,
+				36428561E37A2695D94E4FC99609A389 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A8223D25EB510E7FC9B45C628C8111BA /* Frameworks */ = {
+		97E7F3BAFA3CB06B4F9CD219C277D91C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FCF5303B1BAAF8099AC889B5C12660A /* Foundation.framework in Frameworks */,
+				C0AD549A7ED5A4D63FDA5F77AE9E3259 /* Foundation.framework in Frameworks */,
+				BF191BFC25D1B83CE368CA16F9BE84AB /* QuartzCore.framework in Frameworks */,
+				2FC7FDE7DEC2633FE0BF5AB5D66B30A5 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D033FBDA490F551214EE9C9105657F5D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2382607CD69BD3A0FDE62DC96D92E39 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01644E7F003745C27C14566DF0E29C7C /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4425F9369CBD8A097F72202BF3BAAC82 /* Info.plist */,
+				5EE5AC945435737723C5CFF2A7D3D2F3 /* SwiftSocket.modulemap */,
+				B4B2BEFD153643DAB101830B0A6A571E /* SwiftSocket.xcconfig */,
+				BA9B67D96F6FA6C4216ED4311A3829F2 /* SwiftSocket-dummy.m */,
+				918278D776296F39B7572B7F76480667 /* SwiftSocket-prefix.pch */,
+				FD4D58249862CD8F85C7283FB3B78827 /* SwiftSocket-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftSocket";
+			sourceTree = "<group>";
+		};
 		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,11 +135,36 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		27C5ECF5D8A31DDE0FFBE1699A5C586E /* Pulsator */ = {
+		2BA9026CF38D118001BEB14D66223CAE /* SwiftSocket */ = {
 			isa = PBXGroup;
 			children = (
-				0204F3B83EC44A2C48B0A2CEDA17F6FC /* Pulsator.swift */,
-				8B2784B5F0006699530FCA2EDFCCD5FD /* Support Files */,
+				F0AFFFCCA719EE208AD28943F72ED288 /* Result.swift */,
+				D256ACAA1C5C8FA10F73FD363DBA3EB6 /* Socket.swift */,
+				BE3C1C5C26A66586B1CE90042EA5D847 /* TCPClient.swift */,
+				4E37B46C6512473415D26BA204120730 /* UDPClient.swift */,
+				545D96A6C543528629999CEF8FE6E9F1 /* ytcpsocket.c */,
+				5E234106DDB38601278D8B1C1B4D10DA /* yudpsocket.c */,
+				01644E7F003745C27C14566DF0E29C7C /* Support Files */,
+			);
+			name = SwiftSocket;
+			path = SwiftSocket;
+			sourceTree = "<group>";
+		};
+		6260F4E47A87BB98BA2CBB61D76E2E1E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BFED44E0F1850E2A114D1EBC89A5C2B6 /* Pods_ContactTransfer.framework */,
+				012486DABA52A641FA8D30B2BEC71D8F /* Pulsator.framework */,
+				067C4F384B221F8D968FBA8D2CDE4573 /* SwiftSocket.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D9E2549BF708249C47EF11B21CA7E34 /* Pulsator */ = {
+			isa = PBXGroup;
+			children = (
+				FBA9EA017243D8BAE3BFD6BA5DAC34FC /* Pulsator.swift */,
+				B42770B099BD40E52313589351FDE07F /* Support Files */,
 			);
 			name = Pulsator;
 			path = Pulsator;
@@ -117,41 +193,19 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
-				88BA676207ED4C980951678A56BFD4C2 /* Pods */,
-				900026BE640D5B29141870C33E89F3D7 /* Products */,
+				943895DEB078A2C6A59D81DE799BCF32 /* Pods */,
+				6260F4E47A87BB98BA2CBB61D76E2E1E /* Products */,
 				E2AA469339ACAEF41B252F0FE504B0F0 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		88BA676207ED4C980951678A56BFD4C2 /* Pods */ = {
+		943895DEB078A2C6A59D81DE799BCF32 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				27C5ECF5D8A31DDE0FFBE1699A5C586E /* Pulsator */,
+				6D9E2549BF708249C47EF11B21CA7E34 /* Pulsator */,
+				2BA9026CF38D118001BEB14D66223CAE /* SwiftSocket */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		8B2784B5F0006699530FCA2EDFCCD5FD /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				5ABB947C275108ADFF4857EBCA7AFDA0 /* Info.plist */,
-				E372C52F63009D82F9B97910626CF9D1 /* Pulsator.modulemap */,
-				A3EA75E4B1DB9DCE4ECAEC6CB5468333 /* Pulsator.xcconfig */,
-				C62ABC2D9DA56A304DEAAF29B5F7EA35 /* Pulsator-dummy.m */,
-				985B973CFDB46C3D40DECDB655173FDC /* Pulsator-prefix.pch */,
-				5C2D960ABB5D7EEBD4F465C1C08927AF /* Pulsator-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Pulsator";
-			sourceTree = "<group>";
-		};
-		900026BE640D5B29141870C33E89F3D7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				29874CE931E00749B8D3F1986C9325C9 /* Pods_ContactTransfer.framework */,
-				9B97E8E6D50092B8E5D7E8A2035D906E /* Pulsator.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		9EBF83A17FAAD0333B507DD3E1099181 /* iOS */ = {
@@ -162,6 +216,20 @@
 				E826AE0196CB3540E72242664FBD3F32 /* UIKit.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		B42770B099BD40E52313589351FDE07F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E665C6507DBFB8C1621AD39AB62F20C7 /* Info.plist */,
+				6337C96C1271910BF99819D6B94D375E /* Pulsator.modulemap */,
+				13BE905B81E90F927701E8B72C062B41 /* Pulsator.xcconfig */,
+				6FC98AC33762AE3457B87B9BFD7671D4 /* Pulsator-dummy.m */,
+				661AF3434FD40CD399122C21D377BC55 /* Pulsator-prefix.pch */,
+				38AAB9A93E63CD586A4D37D5A47ADDF6 /* Pulsator-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pulsator";
 			sourceTree = "<group>";
 		};
 		E2AA469339ACAEF41B252F0FE504B0F0 /* Targets Support Files */ = {
@@ -175,52 +243,41 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		D914672764D6CABE12D5DDECB9E378D4 /* Headers */ = {
+		31CCA2DF20BACF58F36A4F36FE45C9B2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B765837709427CAED69E3E578309A8DE /* Pulsator-umbrella.h in Headers */,
+				4B0C18E076AF63038983C0913BEB5E5B /* SwiftSocket-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F1428E29AA2982214FE623ED804D1C80 /* Headers */ = {
+		31DFFF91F7AF0A80FB328A6A3FA4C3AE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE5B2BD3881AD6CD8BE7496BDF9129F0 /* Pods-ContactTransfer-umbrella.h in Headers */,
+				C130671448CD17ED9C0831708263B560 /* Pulsator-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B940A70502134525116F3A044B1DC32D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C79D5A4A3DE36F1E44E2D8FC7BEDCB63 /* Pods-ContactTransfer-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		9C7E66017863909EACFFEEEA29CB648E /* Pods-ContactTransfer */ = {
+		5E0A8804ABF0C66BC054C54BE4AB4751 /* Pulsator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ADE031D9BD2A87FC27AD86D0F89084E4 /* Build configuration list for PBXNativeTarget "Pods-ContactTransfer" */;
+			buildConfigurationList = 9B1A07D9BEB01C84001F366500069B8D /* Build configuration list for PBXNativeTarget "Pulsator" */;
 			buildPhases = (
-				F1428E29AA2982214FE623ED804D1C80 /* Headers */,
-				EDEE2E0DE9000782B507DC7895061CE5 /* Sources */,
-				A8223D25EB510E7FC9B45C628C8111BA /* Frameworks */,
-				D5B6D8DBEE956F50DB00EE696AE2959C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				302043D35E0AEBDD5E4F80F138E3DF70 /* PBXTargetDependency */,
-			);
-			name = "Pods-ContactTransfer";
-			productName = "Pods-ContactTransfer";
-			productReference = 29874CE931E00749B8D3F1986C9325C9 /* Pods_ContactTransfer.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		A839E455406D669510429876E8A3BC40 /* Pulsator */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2D51393FED685A13EBDFA4B114FCEC11 /* Build configuration list for PBXNativeTarget "Pulsator" */;
-			buildPhases = (
-				D914672764D6CABE12D5DDECB9E378D4 /* Headers */,
-				C08E0E565B59421ED78D821E9FCA21C3 /* Sources */,
-				2C3AF6B7D5D01C2485EC8440C560ABB1 /* Frameworks */,
-				CA926E3B01EC92D692C43970D78DE013 /* Resources */,
+				31DFFF91F7AF0A80FB328A6A3FA4C3AE /* Headers */,
+				EDC1A6D264AC3E9DF8AC7E9007D5DD01 /* Sources */,
+				97E7F3BAFA3CB06B4F9CD219C277D91C /* Frameworks */,
+				EB4DFA94110FFC9898485EA1FDEA17BA /* Resources */,
 			);
 			buildRules = (
 			);
@@ -228,7 +285,45 @@
 			);
 			name = Pulsator;
 			productName = Pulsator;
-			productReference = 9B97E8E6D50092B8E5D7E8A2035D906E /* Pulsator.framework */;
+			productReference = 012486DABA52A641FA8D30B2BEC71D8F /* Pulsator.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		98BA575E03BD1A44A8036D4AF3BC4C5E /* SwiftSocket */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46CD0939416B47D869E8A95C0E1741C2 /* Build configuration list for PBXNativeTarget "SwiftSocket" */;
+			buildPhases = (
+				31CCA2DF20BACF58F36A4F36FE45C9B2 /* Headers */,
+				14426E94CACB365BB74D6AFCF7CDF7EA /* Sources */,
+				D033FBDA490F551214EE9C9105657F5D /* Frameworks */,
+				7158E7B08C526C2EC3219300CF46F7A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftSocket;
+			productName = SwiftSocket;
+			productReference = 067C4F384B221F8D968FBA8D2CDE4573 /* SwiftSocket.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C65EE6C25B8440C0A5E0307FE4D4EF07 /* Pods-ContactTransfer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A85F14B6F792B98F4C0416CF4F07D0B8 /* Build configuration list for PBXNativeTarget "Pods-ContactTransfer" */;
+			buildPhases = (
+				B940A70502134525116F3A044B1DC32D /* Headers */,
+				D7B6F74A34E5D461A709EA2C32747014 /* Sources */,
+				564BCA2D54DC3A382B3A8583508B2F8C /* Frameworks */,
+				18B95BAC9557AADEE399D4E4F5C1DCCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C08BAF3F50282F449C3BC308645B57E5 /* PBXTargetDependency */,
+				E15B28AC59583990DE6F055B49611B33 /* PBXTargetDependency */,
+			);
+			name = "Pods-ContactTransfer";
+			productName = "Pods-ContactTransfer";
+			productReference = BFED44E0F1850E2A114D1EBC89A5C2B6 /* Pods_ContactTransfer.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -248,25 +343,33 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 900026BE640D5B29141870C33E89F3D7 /* Products */;
+			productRefGroup = 6260F4E47A87BB98BA2CBB61D76E2E1E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9C7E66017863909EACFFEEEA29CB648E /* Pods-ContactTransfer */,
-				A839E455406D669510429876E8A3BC40 /* Pulsator */,
+				C65EE6C25B8440C0A5E0307FE4D4EF07 /* Pods-ContactTransfer */,
+				5E0A8804ABF0C66BC054C54BE4AB4751 /* Pulsator */,
+				98BA575E03BD1A44A8036D4AF3BC4C5E /* SwiftSocket */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		CA926E3B01EC92D692C43970D78DE013 /* Resources */ = {
+		18B95BAC9557AADEE399D4E4F5C1DCCD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D5B6D8DBEE956F50DB00EE696AE2959C /* Resources */ = {
+		7158E7B08C526C2EC3219300CF46F7A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB4DFA94110FFC9898485EA1FDEA17BA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -276,35 +379,133 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C08E0E565B59421ED78D821E9FCA21C3 /* Sources */ = {
+		14426E94CACB365BB74D6AFCF7CDF7EA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF094A72B38430B728A2E8674673B70C /* Pulsator-dummy.m in Sources */,
-				3A38C82F579D798509D0420974FD74FA /* Pulsator.swift in Sources */,
+				5BD66DED662130B9202814C4AF381E3F /* Result.swift in Sources */,
+				3C6A69B2ABF0FA4551C5C1284D4E5558 /* Socket.swift in Sources */,
+				E5E6E2914FE4F6EF0B90BA610E2FBBE5 /* SwiftSocket-dummy.m in Sources */,
+				C25A4ABB598A92BBD12F5895C3E9CE2B /* TCPClient.swift in Sources */,
+				BEB1F1DF97FB151D8ED57141F6FB35FB /* UDPClient.swift in Sources */,
+				05F9861464A41834A784829BA8C46C87 /* ytcpsocket.c in Sources */,
+				67E0B442E66F1756D3D2C4A8D1EDA41B /* yudpsocket.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EDEE2E0DE9000782B507DC7895061CE5 /* Sources */ = {
+		D7B6F74A34E5D461A709EA2C32747014 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F77EAC47EC33CCD777C00A2CF970E920 /* Pods-ContactTransfer-dummy.m in Sources */,
+				B01C54BB896C7A2154F497BDD36824DE /* Pods-ContactTransfer-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EDC1A6D264AC3E9DF8AC7E9007D5DD01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CABA8C6D96F2FEA5278A1A369CE7A7E /* Pulsator-dummy.m in Sources */,
+				5EB62145A00F9EF54C75487425EB6AE4 /* Pulsator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		302043D35E0AEBDD5E4F80F138E3DF70 /* PBXTargetDependency */ = {
+		C08BAF3F50282F449C3BC308645B57E5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Pulsator;
-			target = A839E455406D669510429876E8A3BC40 /* Pulsator */;
-			targetProxy = B27F8C562FD07BC688B6E01EE202BE10 /* PBXContainerItemProxy */;
+			target = 5E0A8804ABF0C66BC054C54BE4AB4751 /* Pulsator */;
+			targetProxy = 5038613CAE8F3A5D12141F0F62039D68 /* PBXContainerItemProxy */;
+		};
+		E15B28AC59583990DE6F055B49611B33 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftSocket;
+			target = 98BA575E03BD1A44A8036D4AF3BC4C5E /* SwiftSocket */;
+			targetProxy = 314800BA0D3430B4B1E01439F60DE8CE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		05211C9F1433AED104452330E106513E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B4B2BEFD153643DAB101830B0A6A571E /* SwiftSocket.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftSocket/SwiftSocket-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftSocket/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SwiftSocket/SwiftSocket.modulemap";
+				PRODUCT_MODULE_NAME = SwiftSocket;
+				PRODUCT_NAME = SwiftSocket;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		238766601F83440483150CA77347DC0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15FEBB3215A481E4A4EE4E4E5134DF92 /* Pods-ContactTransfer.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-ContactTransfer/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ContactTransfer/Pods-ContactTransfer.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		60DAF49CA7A9F362148D49C3C3123B2A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -369,7 +570,43 @@
 			};
 			name = Debug;
 		};
-		AF699F7B91EC68E4CE86822A7BA00BEA /* Debug */ = {
+		806D3A9C3A92162C08F0F64FF77A2896 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B4B2BEFD153643DAB101830B0A6A571E /* SwiftSocket.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftSocket/SwiftSocket-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftSocket/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SwiftSocket/SwiftSocket.modulemap";
+				PRODUCT_MODULE_NAME = SwiftSocket;
+				PRODUCT_NAME = SwiftSocket;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		974E60A59F081BF23C3661237EB4AC72 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F14BC820B0C2DEB1DD8E4CDBAD0AA8AD /* Pods-ContactTransfer.debug.xcconfig */;
 			buildSettings = {
@@ -467,49 +704,9 @@
 			};
 			name = Release;
 		};
-		CCB420B367D4E4D6EF748277AEE24715 /* Release */ = {
+		E8AC6A772CD09BB1331E9A98F6BB26B3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15FEBB3215A481E4A4EE4E4E5134DF92 /* Pods-ContactTransfer.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ContactTransfer/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ContactTransfer/Pods-ContactTransfer.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		CFADB564412A430BFE86A97C8B626911 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3EA75E4B1DB9DCE4ECAEC6CB5468333 /* Pulsator.xcconfig */;
+			baseConfigurationReference = 13BE905B81E90F927701E8B72C062B41 /* Pulsator.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -545,9 +742,9 @@
 			};
 			name = Release;
 		};
-		FEB7FF49DAC79CFBCD5828F7CD26C6CF /* Debug */ = {
+		FB43D767BD478C3343FE9DBED6C58019 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3EA75E4B1DB9DCE4ECAEC6CB5468333 /* Pulsator.xcconfig */;
+			baseConfigurationReference = 13BE905B81E90F927701E8B72C062B41 /* Pulsator.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -584,15 +781,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D51393FED685A13EBDFA4B114FCEC11 /* Build configuration list for PBXNativeTarget "Pulsator" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FEB7FF49DAC79CFBCD5828F7CD26C6CF /* Debug */,
-				CFADB564412A430BFE86A97C8B626911 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -602,11 +790,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ADE031D9BD2A87FC27AD86D0F89084E4 /* Build configuration list for PBXNativeTarget "Pods-ContactTransfer" */ = {
+		46CD0939416B47D869E8A95C0E1741C2 /* Build configuration list for PBXNativeTarget "SwiftSocket" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AF699F7B91EC68E4CE86822A7BA00BEA /* Debug */,
-				CCB420B367D4E4D6EF748277AEE24715 /* Release */,
+				806D3A9C3A92162C08F0F64FF77A2896 /* Debug */,
+				05211C9F1433AED104452330E106513E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B1A07D9BEB01C84001F366500069B8D /* Build configuration list for PBXNativeTarget "Pulsator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB43D767BD478C3343FE9DBED6C58019 /* Debug */,
+				E8AC6A772CD09BB1331E9A98F6BB26B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A85F14B6F792B98F4C0416CF4F07D0B8 /* Build configuration list for PBXNativeTarget "Pods-ContactTransfer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				974E60A59F081BF23C3661237EB4AC72 /* Debug */,
+				238766601F83440483150CA77347DC0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

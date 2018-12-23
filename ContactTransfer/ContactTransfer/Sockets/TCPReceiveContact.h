@@ -11,17 +11,16 @@
 #import "ServerSocket.h"
 #define MAX_DATA_LENGTH 8192
 
-@protocol ReceiveContactDelegate <NSObject>
+@protocol TCPReceiveContactDelegate <NSObject>
 
--(void)contactReceivedWithData:(NSData *)data;
--(void)contactReceiveWithError:(NSError *)receiveError;
+-(void)onContactReceivedSuccess:(NSData *)data;
+-(void)onContactReceiveError:(NSError *)receiveError;
 @end
-@interface TCPReceiveContact : NSObject {
-    
+@interface TCPReceiveContact : NSObject
+{
+    CSClientSocket *incomingSocket;
 }
-
-@property (weak, readwrite) id<ReceiveContactDelegate> receiveDelegate;
-
+@property (weak, readwrite) id<TCPReceiveContactDelegate> receiveDelegate;
 @property (readonly)        BOOL isConnected;
 
 -(void) receiveContact;

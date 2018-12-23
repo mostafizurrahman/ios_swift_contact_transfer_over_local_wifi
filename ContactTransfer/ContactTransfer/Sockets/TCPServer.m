@@ -41,7 +41,7 @@
 	hints.ai_family = AF_INET;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;
-	hints.ai_addr = NULL;
+	hints.ai_addr = INADDR_ANY;
 	hints.ai_protocol = 0;          /* Any protocol */
 	hints.ai_canonname = NULL;
 	hints.ai_next = NULL;
