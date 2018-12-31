@@ -19,6 +19,10 @@
 		BE1F1F5C21CEA45A007D2123 /* SenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */; };
 		BE1F1F5E21CEA466007D2123 /* ReceiverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */; };
 		BE1F1F6021CEA775007D2123 /* IMG_6709.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BE1F1F5F21CEA775007D2123 /* IMG_6709.jpeg */; };
+		BE27A28D21DA236A00DF451F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A28C21DA236A00DF451F /* ContactViewController.swift */; };
+		BE27A29021DA2FBA00DF451F /* ContactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A28F21DA2FBA00DF451F /* ContactData.swift */; };
+		BE27A29221DA492900DF451F /* ContactParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A29121DA492900DF451F /* ContactParser.swift */; };
+		BE27A29521DA4F4A00DF451F /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A29421DA4F4A00DF451F /* ContactTableViewCell.swift */; };
 		BE886F1421CC0C8100F6534F /* CSClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0821CC0C8000F6534F /* CSClientSocket.m */; };
 		BE886F1521CC0C8100F6534F /* ServerSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0921CC0C8000F6534F /* ServerSocket.m */; };
 		BE886F1621CC0C8100F6534F /* TCPContactSend.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0A21CC0C8000F6534F /* TCPContactSend.m */; };
@@ -47,6 +51,10 @@
 		BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderViewController.swift; sourceTree = "<group>"; };
 		BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverViewController.swift; sourceTree = "<group>"; };
 		BE1F1F5F21CEA775007D2123 /* IMG_6709.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_6709.jpeg; sourceTree = "<group>"; };
+		BE27A28C21DA236A00DF451F /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		BE27A28F21DA2FBA00DF451F /* ContactData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactData.swift; sourceTree = "<group>"; };
+		BE27A29121DA492900DF451F /* ContactParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactParser.swift; sourceTree = "<group>"; };
+		BE27A29421DA4F4A00DF451F /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		BE886F0721CC0C7F00F6534F /* ContactTransfer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ContactTransfer-Bridging-Header.h"; sourceTree = "<group>"; };
 		BE886F0821CC0C8000F6534F /* CSClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSClientSocket.m; sourceTree = "<group>"; };
 		BE886F0921CC0C8000F6534F /* ServerSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerSocket.m; sourceTree = "<group>"; };
@@ -114,6 +122,8 @@
 		BE02EEC321CAD654004CB9CD /* ContactTransfer */ = {
 			isa = PBXGroup;
 			children = (
+				BE27A29321DA4F2600DF451F /* CollectionViews */,
+				BE27A28E21DA2FA000DF451F /* DataModel */,
 				BE040A6721CE65F100D826E8 /* BorderButton.swift */,
 				BE02EEC421CAD654004CB9CD /* AppDelegate.swift */,
 				BE02EEC621CAD654004CB9CD /* ViewController.swift */,
@@ -126,8 +136,26 @@
 				BE886F1A21CC0C8B00F6534F /* Sockets */,
 				BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */,
 				BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */,
+				BE27A28C21DA236A00DF451F /* ContactViewController.swift */,
 			);
 			path = ContactTransfer;
+			sourceTree = "<group>";
+		};
+		BE27A28E21DA2FA000DF451F /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				BE27A28F21DA2FBA00DF451F /* ContactData.swift */,
+				BE27A29121DA492900DF451F /* ContactParser.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		BE27A29321DA4F2600DF451F /* CollectionViews */ = {
+			isa = PBXGroup;
+			children = (
+				BE27A29421DA4F4A00DF451F /* ContactTableViewCell.swift */,
+			);
+			path = CollectionViews;
 			sourceTree = "<group>";
 		};
 		BE886F1A21CC0C8B00F6534F /* Sockets */ = {
@@ -279,8 +307,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE886F2221CD0F0200F6534F /* UdpSocket.c in Sources */,
+				BE27A29021DA2FBA00DF451F /* ContactData.swift in Sources */,
+				BE27A28D21DA236A00DF451F /* ContactViewController.swift in Sources */,
 				BE886F1421CC0C8100F6534F /* CSClientSocket.m in Sources */,
 				BE886F1821CC0C8100F6534F /* TCPReceiveContact.m in Sources */,
+				BE27A29521DA4F4A00DF451F /* ContactTableViewCell.swift in Sources */,
 				BE886F1521CC0C8100F6534F /* ServerSocket.m in Sources */,
 				BE040A6821CE65F100D826E8 /* BorderButton.swift in Sources */,
 				BE886F1621CC0C8100F6534F /* TCPContactSend.m in Sources */,
@@ -293,6 +324,7 @@
 				BE1F1F5C21CEA45A007D2123 /* SenderViewController.swift in Sources */,
 				BE03D33321CF3B8E0022B2F5 /* TCPServer.m in Sources */,
 				BE886F1C21CC169100F6534F /* ReceiverBroadcast.swift in Sources */,
+				BE27A29221DA492900DF451F /* ContactParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
