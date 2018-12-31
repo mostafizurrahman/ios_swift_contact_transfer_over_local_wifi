@@ -8,6 +8,7 @@
 
 import UIKit
 import Pulsator
+import Contacts
 
 class ViewController: UIViewController {
     
@@ -176,14 +177,21 @@ class ViewController: UIViewController {
     }
     
     @IBAction func sendData(_ sender: Any) {
-        self.startBroadcastReciever()
-        self.leadingSpace.constant = -HVC.MSW / 4
-        self.trailingSpace.constant = 0
-        UIView.animate(withDuration: 0.5, animations: {
-            self.view.layoutIfNeeded()
-        }) { (_finished) in
-            self.startPulse()
+        
+        
+        self.requestAccess { (granted) in
+            if granted {
+                self.performSegue(withIdentifier: "ContactSegue", sender: self)
+            }
         }
+//        self.startBroadcastReciever()
+//        self.leadingSpace.constant = -HVC.MSW / 4
+//        self.trailingSpace.constant = 0
+//        UIView.animate(withDuration: 0.5, animations: {
+//            self.view.layoutIfNeeded()
+//        }) { (_finished) in
+//            self.startPulse()
+//        }
     }
     
     @IBAction func receiveData(_ sender: Any) {
@@ -276,6 +284,43 @@ class ViewController: UIViewController {
                                     y: self.pulsView.bounds.midY)
         self.pulsView.layer.addSublayer(pulsator)
         pulsator.start()
+    }
+    
+    
+    func requestAccess(completionHandler: @escaping (_ accessGranted: Bool) -> Void) {
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+        case .authorized:
+            completionHandler(true)
+        case .denied:
+            showSettingsAlert(completionHandler)
+        case .restricted, .notDetermined:
+            let store = CNContactStore()
+            store.requestAccess(for: .contacts) { granted, error in
+                if granted {
+                    completionHandler(true)
+                } else {
+                    DispatchQueue.main.async {
+                        self.showSettingsAlert(completionHandler)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func showSettingsAlert(_ completionHandler: @escaping (_ accessGranted: Bool) -> Void) {
+        let alert = UIAlertController(title: nil, message: "This app requires access to Contacts to proceed. Would you like to open settings and grant permission to contacts?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { action in
+            completionHandler(false)
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            } else {
+                // Fallback on earlier versions
+            }
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in
+            completionHandler(false)
+        })
+        present(alert, animated: true)
     }
     
 }
