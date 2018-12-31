@@ -48,7 +48,6 @@ class ViewController: UIViewController {
         free(client_ip)
     }
     
-    
     fileprivate func startBroadCastSender(){
         let broadcastQueue = DispatchQueue(label: "contact.broadcast", attributes: .concurrent)
         let receivingQueue = DispatchQueue(label: "contact.receiving", attributes: .concurrent)
@@ -73,7 +72,6 @@ class ViewController: UIViewController {
                 if send_len > 0 {
                     print(send_len)
                 }
-                
                 sleep(1)
             }
         }
@@ -202,16 +200,16 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let idf = segue.identifier {
-            if idf.elementsEqual("SenderSegue") {
-                if let _dest = segue.destination as? TransmitterViewController {
-                    _dest.senderInfo = sender as? SocketData
-                }
-            }
-            else if idf.elementsEqual("ReceiveSegue") {
-                if let _dest = segue.destination as? ReceiverViewController {
-                    _dest.senderInfo = sender as? SocketData
-                }
-            }
+//            if idf.elementsEqual("SenderSegue") {
+//                if let _dest = segue.destination as? TransmitterViewController {
+//                    _dest.senderInfo = sender as? SocketData
+//                }
+//            }
+//            else if idf.elementsEqual("ReceiveSegue") {
+//                if let _dest = segue.destination as? ReceiverViewController {
+//                    _dest.senderInfo = sender as? SocketData
+//                }
+//            }
         }
     }
     
@@ -258,8 +256,6 @@ class ViewController: UIViewController {
                             do {
                                 let raw_data = try Data.init(contentsOf: URL(fileURLWithPath: path))
                                 __sender.sendContact(raw_data)
-                                
-                                
                             }
                             catch {
                                 print(error)

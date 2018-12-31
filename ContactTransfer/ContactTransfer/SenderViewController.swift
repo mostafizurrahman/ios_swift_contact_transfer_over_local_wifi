@@ -10,7 +10,7 @@ import UIKit
 import SwiftSocket
 
 
-class TransmitterViewController: UIViewController {
+class SenderViewController: UIViewController {
 
     var senderInfo:SocketData?
     var sender:TCPContactSend?

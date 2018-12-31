@@ -16,7 +16,7 @@
 		BE03D33221CF3B8E0022B2F5 /* TCPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03D32F21CF3B8E0022B2F5 /* TCPClient.m */; };
 		BE03D33321CF3B8E0022B2F5 /* TCPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03D33121CF3B8E0022B2F5 /* TCPServer.m */; };
 		BE040A6821CE65F100D826E8 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE040A6721CE65F100D826E8 /* BorderButton.swift */; };
-		BE1F1F5C21CEA45A007D2123 /* TransmitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F1F5B21CEA45A007D2123 /* TransmitterViewController.swift */; };
+		BE1F1F5C21CEA45A007D2123 /* SenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */; };
 		BE1F1F5E21CEA466007D2123 /* ReceiverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */; };
 		BE1F1F6021CEA775007D2123 /* IMG_6709.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BE1F1F5F21CEA775007D2123 /* IMG_6709.jpeg */; };
 		BE886F1421CC0C8100F6534F /* CSClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0821CC0C8000F6534F /* CSClientSocket.m */; };
@@ -44,7 +44,7 @@
 		BE03D33021CF3B8E0022B2F5 /* TCPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPClient.h; sourceTree = "<group>"; };
 		BE03D33121CF3B8E0022B2F5 /* TCPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPServer.m; sourceTree = "<group>"; };
 		BE040A6721CE65F100D826E8 /* BorderButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
-		BE1F1F5B21CEA45A007D2123 /* TransmitterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmitterViewController.swift; sourceTree = "<group>"; };
+		BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderViewController.swift; sourceTree = "<group>"; };
 		BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverViewController.swift; sourceTree = "<group>"; };
 		BE1F1F5F21CEA775007D2123 /* IMG_6709.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_6709.jpeg; sourceTree = "<group>"; };
 		BE886F0721CC0C7F00F6534F /* ContactTransfer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ContactTransfer-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 				BE02EED021CAD656004CB9CD /* Info.plist */,
 				BE886F0721CC0C7F00F6534F /* ContactTransfer-Bridging-Header.h */,
 				BE886F1A21CC0C8B00F6534F /* Sockets */,
-				BE1F1F5B21CEA45A007D2123 /* TransmitterViewController.swift */,
+				BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */,
 				BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */,
 			);
 			path = ContactTransfer;
@@ -290,7 +290,7 @@
 				BE886F1E21CC2BBA00F6534F /* SocketData.swift in Sources */,
 				BE03D33221CF3B8E0022B2F5 /* TCPClient.m in Sources */,
 				BE1F1F5E21CEA466007D2123 /* ReceiverViewController.swift in Sources */,
-				BE1F1F5C21CEA45A007D2123 /* TransmitterViewController.swift in Sources */,
+				BE1F1F5C21CEA45A007D2123 /* SenderViewController.swift in Sources */,
 				BE03D33321CF3B8E0022B2F5 /* TCPServer.m in Sources */,
 				BE886F1C21CC169100F6534F /* ReceiverBroadcast.swift in Sources */,
 			);
