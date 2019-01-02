@@ -12,16 +12,24 @@ import Contacts
 class ContactViewController: UIViewController {
 
     
+    @IBOutlet weak var bottomSpaceSendContact: NSLayoutConstraint!
+    @IBOutlet weak var bottomSpaceHideKeybord: NSLayoutConstraint!
+    @IBOutlet weak var bottomSpaceCollections: NSLayoutConstraint!
     @IBOutlet weak var contactTableView: UITableView!
     fileprivate var searchActive = false
     fileprivate let cnparser = ContactParser.parser
     fileprivate var deviceContacts:[ContactData] = []
     fileprivate var filterContacts:[ContactData] = []
     fileprivate var deselectedContacts:[String] = []
-    
-    
+    var searchBar:UISearchBar!
+    var keybordSize:CGRect?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.searchBar = UISearchBar(frame: CGRect(x:0, y:0, width:self.view.frame.width * 0.75, height:44))
+        self.searchBar.placeholder = "search contact..."
+        self.searchBar.delegate = self
+        let navBarButton = UIBarButtonItem(customView:self.searchBar)
+        self.navigationItem.rightBarButtonItem = navBarButton
         NotificationCenter.default.addObserver(self, selector: #selector(ContactViewController.keyboardWillShow),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ContactViewController.keyboardWillHide),
@@ -31,23 +39,41 @@ class ContactViewController: UIViewController {
             NotificationCenter.default.addObserver(self, selector: #selector(onContactParsed(_:)),
                                                    name: Notification.Name(rawValue: "ContactNotification"),
                                                    object: nil)
+        } else {
+            self.deviceContacts = self.cnparser.phoneContacts
+            self.contactTableView.reloadData()
         }
+        if let _value = UserDefaults.standard.value(forKey: "keyborad_frame") {
+            self.keybordSize = (_value as! NSValue).cgRectValue
+        }
+        
         // Do any additional setup after loading the view.
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "ContactNotification"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     @objc func keyboardWillShow(notification: Notification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey]
-            as? NSValue)?.cgRectValue {
-            self.contactTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-           
+        let bottomSpace:CGFloat = UIScreen.main.bounds.height / 2.65
+        self.bottomSpaceCollections.constant = bottomSpace
+        self.bottomSpaceHideKeybord.constant = bottomSpace - 45
+        self.bottomSpaceSendContact.constant = bottomSpace - 45
+        UIView.animate(withDuration: 0.4) {
+            self.view.layoutIfNeeded()
         }
-        
     }
     
     @objc func keyboardWillHide(notification: Notification) {
         if let _ = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey]
             as? NSValue)?.cgRectValue {
-            self.contactTableView.contentInset = UIEdgeInsets.zero
+            self.bottomSpaceCollections.constant = 45
+            self.bottomSpaceHideKeybord.constant = 2.5
+            self.bottomSpaceSendContact.constant = 2.5
+            UIView.animate(withDuration: 0.4) {
+                self.view.layoutIfNeeded()
+            }
         }
     }
     
@@ -73,6 +99,10 @@ class ContactViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    @IBAction func hideKeybord(_ sender: Any) {
+        self.view.endEditing(true)
+        self.searchBar.endEditing(true)
+    }
     
 
 }
@@ -81,7 +111,7 @@ extension ContactViewController:UISearchBarDelegate, UITableViewDelegate, UITabl
     
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        self.searchActive = true;
+//        self.searchActive = true;
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -99,7 +129,7 @@ extension ContactViewController:UISearchBarDelegate, UITableViewDelegate, UITabl
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         DispatchQueue.global().async {
             self.filterContacts = self.deviceContacts.filter({ (contactData) -> Bool in
-                if contactData.contactName_display.contains(searchText) {
+                if contactData.contactName_display.lowercased().contains(searchText.lowercased()) {
                     return true
                 }
                 for phone in contactData.contactPhoneNumber.values {
@@ -162,12 +192,19 @@ extension ContactViewController:UISearchBarDelegate, UITableViewDelegate, UITabl
             .none : .checkmark
         tableCell.contactTitle.text = contactData.contactName_display
         if contactData.contactPhoneNumber.values.count > 0 {
-            let key = Array(contactData.contactPhoneNumber)[0].key
             let value = Array(contactData.contactPhoneNumber)[0].value
-            tableCell.contactNumber.text = "\(key) : \(value)"
+            tableCell.contactNumber.text = "\(value)"
         }
         if let thumb_data = contactData.contactThumbData {
             tableCell.contactThumb.image = UIImage.init(data: thumb_data)
+        } else {
+            tableCell.contactThumb.image = UIImage.init(named: "woman")
+        }
+        if tableCell.contactThumb.layer.cornerRadius == 0 {
+            tableCell.contactThumb.layer.cornerRadius = tableCell.contactThumb.frame.size.width/2
+            tableCell.contactThumb.layer.masksToBounds = true
+            tableCell.contactThumb.layer.borderColor = UIColor.white.cgColor
+            tableCell.contactThumb.layer.borderWidth = 0.8
         }
         
         return tableCell

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KCc-qv-Ipz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,23 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="bkl-zU-Pp7">
+            <objects>
+                <navigationController id="KCc-qv-Ipz" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tl8-U9-5c5">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="dbQ-WE-kih"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YxB-Gg-NA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-991" y="348"/>
+        </scene>
+        <!--Contact Transfer-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ContactTransfer" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,10 +35,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q1I-Qx-uIJ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4VE-q5-h6K" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
-                                        <rect key="frame" x="56.5" y="286" width="75" height="75"/>
+                                        <rect key="frame" x="56.5" y="264" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="nUi-Wu-aMG"/>
                                             <constraint firstAttribute="height" constant="75" id="sod-ZI-yZg"/>
@@ -49,7 +65,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nto-PQ-prk" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
-                                        <rect key="frame" x="244" y="286" width="75" height="75"/>
+                                        <rect key="frame" x="244" y="264" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="1Bl-fs-Uzk"/>
                                             <constraint firstAttribute="width" constant="75" id="7k4-JZ-RTX"/>
@@ -85,7 +101,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="okX-n5-9Hq">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zrp-Ng-CA3" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
                                         <rect key="frame" x="16" y="8" width="67" height="30"/>
@@ -109,7 +125,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waf-Or-jfE">
-                                        <rect key="frame" x="62.5" y="198.5" width="250" height="250"/>
+                                        <rect key="frame" x="62.5" y="176.5" width="250" height="250"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="250" id="17a-IS-omc"/>
@@ -140,6 +156,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Contact Transfer" id="YuU-dJ-NM4"/>
                     <connections>
                         <outlet property="leadingSpace" destination="E5G-BO-pex" id="UxK-0q-P2t"/>
                         <outlet property="pulsView" destination="waf-Or-jfE" id="i3F-A8-DO4"/>
@@ -161,41 +178,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7XD-rf-lhB">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7XD-rf-lhB">
+                                <rect key="frame" x="0.0" y="64" width="375" height="558"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="Xg7-XN-zZg">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="Cn3-od-0GI" id="8Ly-Sr-ViX"/>
-                                    </connections>
-                                </searchBar>
+                                <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ContactCell" rowHeight="71" id="uEI-1v-A4f" customClass="ContactTableViewCell" customModule="ContactTransfer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="71"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uEI-1v-A4f" id="Rir-sL-6tC">
-                                            <rect key="frame" x="0.0" y="0.0" width="336" height="71"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="336" height="70.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ykt-Eb-iKa">
-                                                    <rect key="frame" x="16" y="10.5" width="50" height="50"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woman" translatesAutoresizingMaskIntoConstraints="NO" id="Ykt-Eb-iKa">
+                                                    <rect key="frame" x="16" y="15.5" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="MuJ-BE-BlP"/>
-                                                        <constraint firstAttribute="height" constant="50" id="bNV-g2-Mq5"/>
+                                                        <constraint firstAttribute="width" constant="40" id="MuJ-BE-BlP"/>
+                                                        <constraint firstAttribute="height" constant="40" id="bNV-g2-Mq5"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3n-fx-jSt">
-                                                    <rect key="frame" x="74" y="17.5" width="101" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <rect key="frame" x="64" y="17.5" width="102.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHL-S2-nc6">
-                                                    <rect key="frame" x="74" y="39" width="96" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                    <rect key="frame" x="64" y="39" width="92.5" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                     <color key="textColor" white="0.87411971830000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -222,17 +232,72 @@
                                     <outlet property="delegate" destination="Cn3-od-0GI" id="xW2-Qq-w3j"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsL-p8-lO0" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
+                                <rect key="frame" x="189" y="624.5" width="178" height="40"/>
+                                <state key="normal" title="Send Contact " image="send_cont">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="topGColor">
+                                        <color key="value" red="1" green="0.0" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bottomGColor">
+                                        <color key="value" red="0.0" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="innerGColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.69999999999999996"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDN-wT-2nU" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
+                                <rect key="frame" x="8" y="624.5" width="169" height="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <state key="normal" title="  Hide Keybord  ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="topGColor">
+                                        <color key="value" red="1" green="0.0" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bottomGColor">
+                                        <color key="value" red="0.0" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="innerGColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.69999999999999996"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="hideKeybord:" destination="Cn3-od-0GI" eventType="touchUpInside" id="LMw-Zp-cjV"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.97207856514084512" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="1SS-lS-nSG" firstAttribute="bottom" secondItem="7XD-rf-lhB" secondAttribute="bottom" id="M6B-jn-0l2"/>
+                            <constraint firstItem="IDN-wT-2nU" firstAttribute="leading" secondItem="1SS-lS-nSG" secondAttribute="leading" constant="8" id="GMc-HI-GTW"/>
+                            <constraint firstItem="gsL-p8-lO0" firstAttribute="width" secondItem="FCZ-Eg-7Xa" secondAttribute="width" multiplier="0.475" id="IG3-zx-DSb"/>
+                            <constraint firstItem="1SS-lS-nSG" firstAttribute="bottom" secondItem="7XD-rf-lhB" secondAttribute="bottom" constant="45" id="M6B-jn-0l2"/>
+                            <constraint firstItem="1SS-lS-nSG" firstAttribute="trailing" secondItem="gsL-p8-lO0" secondAttribute="trailing" constant="8" id="ZVQ-UB-MMj"/>
                             <constraint firstItem="7XD-rf-lhB" firstAttribute="top" secondItem="1SS-lS-nSG" secondAttribute="top" id="byH-ku-m5B"/>
+                            <constraint firstItem="1SS-lS-nSG" firstAttribute="bottom" secondItem="IDN-wT-2nU" secondAttribute="bottom" constant="2.5" id="gaf-0T-zRh"/>
+                            <constraint firstItem="IDN-wT-2nU" firstAttribute="top" secondItem="7XD-rf-lhB" secondAttribute="bottom" constant="2.5" id="hAo-OG-JjY"/>
+                            <constraint firstItem="IDN-wT-2nU" firstAttribute="width" secondItem="FCZ-Eg-7Xa" secondAttribute="width" multiplier="0.45" id="inG-FS-Yad"/>
+                            <constraint firstItem="1SS-lS-nSG" firstAttribute="bottom" secondItem="gsL-p8-lO0" secondAttribute="bottom" constant="2.5" id="nVm-EH-AEK"/>
+                            <constraint firstItem="gsL-p8-lO0" firstAttribute="top" secondItem="7XD-rf-lhB" secondAttribute="bottom" constant="2.5" id="q9k-63-hCj"/>
                             <constraint firstItem="1SS-lS-nSG" firstAttribute="trailing" secondItem="7XD-rf-lhB" secondAttribute="trailing" id="rj3-16-HJV"/>
                             <constraint firstItem="7XD-rf-lhB" firstAttribute="leading" secondItem="1SS-lS-nSG" secondAttribute="leading" id="vk8-rB-AQp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1SS-lS-nSG"/>
                     </view>
                     <connections>
+                        <outlet property="bottomSpaceCollections" destination="M6B-jn-0l2" id="tgp-RZ-Yh7"/>
+                        <outlet property="bottomSpaceHideKeybord" destination="gaf-0T-zRh" id="q4P-B1-Ko4"/>
+                        <outlet property="bottomSpaceSendContact" destination="nVm-EH-AEK" id="CGq-hY-1DN"/>
                         <outlet property="contactTableView" destination="7XD-rf-lhB" id="7vc-fY-oPo"/>
                     </connections>
                 </viewController>
@@ -249,7 +314,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uN0-Tq-HMe">
-                                <rect key="frame" x="16" y="36" width="343" height="615"/>
+                                <rect key="frame" x="16" y="80" width="343" height="571"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -270,4 +335,8 @@
             <point key="canvasLocation" x="960.79999999999995" y="-13.043478260869566"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="send_cont" width="60" height="60"/>
+        <image name="woman" width="64" height="64"/>
+    </resources>
 </document>
