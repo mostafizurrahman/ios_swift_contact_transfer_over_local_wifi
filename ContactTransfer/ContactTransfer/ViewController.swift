@@ -181,7 +181,9 @@ class ViewController: UIViewController {
         
         self.requestAccess { (granted) in
             if granted {
-                self.performSegue(withIdentifier: "ContactSegue", sender: self)
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "ContactSegue", sender: self)
+                }
             }
         }
 //        self.startBroadcastReciever()

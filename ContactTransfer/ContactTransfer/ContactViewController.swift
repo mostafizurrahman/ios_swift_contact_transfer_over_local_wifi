@@ -12,6 +12,7 @@ import Contacts
 class ContactViewController: UIViewController {
 
     
+    @IBOutlet weak var bottomSpaceSelect: NSLayoutConstraint!
     @IBOutlet weak var bottomSpaceSendContact: NSLayoutConstraint!
     @IBOutlet weak var bottomSpaceHideKeybord: NSLayoutConstraint!
     @IBOutlet weak var bottomSpaceCollections: NSLayoutConstraint!
@@ -22,7 +23,7 @@ class ContactViewController: UIViewController {
     fileprivate var filterContacts:[ContactData] = []
     fileprivate var deselectedContacts:[String] = []
     var searchBar:UISearchBar!
-    var keybordSize:CGRect?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.searchBar = UISearchBar(frame: CGRect(x:0, y:0, width:self.view.frame.width * 0.75, height:44))
@@ -43,9 +44,7 @@ class ContactViewController: UIViewController {
             self.deviceContacts = self.cnparser.phoneContacts
             self.contactTableView.reloadData()
         }
-        if let _value = UserDefaults.standard.value(forKey: "keyborad_frame") {
-            self.keybordSize = (_value as! NSValue).cgRectValue
-        }
+        
         
         // Do any additional setup after loading the view.
     }
@@ -56,10 +55,12 @@ class ContactViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     @objc func keyboardWillShow(notification: Notification) {
-        let bottomSpace:CGFloat = UIScreen.main.bounds.height / 2.65
+        let factor:CGFloat = UIScreen.main.nativeBounds.height > 2435 ? 2.65 : 2.5
+        let bottomSpace:CGFloat = UIScreen.main.bounds.height / factor
         self.bottomSpaceCollections.constant = bottomSpace
         self.bottomSpaceHideKeybord.constant = bottomSpace - 45
         self.bottomSpaceSendContact.constant = bottomSpace - 45
+        self.bottomSpaceSelect.constant = bottomSpace - 45
         UIView.animate(withDuration: 0.4) {
             self.view.layoutIfNeeded()
         }
@@ -71,6 +72,7 @@ class ContactViewController: UIViewController {
             self.bottomSpaceCollections.constant = 45
             self.bottomSpaceHideKeybord.constant = 2.5
             self.bottomSpaceSendContact.constant = 2.5
+            self.bottomSpaceSelect.constant = 2.5
             UIView.animate(withDuration: 0.4) {
                 self.view.layoutIfNeeded()
             }
@@ -104,7 +106,23 @@ class ContactViewController: UIViewController {
         self.searchBar.endEditing(true)
     }
     
-
+    @IBAction func changeSelection(_ sender: BorderButton) {
+        self.searchBar.endEditing(true)
+        self.searchActive = false
+        self.deselectedContacts.removeAll()
+        if let __title = sender.title(for: .normal) {
+            if __title.elementsEqual("  Deselect  ") {
+                for contact in self.deviceContacts {
+                    self.deselectedContacts.append(contact.identifier)
+                }
+                sender.setTitle("    Select    ", for: .normal)
+            } else {
+                sender.setTitle("  Deselect  ", for: .normal)
+            }
+        }
+        self.contactTableView.reloadData()
+    }
+    
 }
 
 extension ContactViewController:UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
