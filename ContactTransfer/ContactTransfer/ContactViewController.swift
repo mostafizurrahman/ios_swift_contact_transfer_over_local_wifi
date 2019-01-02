@@ -20,6 +20,7 @@ class ContactViewController: UIViewController {
     fileprivate var searchActive = false
     fileprivate let cnparser = ContactParser.parser
     fileprivate var deviceContacts:[ContactData] = []
+    fileprivate var selectContacts:[ContactData] = []
     fileprivate var filterContacts:[ContactData] = []
     fileprivate var deselectedContacts:[String] = []
     var searchBar:UISearchBar!
@@ -86,15 +87,24 @@ class ContactViewController: UIViewController {
     }
     
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if let idf = segue.identifier {
+            if idf.elementsEqual("SendSegue") {
+                if let destination = segue.destination as? SenderViewController {
+                    guard let selected_contacts = sender as? [ContactData] else {
+                        return
+                    }
+                    destination.selectedContacts = selected_contacts
+                }
+            }
+        }
     }
-    */
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -121,6 +131,26 @@ class ContactViewController: UIViewController {
             }
         }
         self.contactTableView.reloadData()
+    }
+    @IBAction func sendContacts(_ sender: Any) {
+        var scontacts:[ContactData] = []
+        for contact in self.deviceContacts {
+            if !self.deselectedContacts.contains(contact.identifier) {
+                scontacts.append(contact)
+            }
+        }
+        if scontacts.count > 0 {
+            self.performSegue(withIdentifier: "SendSegue", sender: scontacts)
+        } else {
+            let alertController = UIAlertController.init(title: "No Contacts Selected",
+                                                         message: "Please! Select contact to send.",
+                                                         preferredStyle: .actionSheet)
+            let action = UIAlertAction.init(title: "Dismiss", style: .default) { (_) in
+                
+            }
+            alertController.addAction(action)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
 }
@@ -166,7 +196,12 @@ extension ContactViewController:UISearchBarDelegate, UITableViewDelegate, UITabl
                 self.contactTableView.reloadData()
             }
         }
+        
+        
     }
+    
+    
+    
     
 //    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
 //        return false

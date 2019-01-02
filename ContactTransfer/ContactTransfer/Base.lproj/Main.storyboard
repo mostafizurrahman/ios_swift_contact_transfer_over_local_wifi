@@ -255,6 +255,9 @@
                                         <real key="value" value="0.69999999999999996"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="sendContacts:" destination="Cn3-od-0GI" eventType="touchUpInside" id="wgH-Bb-TbV"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDN-wT-2nU" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
                                 <rect key="frame" x="8" y="624.5" width="66" height="40"/>
@@ -329,11 +332,27 @@
                         <outlet property="bottomSpaceSelect" destination="b1p-7O-vhm" id="kYS-mI-J0A"/>
                         <outlet property="bottomSpaceSendContact" destination="nVm-EH-AEK" id="CGq-hY-1DN"/>
                         <outlet property="contactTableView" destination="7XD-rf-lhB" id="7vc-fY-oPo"/>
+                        <segue destination="0iH-yV-Xhs" kind="show" identifier="SendSegue" id="tF7-NI-HYK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XaB-aF-BFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="960.79999999999995" y="754.27286356821594"/>
+        </scene>
+        <!--Sending...-->
+        <scene sceneID="GQB-34-raa">
+            <objects>
+                <viewController title="Sending..." id="0iH-yV-Xhs" customClass="SenderViewController" customModule="ContactTransfer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xrX-1s-RiE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="uva-UH-0M9"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HXx-tY-BKT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1841" y="754"/>
         </scene>
         <!--Receiver View Controller-->
         <scene sceneID="JfQ-nq-tGv">

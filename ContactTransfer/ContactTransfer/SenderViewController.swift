@@ -12,6 +12,7 @@ import SwiftSocket
 
 class SenderViewController: UIViewController {
 
+    var selectedContacts:[ContactData]!
     var senderInfo:SocketData?
     var sender:TCPContactSend?
     let client = TCPClient(address: "192.168.0.101", port: 8444)
