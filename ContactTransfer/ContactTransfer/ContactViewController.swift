@@ -201,12 +201,6 @@ extension ContactViewController:UISearchBarDelegate, UITableViewDelegate, UITabl
     }
     
     
-    
-    
-//    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-//        return false
-//    }
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }

@@ -13,52 +13,51 @@ class ReceiverViewController: UIViewController {
     
     @IBOutlet weak var receivedImageView: UIImageView!
     var senderInfo:SocketData?
-    var receiver:TCPReceiveContact?
+    var countactCount:Int = 0
+    var successCount:Int = 0
+    @IBOutlet weak var contactNameLabel: UILabel!
+    
+    var receiveContact:TCPReceiveContact?
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.receiver = TCPReceiveContact()
-        self.receiver?.receiveDelegate = self
-        
+        self.receiveContact = TCPReceiveContact()
+        self.receiveContact?.receiveDelegate = self
+        self.contactNameLabel.text = "\(self.senderInfo?.commPort)_\(self.senderInfo?.receiverIp)"
+        DispatchQueue.global().async {
+            self.initiateConnections()
+        }
         // Do any additional setup after loading the view.
     }
     
-    
-//    func echoService(client: TCPClient) {
-//        print("Newclient from:\(client.address)[\(client.port)]")
-//        var d = client.read(1024*10)
-//        client.send(data: d!)
-//        client.close()
-//    }
-    
-    func testServer() {
-        let server = TCPServer(address: "192.168.0.101", port: 8444)
-        switch server.listen() {
-        case .success:
-            while true {
-                if var client = server.accept() {
-                    print("ok")
-                    let __data = NSMutableData()
-                    while let byt = client.read(1024){
-                        let data = NSData.init(bytes: byt, length: byt.count)
-                        __data.append(data as Data )
+    fileprivate func initiateConnections(){
+        if let contactData = self.senderInfo {
+            if let count = Int(contactData.receiverName) {
+                self.countactCount =  count
+                var is_connected = false
+                var index = 0
+                while index < 5 && !is_connected {
+                    guard let __receiver = self.receiveContact else {
+                        continue
                     }
+                    is_connected = __receiver.initiateConnection("\(contactData.commPort)", timeOut: 5)
+                    index += 1
                     
-                    let image = UIImage.init(data: __data as Data)
-                    self.receivedImageView.image = image
-                } else {
-                    print("accept error")
+                }
+                if is_connected {
+                    guard let __receiver = self.receiveContact else {
+                        return
+                    }
+                    __receiver.receiveContact()
                 }
             }
-        case .failure(let error):
-            print(error)
         }
     }
     
     
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        testServer()
+        
 //        if let _data = senderInfo, let _rcv = self.receiver {
 //            while !_rcv.initiateConnection("2442", timeOut: 10){
 //                print("not connected")
@@ -84,6 +83,20 @@ class ReceiverViewController: UIViewController {
 
 extension ReceiverViewController:TCPReceiveContactDelegate {
     func onContactReceivedSuccess(_ data: Data!) {
+        let contactData = ContactData.init(withData: data)
+        DispatchQueue.main.async {
+            self.contactNameLabel.text = contactData.contactName_display
+        }
+        self.countactCount -= 1
+        if self.countactCount > 0 {
+            
+            guard let __receiver = self.receiveContact else {
+                return
+            }
+            self.successCount += 1
+            __receiver.sendStatus("\(self.successCount)")
+            __receiver.receiveContact()
+        }
         
     }
     

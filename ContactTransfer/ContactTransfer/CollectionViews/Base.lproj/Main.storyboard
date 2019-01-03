@@ -24,12 +24,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YxB-Gg-NA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-991" y="348"/>
+            <point key="canvasLocation" x="-732" y="358"/>
         </scene>
         <!--Contact Transfer-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ContactTransfer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="TransferViewController" customModule="ContactTransfer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -362,21 +362,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uN0-Tq-HMe">
-                                <rect key="frame" x="16" y="80" width="343" height="571"/>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6aa-bt-3Im">
+                                <rect key="frame" x="52" y="176" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6aX-le-kxA" firstAttribute="bottom" secondItem="uN0-Tq-HMe" secondAttribute="bottom" constant="16" id="5FI-D9-L7u"/>
-                            <constraint firstItem="6aX-le-kxA" firstAttribute="trailing" secondItem="uN0-Tq-HMe" secondAttribute="trailing" constant="16" id="IuW-ri-Zrl"/>
-                            <constraint firstItem="uN0-Tq-HMe" firstAttribute="top" secondItem="6aX-le-kxA" secondAttribute="top" constant="16" id="ahH-a4-rSV"/>
-                            <constraint firstItem="uN0-Tq-HMe" firstAttribute="leading" secondItem="6aX-le-kxA" secondAttribute="leading" constant="16" id="jfY-FD-Hpz"/>
+                            <constraint firstItem="6aa-bt-3Im" firstAttribute="leading" secondItem="6aX-le-kxA" secondAttribute="leading" constant="52" id="IfJ-VD-UDR"/>
+                            <constraint firstItem="6aa-bt-3Im" firstAttribute="top" secondItem="6aX-le-kxA" secondAttribute="top" constant="112" id="ihb-Dh-TDU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6aX-le-kxA"/>
                     </view>
                     <connections>
-                        <outlet property="receivedImageView" destination="uN0-Tq-HMe" id="pKA-SM-ySi"/>
+                        <outlet property="contactNameLabel" destination="6aa-bt-3Im" id="bZx-dy-Ly7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xUi-yh-t2F" userLabel="First Responder" sceneMemberID="firstResponder"/>
