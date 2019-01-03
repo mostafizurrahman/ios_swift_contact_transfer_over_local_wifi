@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KCc-qv-Ipz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,19 +10,35 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="bkl-zU-Pp7">
+            <objects>
+                <navigationController id="KCc-qv-Ipz" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tl8-U9-5c5">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="dbQ-WE-kih"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YxB-Gg-NA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-732" y="358"/>
+        </scene>
+        <!--Contact Transfer-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ContactTransfer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="TransferViewController" customModule="ContactTransfer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q1I-Qx-uIJ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4VE-q5-h6K" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
-                                        <rect key="frame" x="56.5" y="286" width="75" height="75"/>
+                                        <rect key="frame" x="56.5" y="264" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="nUi-Wu-aMG"/>
                                             <constraint firstAttribute="height" constant="75" id="sod-ZI-yZg"/>
@@ -49,7 +65,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nto-PQ-prk" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
-                                        <rect key="frame" x="244" y="286" width="75" height="75"/>
+                                        <rect key="frame" x="244" y="264" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="1Bl-fs-Uzk"/>
                                             <constraint firstAttribute="width" constant="75" id="7k4-JZ-RTX"/>
@@ -85,7 +101,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="okX-n5-9Hq">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zrp-Ng-CA3" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
                                         <rect key="frame" x="16" y="8" width="67" height="30"/>
@@ -109,7 +125,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waf-Or-jfE">
-                                        <rect key="frame" x="62.5" y="198.5" width="250" height="250"/>
+                                        <rect key="frame" x="62.5" y="176.5" width="250" height="250"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="250" id="17a-IS-omc"/>
@@ -140,6 +156,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Contact Transfer" id="YuU-dJ-NM4"/>
                     <connections>
                         <outlet property="leadingSpace" destination="E5G-BO-pex" id="UxK-0q-P2t"/>
                         <outlet property="pulsView" destination="waf-Or-jfE" id="i3F-A8-DO4"/>
@@ -161,41 +178,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7XD-rf-lhB">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7XD-rf-lhB">
+                                <rect key="frame" x="0.0" y="64" width="375" height="558"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="Xg7-XN-zZg">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="Cn3-od-0GI" id="8Ly-Sr-ViX"/>
-                                    </connections>
-                                </searchBar>
+                                <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactCell" rowHeight="71" id="uEI-1v-A4f" customClass="ContactTableViewCell" customModule="ContactTransfer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="71"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ContactCell" rowHeight="71" id="uEI-1v-A4f" customClass="ContactTableViewCell" customModule="ContactTransfer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uEI-1v-A4f" id="Rir-sL-6tC">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="336" height="70.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ykt-Eb-iKa">
-                                                    <rect key="frame" x="16" y="10.5" width="50" height="50"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woman" translatesAutoresizingMaskIntoConstraints="NO" id="Ykt-Eb-iKa">
+                                                    <rect key="frame" x="16" y="15.5" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="MuJ-BE-BlP"/>
-                                                        <constraint firstAttribute="height" constant="50" id="bNV-g2-Mq5"/>
+                                                        <constraint firstAttribute="width" constant="40" id="MuJ-BE-BlP"/>
+                                                        <constraint firstAttribute="height" constant="40" id="bNV-g2-Mq5"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3n-fx-jSt">
-                                                    <rect key="frame" x="74" y="17.5" width="101" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <rect key="frame" x="64" y="17.5" width="102.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHL-S2-nc6">
-                                                    <rect key="frame" x="74" y="39" width="96" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                    <rect key="frame" x="64" y="39" width="92.5" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                     <color key="textColor" white="0.87411971830000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -222,23 +232,127 @@
                                     <outlet property="delegate" destination="Cn3-od-0GI" id="xW2-Qq-w3j"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsL-p8-lO0" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
+                                <rect key="frame" x="283" y="624.5" width="84" height="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="  Send ⇨  ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="topGColor">
+                                        <color key="value" red="1" green="0.0" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bottomGColor">
+                                        <color key="value" red="0.0" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="innerGColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.69999999999999996"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="sendContacts:" destination="Cn3-od-0GI" eventType="touchUpInside" id="wgH-Bb-TbV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDN-wT-2nU" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
+                                <rect key="frame" x="8" y="624.5" width="66" height="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <state key="normal" title="   ↓↓↓   ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="topGColor">
+                                        <color key="value" red="1" green="0.0" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bottomGColor">
+                                        <color key="value" red="0.0" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="innerGColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.69999999999999996"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="hideKeybord:" destination="Cn3-od-0GI" eventType="touchUpInside" id="LMw-Zp-cjV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzS-tR-R0M" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
+                                <rect key="frame" x="146.5" y="624.5" width="82" height="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <state key="normal" title="  Deselect  ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="topGColor">
+                                        <color key="value" red="1" green="0.0" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bottomGColor">
+                                        <color key="value" red="0.0" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="innerGColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.75"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="changeSelection:" destination="Cn3-od-0GI" eventType="touchUpInside" id="3Oy-Xb-ZL8"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.8461157570422535" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="1SS-lS-nSG" firstAttribute="bottom" secondItem="7XD-rf-lhB" secondAttribute="bottom" id="M6B-jn-0l2"/>
+                            <constraint firstItem="rzS-tR-R0M" firstAttribute="top" secondItem="7XD-rf-lhB" secondAttribute="bottom" constant="2.5" id="FAq-Xq-Xzh"/>
+                            <constraint firstItem="IDN-wT-2nU" firstAttribute="leading" secondItem="1SS-lS-nSG" secondAttribute="leading" constant="8" id="GMc-HI-GTW"/>
+                            <constraint firstItem="1SS-lS-nSG" firstAttribute="bottom" secondItem="7XD-rf-lhB" secondAttribute="bottom" constant="45" id="M6B-jn-0l2"/>
+                            <constraint firstItem="1SS-lS-nSG" firstAttribute="trailing" secondItem="gsL-p8-lO0" secondAttribute="trailing" constant="8" id="ZVQ-UB-MMj"/>
+                            <constraint firstItem="1SS-lS-nSG" firstAttribute="bottom" secondItem="rzS-tR-R0M" secondAttribute="bottom" constant="2.5" id="b1p-7O-vhm"/>
                             <constraint firstItem="7XD-rf-lhB" firstAttribute="top" secondItem="1SS-lS-nSG" secondAttribute="top" id="byH-ku-m5B"/>
+                            <constraint firstItem="1SS-lS-nSG" firstAttribute="bottom" secondItem="IDN-wT-2nU" secondAttribute="bottom" constant="2.5" id="gaf-0T-zRh"/>
+                            <constraint firstItem="IDN-wT-2nU" firstAttribute="top" secondItem="7XD-rf-lhB" secondAttribute="bottom" constant="2.5" id="hAo-OG-JjY"/>
+                            <constraint firstItem="1SS-lS-nSG" firstAttribute="bottom" secondItem="gsL-p8-lO0" secondAttribute="bottom" constant="2.5" id="nVm-EH-AEK"/>
+                            <constraint firstItem="gsL-p8-lO0" firstAttribute="top" secondItem="7XD-rf-lhB" secondAttribute="bottom" constant="2.5" id="q9k-63-hCj"/>
                             <constraint firstItem="1SS-lS-nSG" firstAttribute="trailing" secondItem="7XD-rf-lhB" secondAttribute="trailing" id="rj3-16-HJV"/>
+                            <constraint firstItem="rzS-tR-R0M" firstAttribute="centerX" secondItem="1SS-lS-nSG" secondAttribute="centerX" id="vHp-jj-Spx"/>
                             <constraint firstItem="7XD-rf-lhB" firstAttribute="leading" secondItem="1SS-lS-nSG" secondAttribute="leading" id="vk8-rB-AQp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1SS-lS-nSG"/>
                     </view>
                     <connections>
+                        <outlet property="bottomSpaceCollections" destination="M6B-jn-0l2" id="tgp-RZ-Yh7"/>
+                        <outlet property="bottomSpaceHideKeybord" destination="gaf-0T-zRh" id="q4P-B1-Ko4"/>
+                        <outlet property="bottomSpaceSelect" destination="b1p-7O-vhm" id="kYS-mI-J0A"/>
+                        <outlet property="bottomSpaceSendContact" destination="nVm-EH-AEK" id="CGq-hY-1DN"/>
                         <outlet property="contactTableView" destination="7XD-rf-lhB" id="7vc-fY-oPo"/>
+                        <segue destination="0iH-yV-Xhs" kind="show" identifier="SendSegue" id="tF7-NI-HYK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XaB-aF-BFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="960.79999999999995" y="754.27286356821594"/>
+        </scene>
+        <!--Sending...-->
+        <scene sceneID="GQB-34-raa">
+            <objects>
+                <viewController title="Sending..." id="0iH-yV-Xhs" customClass="SenderViewController" customModule="ContactTransfer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xrX-1s-RiE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="uva-UH-0M9"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HXx-tY-BKT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1841" y="754"/>
         </scene>
         <!--Receiver View Controller-->
         <scene sceneID="JfQ-nq-tGv">
@@ -248,21 +362,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uN0-Tq-HMe">
-                                <rect key="frame" x="16" y="36" width="343" height="615"/>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6aa-bt-3Im">
+                                <rect key="frame" x="52" y="176" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6aX-le-kxA" firstAttribute="bottom" secondItem="uN0-Tq-HMe" secondAttribute="bottom" constant="16" id="5FI-D9-L7u"/>
-                            <constraint firstItem="6aX-le-kxA" firstAttribute="trailing" secondItem="uN0-Tq-HMe" secondAttribute="trailing" constant="16" id="IuW-ri-Zrl"/>
-                            <constraint firstItem="uN0-Tq-HMe" firstAttribute="top" secondItem="6aX-le-kxA" secondAttribute="top" constant="16" id="ahH-a4-rSV"/>
-                            <constraint firstItem="uN0-Tq-HMe" firstAttribute="leading" secondItem="6aX-le-kxA" secondAttribute="leading" constant="16" id="jfY-FD-Hpz"/>
+                            <constraint firstItem="6aa-bt-3Im" firstAttribute="leading" secondItem="6aX-le-kxA" secondAttribute="leading" constant="52" id="IfJ-VD-UDR"/>
+                            <constraint firstItem="6aa-bt-3Im" firstAttribute="top" secondItem="6aX-le-kxA" secondAttribute="top" constant="112" id="ihb-Dh-TDU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6aX-le-kxA"/>
                     </view>
                     <connections>
-                        <outlet property="receivedImageView" destination="uN0-Tq-HMe" id="pKA-SM-ySi"/>
+                        <outlet property="contactNameLabel" destination="6aa-bt-3Im" id="bZx-dy-Ly7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xUi-yh-t2F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -270,4 +385,7 @@
             <point key="canvasLocation" x="960.79999999999995" y="-13.043478260869566"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="woman" width="64" height="64"/>
+    </resources>
 </document>

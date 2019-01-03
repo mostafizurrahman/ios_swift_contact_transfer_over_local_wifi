@@ -12,6 +12,7 @@ enum SOStatus:String {
     case broadcast = "00"
     case receive = "01"
     case send = "10"
+    case offline = "OF"
     case unknown = "11"
 }
 enum OSType : Int {

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		913F105E56F60750CE3DAD71 /* Pods_ContactTransfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E989E06845EBEA36B391787E /* Pods_ContactTransfer.framework */; };
 		BE02EEC521CAD654004CB9CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE02EEC421CAD654004CB9CD /* AppDelegate.swift */; };
-		BE02EEC721CAD654004CB9CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE02EEC621CAD654004CB9CD /* ViewController.swift */; };
+		BE02EEC721CAD654004CB9CD /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE02EEC621CAD654004CB9CD /* TransferViewController.swift */; };
 		BE02EECA21CAD654004CB9CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE02EEC821CAD654004CB9CD /* Main.storyboard */; };
 		BE02EECC21CAD656004CB9CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE02EECB21CAD656004CB9CD /* Assets.xcassets */; };
 		BE02EECF21CAD656004CB9CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE02EECD21CAD656004CB9CD /* LaunchScreen.storyboard */; };
@@ -18,7 +18,6 @@
 		BE040A6821CE65F100D826E8 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE040A6721CE65F100D826E8 /* BorderButton.swift */; };
 		BE1F1F5C21CEA45A007D2123 /* SenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */; };
 		BE1F1F5E21CEA466007D2123 /* ReceiverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */; };
-		BE1F1F6021CEA775007D2123 /* IMG_6709.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BE1F1F5F21CEA775007D2123 /* IMG_6709.jpeg */; };
 		BE27A28D21DA236A00DF451F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A28C21DA236A00DF451F /* ContactViewController.swift */; };
 		BE27A29021DA2FBA00DF451F /* ContactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A28F21DA2FBA00DF451F /* ContactData.swift */; };
 		BE27A29221DA492900DF451F /* ContactParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A29121DA492900DF451F /* ContactParser.swift */; };
@@ -27,7 +26,7 @@
 		BE886F1521CC0C8100F6534F /* ServerSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0921CC0C8000F6534F /* ServerSocket.m */; };
 		BE886F1621CC0C8100F6534F /* TCPContactSend.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0A21CC0C8000F6534F /* TCPContactSend.m */; };
 		BE886F1821CC0C8100F6534F /* TCPReceiveContact.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0F21CC0C8100F6534F /* TCPReceiveContact.m */; };
-		BE886F1C21CC169100F6534F /* ReceiverBroadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE886F1B21CC169100F6534F /* ReceiverBroadcast.swift */; };
+		BE886F1C21CC169100F6534F /* BroadcastDataSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE886F1B21CC169100F6534F /* BroadcastDataSender.swift */; };
 		BE886F1E21CC2BBA00F6534F /* SocketData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE886F1D21CC2BBA00F6534F /* SocketData.swift */; };
 		BE886F2021CCDE6300F6534F /* SenderBroadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE886F1F21CCDE6300F6534F /* SenderBroadcast.swift */; };
 		BE886F2221CD0F0200F6534F /* UdpSocket.c in Sources */ = {isa = PBXBuildFile; fileRef = BE886F2121CD0F0200F6534F /* UdpSocket.c */; };
@@ -38,7 +37,7 @@
 		99F59464564BBA7407B9288C /* Pods-ContactTransfer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContactTransfer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ContactTransfer/Pods-ContactTransfer.debug.xcconfig"; sourceTree = "<group>"; };
 		BE02EEC121CAD654004CB9CD /* ContactTransfer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactTransfer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE02EEC421CAD654004CB9CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BE02EEC621CAD654004CB9CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BE02EEC621CAD654004CB9CD /* TransferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
 		BE02EEC921CAD654004CB9CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BE02EECB21CAD656004CB9CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE02EECE21CAD656004CB9CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,7 +49,6 @@
 		BE040A6721CE65F100D826E8 /* BorderButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
 		BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderViewController.swift; sourceTree = "<group>"; };
 		BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverViewController.swift; sourceTree = "<group>"; };
-		BE1F1F5F21CEA775007D2123 /* IMG_6709.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_6709.jpeg; sourceTree = "<group>"; };
 		BE27A28C21DA236A00DF451F /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		BE27A28F21DA2FBA00DF451F /* ContactData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactData.swift; sourceTree = "<group>"; };
 		BE27A29121DA492900DF451F /* ContactParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactParser.swift; sourceTree = "<group>"; };
@@ -64,7 +62,7 @@
 		BE886F0F21CC0C8100F6534F /* TCPReceiveContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPReceiveContact.m; sourceTree = "<group>"; };
 		BE886F1121CC0C8100F6534F /* CSClientSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSClientSocket.h; sourceTree = "<group>"; };
 		BE886F1321CC0C8100F6534F /* TCPContactSend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPContactSend.h; sourceTree = "<group>"; };
-		BE886F1B21CC169100F6534F /* ReceiverBroadcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverBroadcast.swift; sourceTree = "<group>"; };
+		BE886F1B21CC169100F6534F /* BroadcastDataSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastDataSender.swift; sourceTree = "<group>"; };
 		BE886F1D21CC2BBA00F6534F /* SocketData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketData.swift; sourceTree = "<group>"; };
 		BE886F1F21CCDE6300F6534F /* SenderBroadcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderBroadcast.swift; sourceTree = "<group>"; };
 		BE886F2121CD0F0200F6534F /* UdpSocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UdpSocket.c; sourceTree = "<group>"; };
@@ -122,20 +120,14 @@
 		BE02EEC321CAD654004CB9CD /* ContactTransfer */ = {
 			isa = PBXGroup;
 			children = (
-				BE27A29321DA4F2600DF451F /* CollectionViews */,
-				BE27A28E21DA2FA000DF451F /* DataModel */,
-				BE040A6721CE65F100D826E8 /* BorderButton.swift */,
-				BE02EEC421CAD654004CB9CD /* AppDelegate.swift */,
-				BE02EEC621CAD654004CB9CD /* ViewController.swift */,
-				BE1F1F5F21CEA775007D2123 /* IMG_6709.jpeg */,
-				BE02EEC821CAD654004CB9CD /* Main.storyboard */,
-				BE02EECB21CAD656004CB9CD /* Assets.xcassets */,
-				BE02EECD21CAD656004CB9CD /* LaunchScreen.storyboard */,
 				BE02EED021CAD656004CB9CD /* Info.plist */,
 				BE886F0721CC0C7F00F6534F /* ContactTransfer-Bridging-Header.h */,
+				BE27A29321DA4F2600DF451F /* CollectionViews */,
+				BE27A28E21DA2FA000DF451F /* DataModel */,
 				BE886F1A21CC0C8B00F6534F /* Sockets */,
-				BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */,
+				BE02EEC621CAD654004CB9CD /* TransferViewController.swift */,
 				BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */,
+				BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */,
 				BE27A28C21DA236A00DF451F /* ContactViewController.swift */,
 			);
 			path = ContactTransfer;
@@ -153,7 +145,12 @@
 		BE27A29321DA4F2600DF451F /* CollectionViews */ = {
 			isa = PBXGroup;
 			children = (
+				BE040A6721CE65F100D826E8 /* BorderButton.swift */,
 				BE27A29421DA4F4A00DF451F /* ContactTableViewCell.swift */,
+				BE02EEC421CAD654004CB9CD /* AppDelegate.swift */,
+				BE02EEC821CAD654004CB9CD /* Main.storyboard */,
+				BE02EECB21CAD656004CB9CD /* Assets.xcassets */,
+				BE02EECD21CAD656004CB9CD /* LaunchScreen.storyboard */,
 			);
 			path = CollectionViews;
 			sourceTree = "<group>";
@@ -173,7 +170,7 @@
 				BE886F0A21CC0C8000F6534F /* TCPContactSend.m */,
 				BE886F0B21CC0C8100F6534F /* TCPReceiveContact.h */,
 				BE886F0F21CC0C8100F6534F /* TCPReceiveContact.m */,
-				BE886F1B21CC169100F6534F /* ReceiverBroadcast.swift */,
+				BE886F1B21CC169100F6534F /* BroadcastDataSender.swift */,
 				BE886F1D21CC2BBA00F6534F /* SocketData.swift */,
 				BE886F1F21CCDE6300F6534F /* SenderBroadcast.swift */,
 				BE886F2121CD0F0200F6534F /* UdpSocket.c */,
@@ -246,7 +243,6 @@
 				BE02EECF21CAD656004CB9CD /* LaunchScreen.storyboard in Resources */,
 				BE02EECC21CAD656004CB9CD /* Assets.xcassets in Resources */,
 				BE02EECA21CAD654004CB9CD /* Main.storyboard in Resources */,
-				BE1F1F6021CEA775007D2123 /* IMG_6709.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,14 +312,14 @@
 				BE040A6821CE65F100D826E8 /* BorderButton.swift in Sources */,
 				BE886F1621CC0C8100F6534F /* TCPContactSend.m in Sources */,
 				BE886F2021CCDE6300F6534F /* SenderBroadcast.swift in Sources */,
-				BE02EEC721CAD654004CB9CD /* ViewController.swift in Sources */,
+				BE02EEC721CAD654004CB9CD /* TransferViewController.swift in Sources */,
 				BE02EEC521CAD654004CB9CD /* AppDelegate.swift in Sources */,
 				BE886F1E21CC2BBA00F6534F /* SocketData.swift in Sources */,
 				BE03D33221CF3B8E0022B2F5 /* TCPClient.m in Sources */,
 				BE1F1F5E21CEA466007D2123 /* ReceiverViewController.swift in Sources */,
 				BE1F1F5C21CEA45A007D2123 /* SenderViewController.swift in Sources */,
 				BE03D33321CF3B8E0022B2F5 /* TCPServer.m in Sources */,
-				BE886F1C21CC169100F6534F /* ReceiverBroadcast.swift in Sources */,
+				BE886F1C21CC169100F6534F /* BroadcastDataSender.swift in Sources */,
 				BE27A29221DA492900DF451F /* ContactParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
