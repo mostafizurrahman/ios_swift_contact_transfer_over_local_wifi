@@ -29,8 +29,6 @@ class ContactData {
     var jobTitle: String = ""
     
     
-    
-    
     //MARK: CONTACT IMAGE
     var contactImageData:Data? = nil
     var contactThumbData:Data? = nil
@@ -49,9 +47,11 @@ class ContactData {
     
     
     init(withData contactData:Data){
-        let lengthData = contactData.subdata(in: 0...0)
-        let length = Int(lengthData.uint32)
-        let rawContact = contactData.subdata(in: 1...length)
+        let lengthData = contactData.subdata(in: 0...7)
+        let length = lengthData.withUnsafeBytes { (ptr: UnsafePointer<Int>) -> Int in
+            return ptr.pointee
+        }
+        let rawContact = contactData.subdata(in: 8...length+7)
         do {
             let jsonData = try JSONSerialization.jsonObject(with: rawContact,
                                                             options: []) as! [String : AnyObject]
@@ -76,7 +76,6 @@ class ContactData {
                 date.year = Int(array[2]) ?? 0
                 self.contactBirthday = date
             }
-           
             
             self.contactPhoneNumber = jsonData["phones"] as? [String:AnyObject] ?? [:]
             self.contactEmails = jsonData["emails"] as? [String:AnyObject] ?? [:]
@@ -222,6 +221,7 @@ class ContactData {
             var dataLength: NSInteger = jsonData.count
             let lengthData = Data(bytes:&dataLength,
                                   count:MemoryLayout.size(ofValue: dataLength))
+            print(lengthData.count)
             contactData.append(lengthData)
             contactData.append(jsonData)
         } catch  {
