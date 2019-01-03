@@ -68,8 +68,15 @@ class ContactData {
             
             self.jobTitle = jsonData["job"] as? String ?? ""
             self.departmentName = jsonData["department"] as? String ?? ""
-            
-            self.contactBirthday = jsonData["birthday"] as? DateComponents
+            if let bd = jsonData["birthday"] as? String {
+                let array = bd.split(separator: "_")
+                var date = DateComponents()
+                date.day = Int(array[0]) ?? 0
+                date.month = Int(array[1]) ?? 0
+                date.year = Int(array[2]) ?? 0
+                self.contactBirthday = date
+            }
+           
             
             self.contactPhoneNumber = jsonData["phones"] as? [String:AnyObject] ?? [:]
             self.contactEmails = jsonData["emails"] as? [String:AnyObject] ?? [:]
@@ -87,7 +94,6 @@ class ContactData {
             let end_index = length+2+image_length
             let image_data = contactData.subdata(in: length+2...end_index)
             let image = UIImage(data: image_data)
-            print(image?.size)
             if image != nil {
                 self.contactHasImage = true
                 self.contactImageData = image_data
@@ -98,7 +104,6 @@ class ContactData {
             let thumb_data = contactData.subdata(in: end_index+2...end_index2)
             let thumb = UIImage.init(data: thumb_data)
             if thumb != nil {
-                
                 self.contactThumbData = thumb_data
             }
         }
@@ -259,8 +264,17 @@ class ContactData {
         data["org"] = self.organizationName as AnyObject
         data["job"] = self.jobTitle as AnyObject
         data["department"] = self.departmentName as AnyObject
+        if let bday = self.contactBirthday {
+            let day = String(format: "%d", bday.day ?? 0)
+            let mon = String(format: "%d", bday.month ?? 0)
+            let yer = String(format: "%d", bday.year ?? 0)
+            let bd = "\(day)_\(mon)_\(yer)"
+            data["birthday"] = bd as AnyObject
+        } else {
+            data["birthday"] = "" as AnyObject
+        }
         
-        data["birthday"] = self.contactBirthday as AnyObject
+        
         
         data["phones"] = self.contactPhoneNumber as AnyObject
         data["emails"] = self.contactEmails as AnyObject

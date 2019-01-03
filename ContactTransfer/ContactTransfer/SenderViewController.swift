@@ -191,8 +191,11 @@ class SenderViewController: UIViewController {
                     index += 1
                     print("\(socketData.commPort)_\(socketData.senderIp)")
                     sleep(1)
-                    
-                    print("__failed...")
+                    if is_connected {
+                        print("__SUCCESS_CONNECTED...")
+                    } else {
+                        print("__failed...")
+                    }
                 }
             }
             return is_connected
