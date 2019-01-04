@@ -17,7 +17,7 @@
 @implementation TCPReceiveContact
 @synthesize receiveDelegate;
 
--(void)receiveContact
+-(BOOL)receiveContact
 {
     long dataCount = MAX_DATA_LENGTH;
     char data[dataCount];
@@ -27,7 +27,7 @@
     {
         [incomingData appendBytes:data length:receiveDataLength];
     }
-    if ([incomingData length] && !incomingSocket.lastError)
+    if ([incomingData length] > 0 && !incomingSocket.lastError)
     {
         [receiveDelegate onContactReceivedSuccess:incomingData];
         incomingData = nil;
@@ -39,8 +39,10 @@
         [receiveDelegate onContactReceiveError:incomingSocket.lastError];
         
         NSLog(@"error ends");
+        return NO;
         
     }
+    return YES;
 }
 
 

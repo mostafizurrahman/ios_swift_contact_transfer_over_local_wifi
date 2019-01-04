@@ -23,7 +23,7 @@
 @property (weak, readwrite) id<TCPReceiveContactDelegate> receiveDelegate;
 @property (readonly)        BOOL isConnected;
 
--(void) receiveContact;
+-(BOOL) receiveContact;
 -(BOOL) initiateConnection:(NSString *)port timeOut:(int)timeOut;
 -(int)  sendStatus:(NSString *)status;
 @end

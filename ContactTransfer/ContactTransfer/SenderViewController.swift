@@ -19,11 +19,13 @@ class SenderViewController: UIViewController {
     var device_ip_address:String = ""
     var receiveBraodcast = true
     var senderInfo:SocketData?
-    var sender:TCPContactSend?
-    var sendingContact:TCPContactSend?
-    var current_index:Int = 0
-    var receiverData:SocketData?
     
+    var sendingContact:TCPContactSend?
+    var sendCount:Int = 0
+    var recvCount:Int = 0
+    var contactDataLen:Int = 0
+    var receiverData:SocketData?
+    var abortSendingOperation = false
     //receiver button position arrrays
     var hasReceiverArray = [false, false, false, false, false, false]
     var receiverFrameArray:[CGRect] = []
@@ -93,7 +95,6 @@ class SenderViewController: UIViewController {
                         }
                     }
                 }
-                
                 sleep(1)
             }
         }
@@ -156,7 +157,6 @@ class SenderViewController: UIViewController {
                     
                     //MARK: TCP CONTACT SEND
                     
-                    
                     if self.inititateConnection() {
                         print("connection___success!!!!___")
                         self.sendContactData()
@@ -170,10 +170,20 @@ class SenderViewController: UIViewController {
     
     func sendContactData(){
         if let __sender = self.sendingContact {
-            let contactData = self.selectedContacts[self.current_index]
-            let raw_data = contactData.getData()
-            __sender.sendContact(raw_data)
-            __sender.receiveStatus()
+            
+            while self.sendCount < self.selectedContacts.count
+            && !self.abortSendingOperation {
+                let contactData = self.selectedContacts[self.sendCount]
+                let raw_data = contactData.getData()
+                self.contactDataLen = raw_data.count
+                __sender.sendContact(raw_data)
+            }
+            
+            if let enddata = "END".data(using: .utf8) {
+                for _ in 0...5 {
+                    __sender.sendContact(enddata)
+                }
+            }
         }
     }
     
@@ -227,7 +237,21 @@ class SenderViewController: UIViewController {
 
 extension SenderViewController : TCPSendContactDelegate {
     func onContactSendSuccess(_ length: Int32) {
-        print("success sending from sender")
+        print("sending \(self.sendCount)")
+        if Int(length) == self.contactDataLen {
+            if let __sender = self.sendingContact {
+                var statusLen = __sender.receiveStatus()
+                var maxTry = 20
+                while statusLen == -1 && maxTry > 0 {
+                    statusLen = __sender.receiveStatus()
+                    maxTry -= 1
+                }
+                if maxTry == 0 {
+                    self.abortSendingOperation = true
+                    print("unable to send data... aborting sending operations! receiver unavailable! Thank you good day")
+                }
+            }
+        }
     }
     
     func onContactSendError(_ sendError: Error!) {
@@ -236,9 +260,7 @@ extension SenderViewController : TCPSendContactDelegate {
     
     func onSendStatusReceived(_ count: Int32) {
         print("receiver received contact ___ \(count)")
-        current_index += 1
-        if current_index < self.selectedContacts.count {
-            self.sendContactData()
-        }
+        self.sendCount = Int(count)
+        self.abortSendingOperation = self.sendCount == self.selectedContacts.count
     }
 }

@@ -70,11 +70,15 @@ class ContactData {
             self.departmentName = jsonData["department"] as? String ?? ""
             if let bd = jsonData["birthday"] as? String {
                 let array = bd.split(separator: "_")
-                var date = DateComponents()
-                date.day = Int(array[0]) ?? 0
-                date.month = Int(array[1]) ?? 0
-                date.year = Int(array[2]) ?? 0
-                self.contactBirthday = date
+                if array.count > 2 {
+                    var date = DateComponents()
+                    date.day = Int(array[0]) ?? 0
+                    date.month = Int(array[1]) ?? 0
+                    date.year = Int(array[2]) ?? 0
+                    self.contactBirthday = date
+                } else {
+                    self.contactBirthday = nil
+                }
             }
             
             self.contactPhoneNumber = jsonData["phones"] as? [String:AnyObject] ?? [:]
@@ -87,25 +91,30 @@ class ContactData {
             print(error)
         }
         
-        if length < contactData.count - 10 {
-            let image_length_data = contactData.subdata(in: length+1...length+1)
-            let image_length = Int(image_length_data.uint32)
-            let end_index = length+2+image_length
-            let image_data = contactData.subdata(in: length+2...end_index)
-            let image = UIImage(data: image_data)
-            if image != nil {
-                self.contactHasImage = true
-                self.contactImageData = image_data
-            }
-            let thumb_length_data = contactData.subdata(in: end_index+1...end_index+1)
-            let thumb_length = Int(thumb_length_data.uint32)
-            let end_index2 = end_index+1+thumb_length
-            let thumb_data = contactData.subdata(in: end_index+2...end_index2)
-            let thumb = UIImage.init(data: thumb_data)
-            if thumb != nil {
-                self.contactThumbData = thumb_data
-            }
-        }
+//        if length < contactData.count - 16 {
+//            let image_length_data = contactData.subdata(in: length+8...length+15)
+//            let image_length = image_length_data.withUnsafeBytes { (ptr: UnsafePointer<Int>) -> Int in
+//                return ptr.pointee
+//            }
+//            let end_index = length+15+image_length
+//            let image_data = contactData.subdata(in: length+16...end_index)
+//            let image = UIImage(data: image_data)
+//            if image != nil {
+//                self.contactHasImage = true
+//                self.contactImageData = image_data
+//            }
+//            
+//            let thumb_length_data = contactData.subdata(in: end_index+1...end_index+8)
+//            let thumb_length = thumb_length_data.withUnsafeBytes { (ptr: UnsafePointer<Int>) -> Int in
+//                return ptr.pointee
+//            }
+//            let end_index2 = end_index+8+thumb_length
+//            let thumb_data = contactData.subdata(in: end_index+9...end_index2)
+//            let thumb = UIImage.init(data: thumb_data)
+//            if thumb != nil {
+//                self.contactThumbData = thumb_data
+//            }
+//        }
     }
     
     init(withContact contact:CNContact){

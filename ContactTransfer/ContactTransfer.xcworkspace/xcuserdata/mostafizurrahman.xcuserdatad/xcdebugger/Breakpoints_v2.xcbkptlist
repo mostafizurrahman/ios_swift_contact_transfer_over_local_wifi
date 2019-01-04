@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ContactTransfer/Sockets/TCPContactSend.m"
-            timestampString = "568194105.90303"
+            timestampString = "568271297.9333659"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "-receiveStatus"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ContactTransfer/DataModel/ContactData.swift"
-            timestampString = "568203445.466469"
+            timestampString = "568274237.585932"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "getData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ContactTransfer/DataModel/ContactData.swift"
-            timestampString = "568203445.46682"
+            filePath = "ContactTransfer/SenderViewController.swift"
+            timestampString = "568274237.585988"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "getData()"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "onSendStatusReceived(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
