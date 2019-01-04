@@ -15,6 +15,7 @@ class ReceiverViewController: UIViewController {
     var senderInfo:SocketData?
     var countactCount:Int = 0
     var successCount:Int = 0
+    var abortReceiveOperation = false
     @IBOutlet weak var contactNameLabel: UILabel!
     
     var receiveContact:TCPReceiveContact?
@@ -22,7 +23,6 @@ class ReceiverViewController: UIViewController {
         super.viewDidLoad()
         self.receiveContact = TCPReceiveContact()
         self.receiveContact?.receiveDelegate = self
-        self.contactNameLabel.text = "\(self.senderInfo?.commPort)_\(self.senderInfo?.receiverIp)"
         DispatchQueue.global().async {
             self.initiateConnections()
         }
@@ -47,7 +47,9 @@ class ReceiverViewController: UIViewController {
                     guard let __receiver = self.receiveContact else {
                         return
                     }
-                    __receiver.receiveContact()
+                    while !self.abortReceiveOperation {
+                        __receiver.receiveContact()
+                    }
                 }
             }
         }
@@ -58,13 +60,6 @@ class ReceiverViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        if let _data = senderInfo, let _rcv = self.receiver {
-//            while !_rcv.initiateConnection("2442", timeOut: 10){
-//                print("not connected")
-//            }
-//            print("connected")
-//            _rcv.receiveContact()
-//        }
     }
     
 
@@ -83,36 +78,42 @@ class ReceiverViewController: UIViewController {
 
 extension ReceiverViewController:TCPReceiveContactDelegate {
     func onContactReceivedSuccess(_ data: Data!) {
+        let end_data = data.subdata(in: 0...3)
+        if let str = String(data: end_data, encoding: .utf8) {
+            if str.contains("EN") {
+                print("finished contact receiving")
+                self.abortReceiveOperation = true
+                return
+            }
+        }
         let contactData = ContactData.init(withData: data)
         DispatchQueue.main.async {
             self.contactNameLabel.text = contactData.contactName_display
         }
-        self.countactCount -= 1
-        if self.countactCount > 0 {
-            
-            guard let __receiver = self.receiveContact else {
-                return
-            }
-            self.successCount += 1
-            __receiver.sendStatus("\(self.successCount)")
-            __receiver.receiveContact()
+        
+        
+        self.successCount += 1
+        
+//        Utility.saveContactToAddressBook(receiveContact: contact)
+        let status = "\(self.successCount)"
+        guard let __receiver = self.receiveContact else {
+            self.abortReceiveOperation = true
+            return
         }
+        __receiver.sendStatus(status)
+        print(status)
+        if self.successCount == self.countactCount {
+            
+            print("success received!! all contacts")
+            self.abortReceiveOperation = true
+        }
+        
         
     }
     
     func onContactReceiveError(_ receiveError: Error!) {
         
     }
-    
-//    func contactReceived(with data: Data!) {
-//        if let image = UIImage.init(data: data) {
-//            self.receivedImageView.image = image
-//        }
-//    }
-//    
-//    func contactReceiveWithError(_ receiveError: Error!) {
-//        print(receiveError)
-//    }
     
     
 }
