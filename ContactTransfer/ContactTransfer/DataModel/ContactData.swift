@@ -91,30 +91,30 @@ class ContactData {
             print(error)
         }
         
-//        if length < contactData.count - 16 {
-//            let image_length_data = contactData.subdata(in: length+8...length+15)
-//            let image_length = image_length_data.withUnsafeBytes { (ptr: UnsafePointer<Int>) -> Int in
-//                return ptr.pointee
-//            }
-//            let end_index = length+15+image_length
-//            let image_data = contactData.subdata(in: length+16...end_index)
-//            let image = UIImage(data: image_data)
-//            if image != nil {
-//                self.contactHasImage = true
-//                self.contactImageData = image_data
-//            }
-//            
-//            let thumb_length_data = contactData.subdata(in: end_index+1...end_index+8)
-//            let thumb_length = thumb_length_data.withUnsafeBytes { (ptr: UnsafePointer<Int>) -> Int in
-//                return ptr.pointee
-//            }
-//            let end_index2 = end_index+8+thumb_length
-//            let thumb_data = contactData.subdata(in: end_index+9...end_index2)
-//            let thumb = UIImage.init(data: thumb_data)
-//            if thumb != nil {
-//                self.contactThumbData = thumb_data
-//            }
-//        }
+        if length < contactData.count - 24 {
+            let image_length_data = contactData.subdata(in: length+8...length+31)
+            let image_length = image_length_data.withUnsafeBytes { (ptr: UnsafePointer<Int>) -> Int in
+                return ptr.pointee
+            }
+            let end_index = length+31+image_length
+            let image_data = contactData.subdata(in: length+32...end_index)
+            let image = UIImage(data: image_data)
+            if image != nil {
+                self.contactHasImage = true
+                self.contactImageData = image_data
+            }
+            
+            let thumb_length_data = contactData.subdata(in: end_index+1...end_index+23)
+            let thumb_length = thumb_length_data.withUnsafeBytes { (ptr: UnsafePointer<Int>) -> Int in
+                return ptr.pointee
+            }
+            let end_index2 = end_index+24+thumb_length
+            let thumb_data = contactData.subdata(in: end_index+25...end_index2)
+            let thumb = UIImage.init(data: thumb_data)
+            if thumb != nil {
+                self.contactThumbData = thumb_data
+            }
+        }
     }
     
     init(withContact contact:CNContact){
