@@ -8,16 +8,29 @@
 
 import UIKit
 
+protocol ContactDetailsDelegate:NSObjectProtocol {
+    func onInfoClicked(atCell tableCell:ContactTableViewCell)
+}
+
 class ContactTableViewCell: UITableViewCell {
 
     @IBOutlet weak var contactTitle: UILabel!
     @IBOutlet weak var contactNumber: UILabel!
     @IBOutlet weak var contactThumb: UIImageView!
+    
+    weak var contactDelegate:ContactDetailsDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-
-
+    @IBAction func showContact(_ sender: Any) {
+        if let __delegate = self.contactDelegate {
+             weak var this = self
+             if let _this = this {
+                __delegate.onInfoClicked(atCell:_this)
+            }
+        }
+    }
 }

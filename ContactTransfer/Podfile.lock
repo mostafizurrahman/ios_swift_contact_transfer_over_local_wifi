@@ -1,20 +1,26 @@
 PODS:
+  - NVActivityIndicatorView (4.4.1):
+    - NVActivityIndicatorView/Presenter (= 4.4.1)
+  - NVActivityIndicatorView/Presenter (4.4.1)
   - Pulsator (0.5.1)
   - SwiftSocket (2.0.2)
 
 DEPENDENCIES:
+  - NVActivityIndicatorView
   - Pulsator
   - SwiftSocket
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - NVActivityIndicatorView
     - Pulsator
     - SwiftSocket
 
 SPEC CHECKSUMS:
+  NVActivityIndicatorView: f0a6b0ed2973d9544da268f4eb76696f0a9577b0
   Pulsator: f465ca37212d826523fe8c79b07c1a4c1a941f5e
   SwiftSocket: 6f4c9c63fbc5c1d61188936bb3c599fd546f40ae
 
-PODFILE CHECKSUM: 924cfb166964609b70682fcd9a101199144f3792
+PODFILE CHECKSUM: ef5b98992d3b560dc9f7e2e35632ff7b43f01a35
 
 COCOAPODS: 1.5.3

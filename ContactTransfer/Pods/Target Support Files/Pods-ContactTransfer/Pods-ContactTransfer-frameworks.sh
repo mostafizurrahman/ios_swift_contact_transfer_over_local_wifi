@@ -143,10 +143,12 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Pulsator/Pulsator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftSocket/SwiftSocket.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Pulsator/Pulsator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftSocket/SwiftSocket.framework"
 fi

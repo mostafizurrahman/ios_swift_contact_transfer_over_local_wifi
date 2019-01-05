@@ -44,6 +44,16 @@ class SenderViewController: UIViewController {
         self.startBroadcastReciever()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.abortSendingOperation = true
+        self.receiveBraodcast = false
+    }
+    
+    deinit {
+        self.abortSendingOperation = true
+        self.receiveBraodcast = false
+    }
     
     fileprivate func configureReceiverPositions(){
         
