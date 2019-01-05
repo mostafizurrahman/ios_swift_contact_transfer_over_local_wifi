@@ -163,6 +163,7 @@ class ContactViewController: UIViewController {
     }
     
     func present(Contact contactData:ContactData){
+        self.searchBar.endEditing(true)
         self.detailContact = contactData
         self.name.text = contactData.contactName_display
         if self.profile.layer.cornerRadius == 0 {
@@ -180,8 +181,13 @@ class ContactViewController: UIViewController {
         var phones:[String] = []
         _ = contactData.contactPhoneNumber.contains { (key, value) -> Bool in
             let __key = key.replacingOccurrences(of: "_$!<", with: "").replacingOccurrences(of: ">!$_", with: "")
-            phones.append("\(__key) : \(value)")
-            return true
+            if __key.count > 2 {
+                phones.append("\(__key) : \(value)")
+            } else {
+                phones.append("Mobile : \(value)")
+            }
+            
+            return false
         }
         let array:[UILabel] = [mobile1, mobile2, mobile3,email1,email2,email3]
         var count = 0
@@ -198,7 +204,7 @@ class ContactViewController: UIViewController {
         _ = contactData.contactEmails.contains { (key, value) -> Bool in
             let __key = key.replacingOccurrences(of: "_$!<", with: "").replacingOccurrences(of: ">!$_", with: "")
             phones.append("\(__key) : \(value)")
-            return true
+            return false
         }
         var last_count = count
         while count < last_count+3 {
@@ -214,7 +220,7 @@ class ContactViewController: UIViewController {
             _ = contactData.contactSocials.contains { (key, value) -> Bool in
                 let __key = key.replacingOccurrences(of: "_$!<", with: "").replacingOccurrences(of: "_$>&", with: "")
                 phones.append("\(__key) : \(value)")
-                return true
+                return false
             }
             last_count = count
             while count < last_count+3 {
