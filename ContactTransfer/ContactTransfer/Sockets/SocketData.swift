@@ -26,17 +26,17 @@ class SocketData: NSObject {
     typealias SD = SocketData
     static let BRDCAST_PORT = 8888
     static let DATAREQ_PORT = 4444
-    static let DATA_SIZE = 71 // total length of the data
+    static let DATA_SIZE = 100 // total length of the data
     
     
     static let LOC_DEVICE_OS = 0 //0-1 index // i dont know what is the index, find it later
     static let LOC_DEVICE_MODEL = 1  // 1-3 // name code of the data transfer // idont know exactly
     static let LOC_SENDER_IP = 9 // ip address of the sender
     static let LOC_SENDER_NAME = 24 // name of the sender //20 char long
-    static let LOC_RECEIV_IP = 37 // ip of the receiver
-    static let LOC_RECEIV_NAME = 51 // name of the receiver//20 char long
-    static let LOC_STATUS = 65 // status of the data transfer 2 bytes
-    static let LOC_COMPORT = 67//port location in data port is 4 digit long
+    static let LOC_RECEIV_IP = 66 // ip of the receiver
+    static let LOC_RECEIV_NAME = 80 // name of the receiver//20 char long
+    static let LOC_STATUS = 94 // status of the data transfer 2 bytes
+    static let LOC_COMPORT = 96//port location in data port is 4 digit long
     
     internal var deviceOSType:OSType = OSType.unknown
     internal var deviceModel:String = ""
