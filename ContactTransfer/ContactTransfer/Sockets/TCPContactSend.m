@@ -8,10 +8,9 @@
 
 #import "TCPContactSend.h"
 
-@interface TCPContactSend()
-{
-    
+@interface TCPContactSend() {
     CSClientSocket *clientSocket;
+    int failCount;
 }
 
 @end
@@ -20,42 +19,31 @@
 
 @synthesize sendDelegate;
 
--(void)sendContact:(NSData *)data
-{
+-(void)sendContact:(NSData *)data {
     
     int32_t contactDataLength = (int32_t)[data length];
     int32_t sendDataLength = (int32_t)[clientSocket sendBytes:[data bytes] count:contactDataLength];
-    if (sendDataLength >= 0)
-    {
+    if (sendDataLength >= 0) {
         [sendDelegate onContactSendSuccess:sendDataLength];
-    }
-    else
-    {
-        NSLog(@"____error sending");
+    } else {
         [sendDelegate onContactSendError:clientSocket.lastError];
     }
-    
 }
 
--(BOOL)initiateConnection:(NSString *)ipAddress incommingPort:(NSString *)port
-{
+-(BOOL)initiateConnection:(NSString *)ipAddress incommingPort:(NSString *)port {
     clientSocket = [[CSClientSocket alloc] initWithHost:ipAddress andPort:port];
     _isConnected = [clientSocket connect];
     return _isConnected;
 }
 
--(BOOL)close
-{
+-(BOOL)close {
     return [clientSocket close];
 }
 
--(long)receiveStatus
-{
+-(long)receiveStatus {
     char data[4] = {};
-//    memset(data, 0, 4);
     long dataLength = [clientSocket receiveBytes:data limit:4];
-    if (dataLength > 0)
-    {
+    if (dataLength > 0) {
         NSData* nsdata = [NSData dataWithBytes:(const void *)data length:4];
         int count = [[[NSString alloc] initWithData:nsdata encoding:NSUTF8StringEncoding] intValue];
         [sendDelegate onSendStatusReceived:count];

@@ -12,6 +12,23 @@ import Contacts
 class ContactViewController: UIViewController {
 
     
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var mobile1: UILabel!
+    @IBOutlet weak var profile: UIImageView!
+    @IBOutlet weak var mobile2: UILabel!
+    @IBOutlet weak var mobile3: UILabel!
+    @IBOutlet weak var contactView:UIView!
+    
+    @IBOutlet weak var email1: UILabel!
+    @IBOutlet weak var email2: UILabel!
+    @IBOutlet weak var email3: UILabel!
+    
+    @IBOutlet weak var address1: UILabel!
+    
+    
+    var detailContact:ContactData? = nil
+    
+    
     @IBOutlet weak var bottomSpaceSelect: NSLayoutConstraint!
     @IBOutlet weak var bottomSpaceSendContact: NSLayoutConstraint!
     @IBOutlet weak var bottomSpaceHideKeybord: NSLayoutConstraint!
@@ -132,6 +149,111 @@ class ContactViewController: UIViewController {
         }
         self.contactTableView.reloadData()
     }
+    
+    @IBAction func sendSingleContact(_ sender: Any) {
+        if let contact = self.detailContact {
+            self.self.performSegue(withIdentifier: "SendSegue", sender: [contact])
+        }
+    }
+    
+    @IBAction func doneContactView(_ sender: Any) {
+        InterfaceHelper.animateOpacity(toInvisible: self.contactView, atDuration: 0.4) { (fin) in
+            self.detailContact = nil
+        }
+    }
+    
+    func present(Contact contactData:ContactData){
+        self.searchBar.endEditing(true)
+        self.detailContact = contactData
+        self.name.text = contactData.contactName_display
+        if self.profile.layer.cornerRadius == 0 {
+            self.profile.layer.cornerRadius = self.profile.frame.height / 2
+            self.profile.layer.masksToBounds = true
+            self.profile.layer.borderColor = UIColor.init(rgb: 0xFF0066).cgColor
+            self.profile.layer.borderWidth = 0.76
+        }
+        if let image_data = contactData.contactImageData {
+            let image = UIImage.init(data: image_data)
+            self.profile.image = image
+        } else {
+            self.profile.image = UIImage(named: "profile")
+        }
+        var phones:[String] = []
+        _ = contactData.contactPhoneNumber.contains { (key, value) -> Bool in
+            let __key = key.replacingOccurrences(of: "_$!<", with: "").replacingOccurrences(of: ">!$_", with: "")
+            if __key.count > 2 {
+                phones.append("\(__key) : \(value)")
+            } else {
+                phones.append("Mobile : \(value)")
+            }
+            
+            return false
+        }
+        let array:[UILabel] = [mobile1, mobile2, mobile3,email1,email2,email3]
+        var count = 0
+        while count < 3 {
+            
+            if count == phones.count {
+                break
+            }
+            let value = phones[count]
+            let lable = array[count]
+            lable.text = value
+            count += 1
+        }
+        _ = contactData.contactEmails.contains { (key, value) -> Bool in
+            let __key = key.replacingOccurrences(of: "_$!<", with: "").replacingOccurrences(of: ">!$_", with: "")
+            phones.append("\(__key) : \(value)")
+            return false
+        }
+        var last_count = count
+        while count < last_count+3 {
+            if count == phones.count {
+                break
+            }
+            let value = phones[count]
+            let lable = array[count]
+            lable.text = value
+            count += 1
+        }
+        if count < 6 {
+            _ = contactData.contactSocials.contains { (key, value) -> Bool in
+                let __key = key.replacingOccurrences(of: "_$!<", with: "").replacingOccurrences(of: "_$>&", with: "")
+                phones.append("\(__key) : \(value)")
+                return false
+            }
+            last_count = count
+            while count < last_count+3 {
+                if count == phones.count {
+                    break
+                }
+                let value = phones[count]
+                let lable = array[count]
+                lable.text = value
+                count += 1
+            }
+        }
+        
+            while count < 6 {
+                let label = array[count]
+                label.text = ""
+                count += 1
+            }
+        if let country = contactData.contactAddress["country"] as? String {
+            let street = contactData.contactAddress["street"] as? String ?? ""
+            let postal = contactData.contactAddress["postalCode"] as? String ?? ""
+            let city = contactData.contactAddress["city"] as? String ?? ""
+            let address = "Street \(street), City \(city)\nPostal Code \(postal), Country \(country)"
+            self.address1.text = address
+        } else {
+            self.address1.text = "Address not found in contact!"
+        }
+        
+        InterfaceHelper.animateOpacity(toVisible: self.contactView, atDuration: 0.4) { (_finished) in
+            
+        }
+    }
+    
     @IBAction func sendContacts(_ sender: Any) {
         var scontacts:[ContactData] = []
         for contact in self.deviceContacts {
@@ -237,6 +359,7 @@ extension ContactViewController:UISearchBarDelegate, UITableViewDelegate, UITabl
             self.deviceContacts[indexPath.row]
         tableCell.accessoryType = self.deselectedContacts.contains(contactData.identifier) ?
             .none : .checkmark
+        tableCell.contactDelegate = self
         tableCell.contactTitle.text = contactData.contactName_display
         if contactData.contactPhoneNumber.values.count > 0 {
             let value = Array(contactData.contactPhoneNumber)[0].value
@@ -257,4 +380,15 @@ extension ContactViewController:UISearchBarDelegate, UITableViewDelegate, UITabl
         return tableCell
     }
     
+}
+extension ContactViewController:ContactDetailsDelegate {
+    func onInfoClicked(atCell tableCell: ContactTableViewCell) {
+        guard let indexPath = self.contactTableView.indexPath(for: tableCell) else {
+            return
+        }
+        let contactData = self.searchActive ?
+            self.filterContacts[indexPath.row]:
+            self.deviceContacts[indexPath.row]
+        self.present(Contact:contactData)
+    }
 }

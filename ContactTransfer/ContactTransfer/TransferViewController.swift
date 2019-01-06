@@ -9,6 +9,8 @@
 import UIKit
 import Pulsator
 import Contacts
+import NVActivityIndicatorView
+import AVFoundation
 
 class TransferViewController: UIViewController {
     
@@ -26,11 +28,19 @@ class TransferViewController: UIViewController {
     
     var shouldBroadcastAddress = true
     var shouldReceiveDataRequest = true
-    
+    var acitivity:NVActivityIndicatorView?
     @IBOutlet weak var transferView: UIView!
     @IBOutlet weak var trailingSpace: NSLayoutConstraint!
     @IBOutlet weak var leadingSpace: NSLayoutConstraint!
     @IBOutlet weak var pulsView: UIView!
+    @IBOutlet weak var broadcastLabel: UILabel!
+    @IBOutlet weak var broadcastLayout: NSLayoutConstraint!
+    @IBOutlet weak var abortButton: BorderButton!
+    
+    @IBOutlet weak var abortSpace: NSLayoutConstraint!
+    
+    @IBOutlet weak var erroStatusLabel: UILabel!
+    @IBOutlet weak var deviceNameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +51,54 @@ class TransferViewController: UIViewController {
         udpsocket_self_ip(client_ip)
         self.deviceIPAddress = String.init(cString: client_ip)
         free(client_ip)
+        if self.view.bounds.height > self.view.bounds.width {
+            self.broadcastLayout.constant = HVC.MSW / 2 - self.broadcastLabel.frame.size.width/2
+            self.abortSpace.constant =  HVC.MSW / 2 - self.abortButton.frame.size.width/2
+            
+        } else {
+            self.broadcastLayout.constant = (HVC.MSW / 2 - self.broadcastLabel.frame.size.width/2) / 2
+            self.abortSpace.constant = (HVC.MSW / 2 - self.abortButton.frame.size.width/2) / 2
+        }
+        self.setErrorStatus(HasError:false)
+        
+        
+        
     }
     
+    fileprivate func setErrorStatus(HasError err : Bool){
+        if err {
+            let color = UIColor.init(rgb: 0xFF0066)
+            self.erroStatusLabel.text = "❌ Check Wifi, Connection fail!"
+            self.erroStatusLabel.textColor = color
+        } else {
+            let color =  UIColor.init(rgb: 0x3BCB63)
+            self.erroStatusLabel.text = "✅ Onile! "
+            self.erroStatusLabel.textColor = color
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        var __width:CGFloat  = 0.0
+        var __height:CGFloat = 0.0
+        if UIDevice.current.orientation.isLandscape {
+            
+            print("Landscape")
+            __height = HVC.MSW < HVC.MSH ?  HVC.MSH : HVC.MSW
+            __width = HVC.MSW > HVC.MSH ?  HVC.MSH : HVC.MSW
+        } else {
+            __width = HVC.MSW > HVC.MSH ?  HVC.MSH : HVC.MSW
+            __height = HVC.MSW < HVC.MSH ?  HVC.MSH : HVC.MSW
+            print("Portrait")
+        }
+        self.broadcastLayout.constant = __width / 2
+            - self.broadcastLabel.frame.size.width / 2
+        self.abortSpace.constant =  __width / 2
+            - self.abortButton.frame.size.width / 2
+        if self.trailingSpace.constant != 0 {
+            self.trailingSpace.constant = -__height
+            self.view.layoutIfNeeded()
+        }
+    }
     
     fileprivate func startBroadCastSender(){
         self.shouldBroadcastAddress = true
@@ -51,9 +107,14 @@ class TransferViewController: UIViewController {
         self.broadcastQueue.async {
             if let user_name = UserDefaults.standard.string(forKey: "UserName") {
                 self.deviceName = user_name
+                
             } else {
                 UserDefaults.standard.set(self.deviceName, forKey: "UserName")
             }
+            DispatchQueue.main.async {
+                self.deviceNameLabel.text = self.deviceName
+            }
+           
             let parameters:[String : AnyObject] = ["DEVICE_OS" : 2 as AnyObject,
                                                    "DEVICE_MODEL" : UIDevice.modelName as AnyObject,
                                                    "SENDER_IP" : self.deviceIPAddress as AnyObject ,
@@ -64,10 +125,16 @@ class TransferViewController: UIViewController {
                                                    "COMM_PORT" : SD.BRDCAST_PORT as AnyObject]
             let data = SocketData(dictionary: parameters)
             let braodcastSocket = BroadcastDataSender()
+
+            
             while self.shouldBroadcastAddress {
                 let send_len = braodcastSocket.send(Data: data)
                 if send_len > 0 {
                     print(send_len)
+                } else {
+                    DispatchQueue.main.async {
+                        self.setErrorStatus(HasError:true)
+                    }
                 }
                 sleep(1)
             }
@@ -93,6 +160,10 @@ class TransferViewController: UIViewController {
                         }
                         break
                     }
+                } else if recv_data == -1000 {
+                    DispatchQueue.main.async {
+                        self.setErrorStatus(HasError:true)
+                    }
                 }
                 sleep(1)
             }
@@ -103,6 +174,9 @@ class TransferViewController: UIViewController {
     }
     
     fileprivate func stopQueue(){
+        self.acitivity?.removeFromSuperview()
+        self.acitivity?.stopAnimating()
+        self.acitivity = nil
         self.broadcastQueue.async {
             self.shouldBroadcastAddress = false
         }
@@ -110,7 +184,7 @@ class TransferViewController: UIViewController {
             self.shouldReceiveDataRequest = false
         }
         self.leadingSpace.constant = 0
-        self.trailingSpace.constant = -HVC.MSW
+        self.trailingSpace.constant = UIDevice.current.orientation.isLandscape ? -HVC.MSH : -HVC.MSW
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         }) { (_finished) in
@@ -121,13 +195,19 @@ class TransferViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = "Contact Transfer"
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.title = nil
     }
     
     @IBAction func exitDataTransfer(_ sender: Any) {
         self.stopQueue()
-        
+        self.title = "Contact Transfer"
     }
     
     @IBAction func sendData(_ sender: Any) {
@@ -143,11 +223,13 @@ class TransferViewController: UIViewController {
     
     @IBAction func receiveData(_ sender: Any) {
         self.startBroadCastSender()
-        self.leadingSpace.constant = -HVC.MSW / 4
+        self.setErrorStatus(HasError:false)
+        self.leadingSpace.constant = -HVC.MSW / 2
         self.trailingSpace.constant = 0
         UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()
         }) { (_finished) in
+            self.title = "Waiting for sender..."
             self.startPulse()
         }
     }
@@ -164,18 +246,12 @@ class TransferViewController: UIViewController {
     
     
     func startPulse(){
-        self.pulsArray.removeAll()
-//        for i in 0...0 {
-            let pulsator = Pulsator()
-            let color = UIColor.init(rgb: 0xDFE0D6).withAlphaComponent(CGFloat(0.75 ))
-            pulsator.backgroundColor = color.cgColor
-            pulsator.radius = self.pulsView.frame.size.width / 2
-            pulsator.position = CGPoint(x: self.pulsView.bounds.midX,
-                                        y: self.pulsView.bounds.midY)
-            self.pulsView.layer.addSublayer(pulsator)
-            self.pulsArray.append(pulsator)
-            pulsator.start()
-//        }
+        self.acitivity = NVActivityIndicatorView(frame: self.pulsView.bounds,
+                                                 type: .lineScale,
+                                                 color: UIColor.init(rgb:0xFF7060),
+                                                 padding: 0)
+        self.acitivity?.startAnimating()
+        self.pulsView.addSubview(acitivity!)
     }
     
     
@@ -206,7 +282,7 @@ class TransferViewController: UIViewController {
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             } else {
-                // Fallback on earlier versions
+                
             }
         })
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in
@@ -216,4 +292,5 @@ class TransferViewController: UIViewController {
     }
     
 }
+
 

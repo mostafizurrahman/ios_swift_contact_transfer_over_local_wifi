@@ -117,11 +117,13 @@ public extension UIDevice {
 }
 extension UIColor {
     convenience init(rgb: Int) {
-        self.init(
-            red: CGFloat((rgb >> 16) & 0xFF),
-            green: CGFloat((rgb >> 8) & 0xFF),
-            blue: CGFloat((rgb >> 0) & 0xFF),
-            alpha:1.0
-        )
+  
+        let red =   CGFloat((rgb & 0xFF0000) >> 16) / 0xFF
+        let green = CGFloat((rgb & 0x00FF00) >> 8) / 0xFF
+        let blue =  CGFloat(rgb & 0x0000FF) / 0xFF
+        let alpha = CGFloat(1.0)
+        
+              self.init(red: red, green: green, blue: blue, alpha: alpha)
+        
     }
 }

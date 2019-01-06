@@ -91,7 +91,7 @@ class ContactData {
             print(error)
         }
         
-        if length < contactData.count - 24 {
+        if contactData.count  > 100000 {
             let image_length_data = contactData.subdata(in: length+8...length+31)
             let image_length = image_length_data.withUnsafeBytes { (ptr: UnsafePointer<Int>) -> Int in
                 return ptr.pointee
@@ -155,7 +155,9 @@ class ContactData {
     
         if contact.phoneNumbers.count > 0 {
             for phoneNumber in contact.phoneNumbers {
-                guard let number_label = phoneNumber.label else {
+                guard let number_label = phoneNumber.label?
+                    .replacingOccurrences(of: "_$!<", with: "")
+                    .replacingOccurrences(of: ">!$_", with: "") else {
                     continue
                 }
                 let phone_number = phoneNumber.value.stringValue
@@ -165,7 +167,9 @@ class ContactData {
         
         if contact.emailAddresses.count > 0 {
             for email in contact.emailAddresses {
-                guard let email_label = email.label else {
+                guard let email_label = email.label?
+                    .replacingOccurrences(of: "_$!<", with: "")
+                    .replacingOccurrences(of: ">!$_", with: "") else {
                     continue
                 }
                 let email_address = email.value as String
@@ -175,7 +179,10 @@ class ContactData {
         
         if contact.urlAddresses.count > 0 {
             for url in contact.urlAddresses {
-                guard let url_label = url.label else {
+                guard let url_label = url.label?
+                    .replacingOccurrences(of: "_$!<", with: "")
+                    .replacingOccurrences(of: ">!$_", with: "")
+                    else {
                     continue
                 }
                 let url_value = url.value as String
@@ -185,7 +192,9 @@ class ContactData {
         
         if contact.postalAddresses.count > 0 {
             for address in contact.postalAddresses {
-                guard let address_label = address.label else {
+                guard let address_label = address.label?
+                    .replacingOccurrences(of: "_$!<", with: "")
+                    .replacingOccurrences(of: ">!$_", with: "") else {
                     continue
                 }
                 let address_value = address.value as CNPostalAddress
@@ -204,9 +213,13 @@ class ContactData {
             }
         }
         
+//        <CNLabeledValue: 0x600000f9f680: identifier=EDDE51A3-7D90-4E3C-8F9B-A60EC5F34498, label=_$!<HomePage>!$_, value=www.icloud.com>
+        
         if contact.socialProfiles.count > 0 {
             for social in contact.socialProfiles {
-                guard let social_label = social.label else {
+                guard let social_label = social.label?
+                    .replacingOccurrences(of: "_$!<", with: "")
+                    .replacingOccurrences(of: ">!$_", with: "") else {
                     continue
                 }
                 var social_value = [String:String]()
@@ -215,6 +228,7 @@ class ContactData {
                 social_value["username"] = profile.username
                 social_value["userIdentifier"] = profile.userIdentifier
                 social_value["service"] = profile.service
+                print(social_value)
                 self.contactSocials[social_label] = social_value as AnyObject
             }
         }
@@ -293,12 +307,111 @@ class ContactData {
         return data
     }
     
+    
+    func toContact()->CNMutableContact {
+        let contact = CNMutableContact()
+        
+        //PHONES
+        var labelValues = [CNLabeledValue<CNPhoneNumber>]()
+        for lv in self.contactPhoneNumber {
+            if let value = lv.value as? String {
+                let phone_number = CNLabeledValue(label:lv.key,
+                                                  value:CNPhoneNumber(stringValue:value))
+                labelValues.append(phone_number)
+            }
+        }
+        contact.phoneNumbers = labelValues
+        
+        //EMAILS
+        
+        let emailValues = ContactData.getLabel(fromValues: self.contactEmails)
+        contact.emailAddresses = emailValues
+        
+        //SOCIAL
+        var socialProfiles = [CNLabeledValue<CNSocialProfile>]()
+        for social in self.contactSocials {
+            if let socialData = social.value as? [String:String] {
+                
+                let value = CNSocialProfile.init(urlString: socialData["urlString"],
+                                                 username: socialData["username"],
+                                                 userIdentifier: socialData["userIdentifier"],
+                                                 service: socialData["service"])
+                let labeledSocial = CNLabeledValue.init(label: social.key, value: value)
+                socialProfiles.append(labeledSocial)
+            }
+        }
+        contact.socialProfiles = socialProfiles
+        
+        //WEBs
+        var webs = [CNLabeledValue<NSString>]()
+        for web in self.contactWeburl {
+            if let value = web.value as? String {
+                let webLableValue = CNLabeledValue(label: CNLabelURLAddressHomePage, value: value  as NSString)
+                webs.append(webLableValue)
+            }
+        }
+        contact.urlAddresses = webs
+        
+        
+        
+        //POSTAL
+        
+        var postalAddresses = [CNLabeledValue<CNPostalAddress>]()
+        for postal in self.contactAddress {
+            if let address = postal.value as? [String:String]{
+                let postalAddress = CNPostalAddress()
+                let keys  = ["street","city","state","postalCode","country"]
+                for key in keys {
+                    postalAddress.setValue(address[key], forKey: key)
+                }
+                let addressLabelValue = CNLabeledValue(label: postal.key, value: postalAddress)
+                postalAddresses.append(addressLabelValue)
+            }
+        }
+        contact.postalAddresses = postalAddresses
+        contact.givenName = self.contactName_given
+        contact.familyName = self.contactName_family
+        contact.nickname = self.contactName_nickname
+        contact.birthday = self.contactBirthday
+        contact.imageData = self.contactImageData
+        contact.jobTitle = self.jobTitle
+        contact.organizationName = self.organizationName
+        contact.departmentName = self.departmentName
+        return contact
+    }
+    
+    static func getLabel(fromValues labelData:[String:AnyObject])->[CNLabeledValue<NSString>] {
+        
+        var labeledValues = [CNLabeledValue<NSString>]()
+        let labelKeys = [CNLabelWork, CNLabelOther, CNLabelHome]
+        for lv in labelData {
+            if let value = lv.value as? String {
+                var found = false
+                for label in labelKeys {
+                    if label.contains(lv.key) {
+                        let final_value = CNLabeledValue(label: label, value: value as NSString )
+                        labeledValues.append(final_value)
+                        found = true
+                        break
+                    }
+                }
+                if !found {
+                    let final_value = CNLabeledValue(label: lv.key, value: value as NSString )
+                    labeledValues.append(final_value)
+                }
+            }
+        }
+        return labeledValues
+    }
 }
+
 extension Data {
     func subdata(in range: ClosedRange<Index>) -> Data {
         return subdata(in: range.lowerBound ..< range.upperBound + 1)
     }
 }
+
+
 extension Data {
     var uint8: UInt8 {
         get {

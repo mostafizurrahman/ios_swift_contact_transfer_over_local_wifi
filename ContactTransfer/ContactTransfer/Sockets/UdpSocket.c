@@ -69,6 +69,7 @@ int udpsocket_receive(int socket_fd, char *outdata, int expted_len,
     tv.tv_usec = 200000;
     if (setsockopt(socket_fd, SOL_SOCKET, SO_RCVTIMEO,&tv,sizeof(tv)) < 0) {
         perror("Error");
+        return -1000;
     }
     int len=(int)recvfrom(socket_fd, outdata, expted_len, 0, (struct sockaddr *)&cli_addr, &clilen);    
     char *clientip = inet_ntoa(cli_addr.sin_addr);

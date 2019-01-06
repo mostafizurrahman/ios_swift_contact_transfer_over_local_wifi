@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ContactTransfer/Sockets/TCPContactSend.m"
-            timestampString = "568271297.9333659"
+            filePath = "ContactTransfer/ContactViewController.swift"
+            timestampString = "568471864.149719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "-receiveStatus"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "present(Contact:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

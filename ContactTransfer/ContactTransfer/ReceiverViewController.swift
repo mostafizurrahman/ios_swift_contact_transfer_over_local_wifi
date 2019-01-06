@@ -8,14 +8,28 @@
 
 import UIKit
 import SwiftSocket
+import NVActivityIndicatorView
+import Contacts
+import AVFoundation
 
 class ReceiverViewController: UIViewController {
     
-    @IBOutlet weak var receivedImageView: UIImageView!
+    @IBOutlet weak var profile: UIImageView!
+    @IBOutlet weak var name:UILabel!
+    @IBOutlet weak var mobile:UILabel!
+    @IBOutlet weak var email:UILabel!
+    @IBOutlet weak var other:UILabel!
+    @IBOutlet weak var status:UILabel!
+    @IBOutlet weak var progress:UIProgressView!
+    @IBOutlet weak var animationView:UIView!
+    @IBOutlet weak var errorLabel:UILabel!
+    
+    var activityView:NVActivityIndicatorView?
     var senderInfo:SocketData?
     var countactCount:Int = 0
     var successCount:Int = 0
     var abortReceiveOperation = false
+    
     @IBOutlet weak var contactNameLabel: UILabel!
     
     var receiveContact:TCPReceiveContact?
@@ -23,8 +37,16 @@ class ReceiverViewController: UIViewController {
         super.viewDidLoad()
         self.receiveContact = TCPReceiveContact()
         self.receiveContact?.receiveDelegate = self
+        self.profile.layer.cornerRadius = self.profile.frame.width / 2
+        self.profile.layer.masksToBounds = true
+        self.profile.layer.borderColor = UIColor.init(rgb: 0xFF0066).cgColor
+        self.profile.layer.borderWidth = 0.75
+        self.activityView = NVActivityIndicatorView(frame: self.animationView.bounds, type: .orbit, color: UIColor.init(rgb: 0xFF0066), padding: 0)
+        self.animationView.addSubview(self.activityView!)
+        self.activityView?.startAnimating()
         DispatchQueue.global().async {
             self.initiateConnections()
+            
         }
         // Do any additional setup after loading the view.
     }
@@ -44,16 +66,37 @@ class ReceiverViewController: UIViewController {
                     
                 }
                 if is_connected {
+                    DispatchQueue.main.async {
+                        self.set(ErrorStatus: nil)
+                    }
                     guard let __receiver = self.receiveContact else {
                         return
                     }
                     while !self.abortReceiveOperation {
                         __receiver.receiveContact()
                     }
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        self.set(ErrorStatus: "Sender Unreachable...")
+                    }
                 }
+                
             }
         }
     }
+    
+    
+    fileprivate func set(ErrorStatus error:String?) {
+        if let __err = error{
+            self.errorLabel.textColor = UIColor.init(rgb: 0xFF0066)
+            self.errorLabel.text = "❌ Network Error! Terminate operation!\n(Details :\(__err))"
+        } else {
+            self.errorLabel.textColor = UIColor.init(rgb: 0x3BCB63)
+            self.errorLabel.text = "✅ Connection live. Contact receive in progress..."
+        }
+    }
+    
     
     
     
@@ -72,10 +115,30 @@ class ReceiverViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    
+    var audioPlayer:AVAudioPlayer!
+    func playNotification(name fileName:String){
+        guard let alertSound = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {return}
+        
+        do {
+            //                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            
+            audioPlayer = try AVAudioPlayer(contentsOf: alertSound)
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
 }
 
-
+extension ReceiverViewController:AVAudioPlayerDelegate {
+    
+}
 extension ReceiverViewController:TCPReceiveContactDelegate {
     func onContactReceivedSuccess(_ data: Data!) {
         let end_data = data.subdata(in: 0...3)
@@ -87,33 +150,103 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
             }
         }
         let contactData = ContactData.init(withData: data)
-        DispatchQueue.main.async {
-            self.contactNameLabel.text = contactData.contactName_display
-        }
         
         
         self.successCount += 1
         
-//        Utility.saveContactToAddressBook(receiveContact: contact)
+        self.save(Contact:contactData)
+        
         let status = "\(self.successCount)"
         guard let __receiver = self.receiveContact else {
             self.abortReceiveOperation = true
             return
         }
         __receiver.sendStatus(status)
-        print(status)
+        
+        DispatchQueue.main.async {
+            self.name.text = contactData.contactName_display
+            self.progress.progress = Float(self.successCount)/Float(self.countactCount)
+            self.status.text = "Received \(self.successCount) of \(self.countactCount) contacts."
+            if contactData.contactPhoneNumber.count > 0 {
+                if let __key_value = contactData.contactPhoneNumber.first {
+                    let __number = "\(__key_value.key) : \(__key_value.value as! String)"
+                    self.mobile.text = __number
+                    
+                }
+            } else {
+                self.mobile.text = "No mobile number found!"
+            }
+            if contactData.contactEmails.count > 0 {
+                if let __key_value = contactData.contactEmails.first {
+                    let __number = "\(__key_value.key) : \(__key_value.value as! String)"
+                    self.email.text = __number
+                }
+            } else {
+                self.email.text = "No email found!"
+            }
+            
+            if let __country = contactData.contactAddress["country"] as? String {
+                let city = contactData.contactAddress["city"] as? String ?? ""
+                let street = contactData.contactAddress["street"] as? String ?? ""
+                self.other.text = "St : \(street), City : \(city), Country : \(__country)"
+            } else if contactData.contactSocials.count  > 0{
+                if let social = contactData.contactSocials.first {
+                    self.other.text = "\(social.key) : \(social.value)"
+                }
+            } else {
+                self.other.text = ""
+            }
+            
+            if let image_data = contactData.contactImageData {
+                let image = UIImage.init(data: image_data)
+                self.profile.image = image
+            } else {
+                self.profile.image = UIImage.init(named: "profile")
+            }
+        }
+        
         if self.successCount == self.countactCount {
             
             print("success received!! all contacts")
             self.abortReceiveOperation = true
+            DispatchQueue.main.async {
+                self.errorLabel.text = "✅ Received and Saved Contacts..."
+                self.playNotification(name:"notification_save")
+                
+            }
         }
-        
-        
     }
     
     func onContactReceiveError(_ receiveError: Error!) {
-        
+        self.abortReceiveOperation = true
+        DispatchQueue.main.async {
+            self.status.textColor = UIColor.init(rgb: 0xFF0066)
+            self.status.text = "❌ Sender stops sending contacts...\nAborting!"
+            
+            let alert = UIAlertController.init(title: "Sender Unavailable!",
+                                               message: "Sender fail to send contacts! Either sender is inactive or connection fails.",
+                                               preferredStyle: .actionSheet)
+            let action = UIAlertAction.init(title: "Dismiss",
+                                            style: UIAlertAction.Style.default,
+                                            handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     
+    func save(Contact contact:ContactData){
+        let contact_store = CNContactStore()
+        let saveRequest = CNSaveRequest()
+        let cncontact = contact.toContact()
+        saveRequest.add(cncontact, toContainerWithIdentifier: nil)
+        do {
+//            try contact_store.execute(saveRequest)
+            DispatchQueue.main.async {
+                self.playNotification(name:"notification_finished")
+            }
+        } catch {
+            print("i dunno")
+        }
+    }
 }

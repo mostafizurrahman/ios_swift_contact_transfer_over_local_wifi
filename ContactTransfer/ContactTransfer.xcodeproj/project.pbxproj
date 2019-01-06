@@ -16,12 +16,15 @@
 		BE03D33221CF3B8E0022B2F5 /* TCPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03D32F21CF3B8E0022B2F5 /* TCPClient.m */; };
 		BE03D33321CF3B8E0022B2F5 /* TCPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03D33121CF3B8E0022B2F5 /* TCPServer.m */; };
 		BE040A6821CE65F100D826E8 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE040A6721CE65F100D826E8 /* BorderButton.swift */; };
+		BE06CEE721E2241900AEAD78 /* notification_save.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE06CEE621E2241900AEAD78 /* notification_save.mp3 */; };
+		BE06CEE921E2245100AEAD78 /* notification_finished.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE06CEE821E2245000AEAD78 /* notification_finished.mp3 */; };
 		BE1F1F5C21CEA45A007D2123 /* SenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */; };
 		BE1F1F5E21CEA466007D2123 /* ReceiverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */; };
 		BE27A28D21DA236A00DF451F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A28C21DA236A00DF451F /* ContactViewController.swift */; };
 		BE27A29021DA2FBA00DF451F /* ContactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A28F21DA2FBA00DF451F /* ContactData.swift */; };
 		BE27A29221DA492900DF451F /* ContactParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A29121DA492900DF451F /* ContactParser.swift */; };
 		BE27A29521DA4F4A00DF451F /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A29421DA4F4A00DF451F /* ContactTableViewCell.swift */; };
+		BE319A7B21E095E300DBC2E8 /* InterfaceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE319A7A21E095E300DBC2E8 /* InterfaceHelper.swift */; };
 		BE886F1421CC0C8100F6534F /* CSClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0821CC0C8000F6534F /* CSClientSocket.m */; };
 		BE886F1521CC0C8100F6534F /* ServerSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0921CC0C8000F6534F /* ServerSocket.m */; };
 		BE886F1621CC0C8100F6534F /* TCPContactSend.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0A21CC0C8000F6534F /* TCPContactSend.m */; };
@@ -47,12 +50,15 @@
 		BE03D33021CF3B8E0022B2F5 /* TCPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPClient.h; sourceTree = "<group>"; };
 		BE03D33121CF3B8E0022B2F5 /* TCPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPServer.m; sourceTree = "<group>"; };
 		BE040A6721CE65F100D826E8 /* BorderButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
+		BE06CEE621E2241900AEAD78 /* notification_save.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = notification_save.mp3; sourceTree = "<group>"; };
+		BE06CEE821E2245000AEAD78 /* notification_finished.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = notification_finished.mp3; sourceTree = "<group>"; };
 		BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderViewController.swift; sourceTree = "<group>"; };
 		BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverViewController.swift; sourceTree = "<group>"; };
 		BE27A28C21DA236A00DF451F /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		BE27A28F21DA2FBA00DF451F /* ContactData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactData.swift; sourceTree = "<group>"; };
 		BE27A29121DA492900DF451F /* ContactParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactParser.swift; sourceTree = "<group>"; };
 		BE27A29421DA4F4A00DF451F /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
+		BE319A7A21E095E300DBC2E8 /* InterfaceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceHelper.swift; sourceTree = "<group>"; };
 		BE886F0721CC0C7F00F6534F /* ContactTransfer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ContactTransfer-Bridging-Header.h"; sourceTree = "<group>"; };
 		BE886F0821CC0C8000F6534F /* CSClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSClientSocket.m; sourceTree = "<group>"; };
 		BE886F0921CC0C8000F6534F /* ServerSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerSocket.m; sourceTree = "<group>"; };
@@ -136,6 +142,8 @@
 		BE27A28E21DA2FA000DF451F /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				BE06CEE621E2241900AEAD78 /* notification_save.mp3 */,
+				BE06CEE821E2245000AEAD78 /* notification_finished.mp3 */,
 				BE27A28F21DA2FBA00DF451F /* ContactData.swift */,
 				BE27A29121DA492900DF451F /* ContactParser.swift */,
 			);
@@ -145,6 +153,7 @@
 		BE27A29321DA4F2600DF451F /* CollectionViews */ = {
 			isa = PBXGroup;
 			children = (
+				BE319A7A21E095E300DBC2E8 /* InterfaceHelper.swift */,
 				BE040A6721CE65F100D826E8 /* BorderButton.swift */,
 				BE27A29421DA4F4A00DF451F /* ContactTableViewCell.swift */,
 				BE02EEC421CAD654004CB9CD /* AppDelegate.swift */,
@@ -240,7 +249,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE06CEE921E2245100AEAD78 /* notification_finished.mp3 in Resources */,
 				BE02EECF21CAD656004CB9CD /* LaunchScreen.storyboard in Resources */,
+				BE06CEE721E2241900AEAD78 /* notification_save.mp3 in Resources */,
 				BE02EECC21CAD656004CB9CD /* Assets.xcassets in Resources */,
 				BE02EECA21CAD654004CB9CD /* Main.storyboard in Resources */,
 			);
@@ -280,6 +291,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ContactTransfer/Pods-ContactTransfer-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/Pulsator/Pulsator.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSocket/SwiftSocket.framework",
 			);
@@ -287,6 +299,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pulsator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSocket.framework",
 			);
@@ -311,6 +324,7 @@
 				BE886F1521CC0C8100F6534F /* ServerSocket.m in Sources */,
 				BE040A6821CE65F100D826E8 /* BorderButton.swift in Sources */,
 				BE886F1621CC0C8100F6534F /* TCPContactSend.m in Sources */,
+				BE319A7B21E095E300DBC2E8 /* InterfaceHelper.swift in Sources */,
 				BE886F2021CCDE6300F6534F /* SenderBroadcast.swift in Sources */,
 				BE02EEC721CAD654004CB9CD /* TransferViewController.swift in Sources */,
 				BE02EEC521CAD654004CB9CD /* AppDelegate.swift in Sources */,
@@ -471,7 +485,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2VZ7V842VP;
 				INFOPLIST_FILE = ContactTransfer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -494,7 +508,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2VZ7V842VP;
 				INFOPLIST_FILE = ContactTransfer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

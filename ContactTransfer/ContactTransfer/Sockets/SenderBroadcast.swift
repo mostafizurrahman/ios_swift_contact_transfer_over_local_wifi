@@ -36,11 +36,21 @@ class SenderBroadcast: NSObject {
             let int_port = remote_port.pointee
             print("sever ip = \(str_ip) __ server port = \(int_port)")
             
+            free(remote_port)
+            free(remote_ip)
+        } else if received_len == -1000 {
+            
+            free(remote_port)
+            free(remote_ip)
+            return -1000
         } else {
+            
+            free(remote_port)
+            free(remote_ip)
             print("no data found yet!!!")
         }
-        free(remote_port)
-        free(remote_ip)
         return Int(received_len)
     }
+    
+    
 }

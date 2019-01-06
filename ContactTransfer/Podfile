@@ -8,5 +8,5 @@ target 'ContactTransfer' do
 pod "Pulsator"
 pod 'SwiftSocket'
   # Pods for ContactTransfer
-
+pod 'NVActivityIndicatorView'
 end

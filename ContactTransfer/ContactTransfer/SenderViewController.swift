@@ -8,17 +8,29 @@
 
 import UIKit
 import SwiftSocket
+import NVActivityIndicatorView
+import AVFoundation
 
 
 class SenderViewController: UIViewController {
 
-    
+    typealias HVC = TransferViewController
     typealias SD = SocketData
     var selectedContacts:[ContactData]!
     var receiverArray:[SocketData] = []
     var device_ip_address:String = ""
     var receiveBraodcast = true
     var senderInfo:SocketData?
+    
+    
+    @IBOutlet var receiverButtonArray: [UIView]!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var tcpSendView: UIView!
+    @IBOutlet weak var satusLabel: UILabel!
+    
+    
+    @IBOutlet weak var animationView: UIView!
+    
     
     var sendingContact:TCPContactSend?
     var sendCount:Int = 0
@@ -28,11 +40,10 @@ class SenderViewController: UIViewController {
     var abortSendingOperation = false
     //receiver button position arrrays
     var hasReceiverArray = [false, false, false, false, false, false]
-    var receiverFrameArray:[CGRect] = []
+    var activityView:NVActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureReceiverPositions()
         let device_ip = UnsafeMutablePointer<Int8>.allocate(capacity: 16)
         memset(device_ip, 0, 16)
         udpsocket_self_ip(device_ip)
@@ -40,39 +51,28 @@ class SenderViewController: UIViewController {
         free(device_ip)
         self.sendingContact = TCPContactSend()
         self.sendingContact?.sendDelegate = self
+        self.activityView = NVActivityIndicatorView(frame: self.animationView.bounds,
+                                                   type: .ballScaleRippleMultiple,
+                                                   color: UIColor.init(rgb: 0xFF6070),
+                                                   padding: 0)
+        self.animationView.addSubview(activityView)
+        activityView.startAnimating()
         // Do any additional setup after loading the view.
+        
         self.startBroadcastReciever()
     }
     
-    
-    fileprivate func configureReceiverPositions(){
-        
-        let dimension:CGFloat = 45
-        let __width = UIScreen.main.bounds.width / 6.0
-        var origin_y = UIScreen.main.bounds.height * 0.25
-        
-        let origin_x = __width / 2 - dimension / 2
-        var __rect = CGRect(x: origin_x, y: origin_y,
-                            width: dimension, height: dimension)
-        self.receiverFrameArray.append(__rect)
-        __rect = CGRect(x: origin_x + __width, y: origin_y - __width * 0.25,
-                        width: dimension, height: dimension)
-        self.receiverFrameArray.append(__rect)
-        __rect = CGRect(x: origin_x + __width * 2, y: origin_y,
-                        width: dimension, height: dimension)
-        self.receiverFrameArray.append(__rect)
-        origin_y = UIScreen.main.bounds.height * 0.25 + dimension * 1.5
-        __rect = CGRect(x: origin_x, y: origin_y,
-                            width: dimension, height: dimension)
-        self.receiverFrameArray.append(__rect)
-        __rect = CGRect(x: origin_x + __width, y: origin_y - __width * 0.25,
-                        width: dimension, height: dimension)
-        self.receiverFrameArray.append(__rect)
-        __rect = CGRect(x: origin_x + __width * 2, y: origin_y,
-                        width: dimension, height: dimension)
-        self.receiverFrameArray.append(__rect)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.abortSendingOperation = true
+        self.receiveBraodcast = false
     }
-
+    
+    deinit {
+        self.abortSendingOperation = true
+        self.receiveBraodcast = false
+    }
+    
     fileprivate func startBroadcastReciever(){
         self.receiveBraodcast = true
         DispatchQueue.global().async {
@@ -85,14 +85,17 @@ class SenderViewController: UIViewController {
                     DispatchQueue.main.async {
                         let socketData = SocketData.init()
                         socketData.set(Data: dataPointer)
-                        if !self.receiverArray.contains(where: { (soc_data) -> Bool in
-                            return soc_data.senderIp.elementsEqual(socketData.senderIp)
-                        })  {
+//                        if !self.receiverArray.contains(where: { (soc_data) -> Bool in
+//                            return soc_data.senderIp.elementsEqual(socketData.senderIp)
+//                        })  {
                             self.receiverArray.append(socketData)
                             self.createReceiverButton(socketData)
-                        } else if socketData.commStatus == .offline {
-                            self.removeReceiver(socketData)
+                        DispatchQueue.main.async {
+                            self.statusLabel.text = "New Receiver Found : \n\(socketData.senderName)"
                         }
+//                        } else if socketData.commStatus == .offline {
+//                            self.removeReceiver(socketData)
+//                        }
                     }
                 }
                 sleep(1)
@@ -104,19 +107,34 @@ class SenderViewController: UIViewController {
         if self.receiveBraodcast {
             if let index = self.hasReceiverArray.firstIndex(of: false) {
                 self.hasReceiverArray[index] = true
-                let buttonRect = self.receiverFrameArray[index]
-                let reciverButton = UIButton(frame: buttonRect)
-                reciverButton.addTarget(self, action: #selector(startSendingData(_:)), for: .touchUpInside)
-                reciverButton.setTitle("iPhone", for: .normal)
-                reciverButton.layer.cornerRadius = buttonRect.width / 2;
-                reciverButton.layer.masksToBounds = true
-                reciverButton.layer.borderColor = UIColor.gray.cgColor
-                reciverButton.layer.borderWidth = 0.75
-                reciverButton.restorationIdentifier = socketData.senderIp
-                self.view.addSubview(reciverButton)
+                let buttonView = self.receiverButtonArray[index]
+                buttonView.isHidden = false
+                if let __button = buttonView.viewWithTag(1212) as? UIButton {
+                    if socketData.deviceOSType == .iOS {
+                        let image = UIImage.init(named: "apple_def")
+                        __button.setBackgroundImage(image, for: .normal)
+                        
+                        let himage = UIImage.init(named: "apple_h")
+                        __button.setBackgroundImage(himage, for: .highlighted)
+                    } else if socketData.deviceOSType == .android {
+                        __button.setImage(UIImage(named: "android_def"), for: .normal)
+                        __button.setImage(UIImage(named: "android_h"), for: .highlighted)
+                    }
+                    __button.restorationIdentifier = socketData.senderIp
+                }
+                if let __titleLabel = buttonView.viewWithTag(1313) as? UILabel {
+                    let name = socketData.senderName
+                    __titleLabel.text = name
+                }
             }
         }
     }
+    
+    @IBAction func selectReceiver(_ sender: UIButton) {
+        
+        self.startSendingData(sender)
+    }
+    
     
     @objc func startSendingData(_ sender:UIButton){
         
@@ -124,8 +142,15 @@ class SenderViewController: UIViewController {
             
             DispatchQueue.global().async {
                 self.receiveBraodcast = false
+                DispatchQueue.main.async {
+                    for view in self.receiverButtonArray {
+                        view.isHidden = true
+                    }
+                    self.satusLabel.text = "Sending Contacts...."
+                }
             }
             if let contactData = self.receiverArray.filter ({$0.senderIp.elementsEqual(ip_address)}).first {
+//                self.activityView.stopAnimating()
                 self.receiverData = contactData
                 
                 //create a random port for TCP connections
@@ -133,7 +158,7 @@ class SenderViewController: UIViewController {
                 self.receiverData?.commPort = comm_port
                 
                 let user_name = UserDefaults.standard.string(forKey: "UserName")
-                let parameters:[String : AnyObject] = ["DEVICE_OS" : 2 as AnyObject,
+                let parameters:[String : AnyObject] = ["DEVICE_OS" : OSType.iOS as AnyObject,
                                                        "DEVICE_MODEL" : UIDevice.modelName as AnyObject,
                                                        "SENDER_IP" : self.device_ip_address as AnyObject ,
                                                        "SENDER_NAME" : user_name as AnyObject,
@@ -218,8 +243,21 @@ class SenderViewController: UIViewController {
         
     }
     
-
-    
+    var audioPlayer:AVAudioPlayer!
+    func playNotification(name fileName:String){
+        guard let alertSound = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {return}
+        
+        do {
+            //                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            audioPlayer = try AVAudioPlayer(contentsOf: alertSound)
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
     
     /*
     // MARK: - Navigation
@@ -230,7 +268,6 @@ class SenderViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 
 
@@ -255,12 +292,37 @@ extension SenderViewController : TCPSendContactDelegate {
     }
     
     func onContactSendError(_ sendError: Error!) {
-        print("error occured")
+        print("error : \(sendError)")
+        self.abortSendingOperation = true
+        DispatchQueue.main.async {
+            self.statusLabel.textColor = UIColor.init(rgb: 0xFF0066)
+            self.satusLabel.text = "❌ Error Sending..."
+            self.statusLabel.text = "Receiver unavailable!\nAborted"
+            
+            let alert = UIAlertController.init(title: "Receiver Unavailable!",
+                                   message: "Receiver fail to receive contacts! Either receiver is inactive or connection fails.",
+                                   preferredStyle: .actionSheet)
+            let action = UIAlertAction.init(title: "Dismiss",
+                                            style: UIAlertAction.Style.default,
+                                            handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+            
+        }
     }
     
     func onSendStatusReceived(_ count: Int32) {
         print("receiver received contact ___ \(count)")
         self.sendCount = Int(count)
         self.abortSendingOperation = self.sendCount == self.selectedContacts.count
+        DispatchQueue.main.async {
+            self.satusLabel.text = "✅ Successfully sent \(self.sendCount) of \(self.selectedContacts.count) contacts."
+            self.statusLabel.text = "Sending in progress..."
+        }
+        
+        if self.abortSendingOperation  {
+            self.playNotification(name:"notification_finished")
+            
+        }
     }
 }
