@@ -17,28 +17,19 @@
 @implementation TCPReceiveContact
 @synthesize receiveDelegate;
 
--(BOOL)receiveContact
-{
+-(BOOL)receiveContact {
     long dataCount = MAX_DATA_LENGTH;
     char data[dataCount];
     NSMutableData *incomingData = [NSMutableData data];
     long receiveDataLength;
-    while ((receiveDataLength = [incomingSocket receiveBytes:data limit:dataCount]) > 0)
-    {
+    while ((receiveDataLength = [incomingSocket receiveBytes:data limit:dataCount]) > 0) {
         [incomingData appendBytes:data length:receiveDataLength];
     }
-    if ([incomingData length] > 0 && !incomingSocket.lastError)
-    {
+    if ([incomingData length] > 0 && !incomingSocket.lastError) {
         [receiveDelegate onContactReceivedSuccess:incomingData];
         incomingData = nil;
-    }
-    else
-    {
-        
-        NSLog(@"error starts");
+    } else {
         [receiveDelegate onContactReceiveError:incomingSocket.lastError];
-        
-        NSLog(@"error ends");
         return NO;
         
     }
@@ -47,35 +38,32 @@
 
 
 
--(BOOL)initiateConnection:(NSString *)port timeOut:(int)timeOut
-{
+-(BOOL)initiateConnection:(NSString *)port timeOut:(int)timeOut {
     
     serverSocket = [[ServerSocket alloc] initWithPort:port];
     [serverSocket listen];
     incomingSocket = [serverSocket accept:timeOut];
     _isConnected = !serverSocket.isTimeOut && incomingSocket;
-    if (!_isConnected)
-    {
+    if (!_isConnected) {
         [receiveDelegate onContactReceiveError:incomingSocket.lastError];
-        NSLog(@"time out occured thanks");
     }
     return _isConnected;
 }
 
--(BOOL)closeConnection
-{
+-(BOOL)closeConnection {
     return [incomingSocket close];
 }
 
--(int)sendStatus:(NSString *)status
-{
+-(int)sendStatus:(NSString *)status {
     NSLog(@"send status ends");
     char *data;
     data = (char *) malloc(4);
     memset(data,' ',4);
     const char *statusByte = status.UTF8String;
     memcpy( &data[0], &statusByte[0], 4 );
-    return (int)[incomingSocket sendBytes:data count:4];
+    int sent_count = (int)[incomingSocket sendBytes:data count:4];
+    free(data);
+    return sent_count;
 }
 
 @end

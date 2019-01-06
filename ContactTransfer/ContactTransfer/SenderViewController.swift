@@ -9,6 +9,8 @@
 import UIKit
 import SwiftSocket
 import NVActivityIndicatorView
+import AVFoundation
+
 
 class SenderViewController: UIViewController {
 
@@ -88,6 +90,9 @@ class SenderViewController: UIViewController {
 //                        })  {
                             self.receiverArray.append(socketData)
                             self.createReceiverButton(socketData)
+                        DispatchQueue.main.async {
+                            self.statusLabel.text = "New Receiver Found : \n\(socketData.senderName)"
+                        }
 //                        } else if socketData.commStatus == .offline {
 //                            self.removeReceiver(socketData)
 //                        }
@@ -126,6 +131,7 @@ class SenderViewController: UIViewController {
     }
     
     @IBAction func selectReceiver(_ sender: UIButton) {
+        
         self.startSendingData(sender)
     }
     
@@ -136,6 +142,12 @@ class SenderViewController: UIViewController {
             
             DispatchQueue.global().async {
                 self.receiveBraodcast = false
+                DispatchQueue.main.async {
+                    for view in self.receiverButtonArray {
+                        view.isHidden = true
+                    }
+                    self.satusLabel.text = "Sending Contacts...."
+                }
             }
             if let contactData = self.receiverArray.filter ({$0.senderIp.elementsEqual(ip_address)}).first {
 //                self.activityView.stopAnimating()
@@ -231,10 +243,21 @@ class SenderViewController: UIViewController {
         
     }
     
-    
-    
-
-    
+    var audioPlayer:AVAudioPlayer!
+    func playNotification(name fileName:String){
+        guard let alertSound = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {return}
+        
+        do {
+            //                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            audioPlayer = try AVAudioPlayer(contentsOf: alertSound)
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
     
     /*
     // MARK: - Navigation
@@ -245,7 +268,6 @@ class SenderViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 
 
@@ -270,12 +292,37 @@ extension SenderViewController : TCPSendContactDelegate {
     }
     
     func onContactSendError(_ sendError: Error!) {
-        print("error occured")
+        print("error : \(sendError)")
+        self.abortSendingOperation = true
+        DispatchQueue.main.async {
+            self.statusLabel.textColor = UIColor.init(rgb: 0xFF0066)
+            self.satusLabel.text = "❌ Error Sending..."
+            self.statusLabel.text = "Receiver unavailable!\nAborted"
+            
+            let alert = UIAlertController.init(title: "Receiver Unavailable!",
+                                   message: "Receiver fail to receive contacts! Either receiver is inactive or connection fails.",
+                                   preferredStyle: .actionSheet)
+            let action = UIAlertAction.init(title: "Dismiss",
+                                            style: UIAlertAction.Style.default,
+                                            handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+            
+        }
     }
     
     func onSendStatusReceived(_ count: Int32) {
         print("receiver received contact ___ \(count)")
         self.sendCount = Int(count)
         self.abortSendingOperation = self.sendCount == self.selectedContacts.count
+        DispatchQueue.main.async {
+            self.satusLabel.text = "✅ Successfully sent \(self.sendCount) of \(self.selectedContacts.count) contacts."
+            self.statusLabel.text = "Sending in progress..."
+        }
+        
+        if self.abortSendingOperation  {
+            self.playNotification(name:"notification_finished")
+            
+        }
     }
 }

@@ -163,7 +163,6 @@ class TransferViewController: UIViewController {
                 } else if recv_data == -1000 {
                     DispatchQueue.main.async {
                         self.setErrorStatus(HasError:true)
-//                        self.stopQueue()
                     }
                 }
                 sleep(1)
@@ -196,8 +195,14 @@ class TransferViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = "Contact Transfer"
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.title = nil
     }
     
     @IBAction func exitDataTransfer(_ sender: Any) {
@@ -244,7 +249,7 @@ class TransferViewController: UIViewController {
         self.acitivity = NVActivityIndicatorView(frame: self.pulsView.bounds,
                                                  type: .lineScale,
                                                  color: UIColor.init(rgb:0xFF7060),
-                                                 padding: 25)
+                                                 padding: 0)
         self.acitivity?.startAnimating()
         self.pulsView.addSubview(acitivity!)
     }
@@ -277,7 +282,7 @@ class TransferViewController: UIViewController {
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             } else {
-                // Fallback on earlier versions
+                
             }
         })
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in

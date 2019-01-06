@@ -211,7 +211,6 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
             self.abortReceiveOperation = true
             DispatchQueue.main.async {
                 self.errorLabel.text = "✅ Received and Saved Contacts..."
-                self.activityView?.startAnimating()
                 self.playNotification(name:"notification_save")
                 
             }
@@ -219,7 +218,20 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
     }
     
     func onContactReceiveError(_ receiveError: Error!) {
-        
+        self.abortReceiveOperation = true
+        DispatchQueue.main.async {
+            self.status.textColor = UIColor.init(rgb: 0xFF0066)
+            self.status.text = "❌ Sender stops sending contacts...\nAborting!"
+            
+            let alert = UIAlertController.init(title: "Sender Unavailable!",
+                                               message: "Sender fail to send contacts! Either sender is inactive or connection fails.",
+                                               preferredStyle: .actionSheet)
+            let action = UIAlertAction.init(title: "Dismiss",
+                                            style: UIAlertAction.Style.default,
+                                            handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     
@@ -229,7 +241,7 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
         let cncontact = contact.toContact()
         saveRequest.add(cncontact, toContainerWithIdentifier: nil)
         do {
-            try contact_store.execute(saveRequest)
+//            try contact_store.execute(saveRequest)
             DispatchQueue.main.async {
                 self.playNotification(name:"notification_finished")
             }
