@@ -19,8 +19,7 @@
 #import <arpa/inet.h>
 
 
-@interface CSClientSocket()
-{
+@interface CSClientSocket() {
     @public
     Boolean isTimeout;
 @protected
@@ -49,18 +48,15 @@
 
 - (id)initWithFileDescriptor:(int)fd
 {
-    if ((self = [super init]))
-    {
+    if ((self = [super init])) {
         _sockfd = fd;
         _size = getpagesize() * 1448 / 4;
         _buffer = valloc(_size);
-        if (setsockopt(_sockfd, SOL_SOCKET, SO_NOSIGPIPE, &(int){1}, sizeof(int)) < 0)
-        {
+        if (setsockopt(_sockfd, SOL_SOCKET, SO_NOSIGPIPE, &(int){1}, sizeof(int)) < 0) {
             _lastError = NEW_ERROR(errno, strerror(errno));
             return nil;
         }
-        if (setsockopt(_sockfd, IPPROTO_TCP, TCP_NODELAY, &(int){1}, sizeof(int)) < 0)
-        {
+        if (setsockopt(_sockfd, IPPROTO_TCP, TCP_NODELAY, &(int){1}, sizeof(int)) < 0) {
             _lastError = NEW_ERROR(errno, strerror(errno));
             return nil;
         }

@@ -16,6 +16,8 @@
 		BE03D33221CF3B8E0022B2F5 /* TCPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03D32F21CF3B8E0022B2F5 /* TCPClient.m */; };
 		BE03D33321CF3B8E0022B2F5 /* TCPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03D33121CF3B8E0022B2F5 /* TCPServer.m */; };
 		BE040A6821CE65F100D826E8 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE040A6721CE65F100D826E8 /* BorderButton.swift */; };
+		BE06CEE721E2241900AEAD78 /* notification_save.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE06CEE621E2241900AEAD78 /* notification_save.mp3 */; };
+		BE06CEE921E2245100AEAD78 /* notification_finished.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE06CEE821E2245000AEAD78 /* notification_finished.mp3 */; };
 		BE1F1F5C21CEA45A007D2123 /* SenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */; };
 		BE1F1F5E21CEA466007D2123 /* ReceiverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */; };
 		BE27A28D21DA236A00DF451F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A28C21DA236A00DF451F /* ContactViewController.swift */; };
@@ -48,6 +50,8 @@
 		BE03D33021CF3B8E0022B2F5 /* TCPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPClient.h; sourceTree = "<group>"; };
 		BE03D33121CF3B8E0022B2F5 /* TCPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPServer.m; sourceTree = "<group>"; };
 		BE040A6721CE65F100D826E8 /* BorderButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
+		BE06CEE621E2241900AEAD78 /* notification_save.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = notification_save.mp3; sourceTree = "<group>"; };
+		BE06CEE821E2245000AEAD78 /* notification_finished.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = notification_finished.mp3; sourceTree = "<group>"; };
 		BE1F1F5B21CEA45A007D2123 /* SenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderViewController.swift; sourceTree = "<group>"; };
 		BE1F1F5D21CEA466007D2123 /* ReceiverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverViewController.swift; sourceTree = "<group>"; };
 		BE27A28C21DA236A00DF451F /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 		BE27A28E21DA2FA000DF451F /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				BE06CEE621E2241900AEAD78 /* notification_save.mp3 */,
+				BE06CEE821E2245000AEAD78 /* notification_finished.mp3 */,
 				BE27A28F21DA2FBA00DF451F /* ContactData.swift */,
 				BE27A29121DA492900DF451F /* ContactParser.swift */,
 			);
@@ -243,7 +249,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE06CEE921E2245100AEAD78 /* notification_finished.mp3 in Resources */,
 				BE02EECF21CAD656004CB9CD /* LaunchScreen.storyboard in Resources */,
+				BE06CEE721E2241900AEAD78 /* notification_save.mp3 in Resources */,
 				BE02EECC21CAD656004CB9CD /* Assets.xcassets in Resources */,
 				BE02EECA21CAD654004CB9CD /* Main.storyboard in Resources */,
 			);
@@ -477,7 +485,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2VZ7V842VP;
 				INFOPLIST_FILE = ContactTransfer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -500,7 +508,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2VZ7V842VP;
 				INFOPLIST_FILE = ContactTransfer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

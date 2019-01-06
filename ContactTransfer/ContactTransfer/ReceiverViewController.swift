@@ -9,6 +9,8 @@
 import UIKit
 import SwiftSocket
 import NVActivityIndicatorView
+import Contacts
+import AVFoundation
 
 class ReceiverViewController: UIViewController {
     
@@ -113,10 +115,30 @@ class ReceiverViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    
+    var audioPlayer:AVAudioPlayer!
+    func playNotification(name fileName:String){
+        guard let alertSound = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {return}
+        
+        do {
+            //                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            
+            audioPlayer = try AVAudioPlayer(contentsOf: alertSound)
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
 }
 
-
+extension ReceiverViewController:AVAudioPlayerDelegate {
+    
+}
 extension ReceiverViewController:TCPReceiveContactDelegate {
     func onContactReceivedSuccess(_ data: Data!) {
         let end_data = data.subdata(in: 0...3)
@@ -132,7 +154,8 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
         
         self.successCount += 1
         
-//        Utility.saveContactToAddressBook(receiveContact: contact)
+        self.save(Contact:contactData)
+        
         let status = "\(self.successCount)"
         guard let __receiver = self.receiveContact else {
             self.abortReceiveOperation = true
@@ -193,16 +216,30 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
             DispatchQueue.main.async {
                 self.errorLabel.text = "✅ Received and Saved Contacts..."
                 self.activityView?.startAnimating()
-                //play TING sound for finished notification
+                self.playNotification(name:"notification_save")
                 
             }
         }
-        
-        
     }
     
     func onContactReceiveError(_ receiveError: Error!) {
         
+    }
+    
+    
+    func save(Contact contact:ContactData){
+        let contact_store = CNContactStore()
+        let saveRequest = CNSaveRequest()
+        let cncontact = contact.toContact()
+        saveRequest.add(cncontact, toContainerWithIdentifier: nil)
+        do {
+            try contact_store.execute(saveRequest)
+            DispatchQueue.main.async {
+                self.playNotification(name:"notification_finished")
+            }
+        } catch {
+            print("i dunno")
+        }
     }
     
     

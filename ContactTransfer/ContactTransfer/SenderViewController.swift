@@ -49,7 +49,7 @@ class SenderViewController: UIViewController {
         free(device_ip)
         self.sendingContact = TCPContactSend()
         self.sendingContact?.sendDelegate = self
-        let activityView = NVActivityIndicatorView(frame: self.animationView.bounds,
+        self.activityView = NVActivityIndicatorView(frame: self.animationView.bounds,
                                                    type: .ballScaleRippleMultiple,
                                                    color: UIColor.init(rgb: 0xFF6070),
                                                    padding: 0)
@@ -138,7 +138,7 @@ class SenderViewController: UIViewController {
                 self.receiveBraodcast = false
             }
             if let contactData = self.receiverArray.filter ({$0.senderIp.elementsEqual(ip_address)}).first {
-                self.activityView.stopAnimating()
+//                self.activityView.stopAnimating()
                 self.receiverData = contactData
                 
                 //create a random port for TCP connections

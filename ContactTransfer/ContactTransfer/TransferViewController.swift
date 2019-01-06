@@ -10,6 +10,7 @@ import UIKit
 import Pulsator
 import Contacts
 import NVActivityIndicatorView
+import AVFoundation
 
 class TransferViewController: UIViewController {
     
@@ -41,7 +42,6 @@ class TransferViewController: UIViewController {
     @IBOutlet weak var erroStatusLabel: UILabel!
     @IBOutlet weak var deviceNameLabel: UILabel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.trailingSpace.constant = -HVC.MSW
@@ -60,16 +60,19 @@ class TransferViewController: UIViewController {
             self.abortSpace.constant = (HVC.MSW / 2 - self.abortButton.frame.size.width/2) / 2
         }
         self.setErrorStatus(HasError:false)
+        
+        
+        
     }
     
     fileprivate func setErrorStatus(HasError err : Bool){
         if err {
             let color = UIColor.init(rgb: 0xFF0066)
-            self.erroStatusLabel.text = "❌ SOCKET CORRUPT, Please Abort!"
+            self.erroStatusLabel.text = "❌ Check Wifi, Connection fail!"
             self.erroStatusLabel.textColor = color
         } else {
             let color =  UIColor.init(rgb: 0x3BCB63)
-            self.erroStatusLabel.text = "✅ No error occured!"
+            self.erroStatusLabel.text = "✅ Onile! "
             self.erroStatusLabel.textColor = color
         }
     }
