@@ -169,9 +169,7 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
             self.status.text = "Received \(self.successCount) of \(self.countactCount) contacts."
             if contactData.contactPhoneNumber.count > 0 {
                 if let __key_value = contactData.contactPhoneNumber.first {
-                    let __key = (__key_value.key).replacingOccurrences(of: "_$!<", with: "")
-                    
-                    let __number = "\(__key.replacingOccurrences(of: ">!$_", with: "")) : \(__key_value.value as! String)"
+                    let __number = "\(__key_value.key) : \(__key_value.value as! String)"
                     self.mobile.text = __number
                     
                 }
@@ -180,9 +178,7 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
             }
             if contactData.contactEmails.count > 0 {
                 if let __key_value = contactData.contactEmails.first {
-                    let __key = (__key_value.key).replacingOccurrences(of: "_$!<", with: "")
-                    
-                    let __number = "\(__key.replacingOccurrences(of: ">!$_", with: "")) : \(__key_value.value as! String)"
+                    let __number = "\(__key_value.key) : \(__key_value.value as! String)"
                     self.email.text = __number
                 }
             } else {
@@ -241,6 +237,4 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
             print("i dunno")
         }
     }
-    
-    
 }
