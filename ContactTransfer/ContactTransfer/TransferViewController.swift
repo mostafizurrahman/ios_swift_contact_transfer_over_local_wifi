@@ -37,6 +37,8 @@ class TransferViewController: UIViewController {
     @IBOutlet weak var broadcastLayout: NSLayoutConstraint!
     @IBOutlet weak var abortButton: BorderButton!
     
+    @IBOutlet weak var buttonSend:UIButton!
+    @IBOutlet weak var buttonRecv:UIButton!
     @IBOutlet weak var abortSpace: NSLayoutConstraint!
     
     @IBOutlet weak var erroStatusLabel: UILabel!
@@ -44,6 +46,11 @@ class TransferViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        for btn in [self.buttonSend, self.buttonRecv] {
+            btn?.layer.cornerRadius = 8
+            btn?.layer.borderColor = UIColor.black.cgColor
+            btn?.layer.borderWidth = 0.75
+        }
         self.trailingSpace.constant = -HVC.MSW
         self.view.layoutIfNeeded()
         let client_ip = UnsafeMutablePointer<Int8>.allocate(capacity: 16)

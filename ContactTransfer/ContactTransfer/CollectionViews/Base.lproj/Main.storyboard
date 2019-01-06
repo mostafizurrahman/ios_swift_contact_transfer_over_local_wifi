@@ -37,13 +37,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q1I-Qx-uIJ">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4VE-q5-h6K" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
-                                        <rect key="frame" x="56.5" y="264" width="75" height="75"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="nUi-Wu-aMG"/>
-                                            <constraint firstAttribute="height" constant="75" id="sod-ZI-yZg"/>
-                                        </constraints>
-                                        <state key="normal" title="Receive">
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4VE-q5-h6K">
+                                        <rect key="frame" x="38" y="245.5" width="112" height="112"/>
+                                        <color key="backgroundColor" red="0.29569212150000002" green="0.39582416370000001" blue="0.40171104749999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="download">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -64,13 +61,10 @@
                                             <action selector="receiveData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="p0l-uN-xDI"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nto-PQ-prk" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
-                                        <rect key="frame" x="244" y="264" width="75" height="75"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="75" id="1Bl-fs-Uzk"/>
-                                            <constraint firstAttribute="width" constant="75" id="7k4-JZ-RTX"/>
-                                        </constraints>
-                                        <state key="normal" title="Send">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nto-PQ-prk">
+                                        <rect key="frame" x="225.5" y="245.5" width="112" height="112"/>
+                                        <color key="backgroundColor" red="0.29569212150000002" green="0.39582416370000001" blue="0.40171104749999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="upload">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -91,17 +85,33 @@
                                             <action selector="sendData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="B9u-pX-kXv"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Uy-Da-DN3">
+                                        <rect key="frame" x="228.5" y="373.5" width="105.5" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receive Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxZ-KE-Ust">
+                                        <rect key="frame" x="31.5" y="373" width="124.5" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Nto-PQ-prk" firstAttribute="centerX" secondItem="q1I-Qx-uIJ" secondAttribute="centerX" multiplier="1.5" id="0Vy-T7-YrR"/>
+                                    <constraint firstItem="sxZ-KE-Ust" firstAttribute="top" secondItem="4VE-q5-h6K" secondAttribute="bottom" constant="15.5" id="BHi-IO-Rnv"/>
+                                    <constraint firstItem="sxZ-KE-Ust" firstAttribute="centerX" secondItem="4VE-q5-h6K" secondAttribute="centerX" id="G6C-40-s02"/>
                                     <constraint firstItem="4VE-q5-h6K" firstAttribute="centerX" secondItem="q1I-Qx-uIJ" secondAttribute="centerX" multiplier="0.5" id="Q6R-qE-G39"/>
                                     <constraint firstItem="Nto-PQ-prk" firstAttribute="centerY" secondItem="q1I-Qx-uIJ" secondAttribute="centerY" id="YbL-uL-UG5"/>
+                                    <constraint firstItem="2Uy-Da-DN3" firstAttribute="centerX" secondItem="Nto-PQ-prk" secondAttribute="centerX" id="e54-BP-iI6"/>
+                                    <constraint firstItem="2Uy-Da-DN3" firstAttribute="top" secondItem="Nto-PQ-prk" secondAttribute="bottom" constant="16" id="on7-C1-tTa"/>
                                     <constraint firstItem="4VE-q5-h6K" firstAttribute="centerY" secondItem="q1I-Qx-uIJ" secondAttribute="centerY" id="uyA-3r-etb"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="okX-n5-9Hq">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="okX-n5-9Hq">
+                                <rect key="frame" x="400" y="64" width="375" height="603"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zrp-Ng-CA3" customClass="BorderButton" customModule="ContactTransfer" customModuleProvider="target">
                                         <rect key="frame" x="93.5" y="551" width="188" height="36"/>
@@ -198,6 +208,8 @@
                         <outlet property="abortSpace" destination="krN-2k-Ofi" id="LIL-nL-WY0"/>
                         <outlet property="broadcastLabel" destination="1EL-Xv-6Bj" id="aje-S0-Tex"/>
                         <outlet property="broadcastLayout" destination="lG5-wg-paB" id="ffm-LF-kdJ"/>
+                        <outlet property="buttonRecv" destination="4VE-q5-h6K" id="7GK-zW-y5G"/>
+                        <outlet property="buttonSend" destination="Nto-PQ-prk" id="lLF-es-ozA"/>
                         <outlet property="deviceNameLabel" destination="LOU-4u-Il6" id="sVX-0V-eKo"/>
                         <outlet property="erroStatusLabel" destination="D9B-nK-amL" id="xY6-bJ-v7V"/>
                         <outlet property="leadingSpace" destination="E5G-BO-pex" id="UxK-0q-P2t"/>
@@ -979,7 +991,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="download" width="112.5" height="112.5"/>
         <image name="profile" width="350" height="350"/>
+        <image name="upload" width="112.5" height="112.5"/>
         <image name="woman" width="64" height="64"/>
     </resources>
 </document>
