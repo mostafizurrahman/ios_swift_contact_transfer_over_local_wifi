@@ -241,7 +241,7 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
         let cncontact = contact.toContact()
         saveRequest.add(cncontact, toContainerWithIdentifier: nil)
         do {
-//            try contact_store.execute(saveRequest)
+            try contact_store.execute(saveRequest)
             DispatchQueue.main.async {
                 self.playNotification(name:"notification_finished")
             }
