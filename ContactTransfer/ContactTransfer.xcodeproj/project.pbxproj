@@ -25,6 +25,7 @@
 		BE27A29221DA492900DF451F /* ContactParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A29121DA492900DF451F /* ContactParser.swift */; };
 		BE27A29521DA4F4A00DF451F /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27A29421DA4F4A00DF451F /* ContactTableViewCell.swift */; };
 		BE319A7B21E095E300DBC2E8 /* InterfaceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE319A7A21E095E300DBC2E8 /* InterfaceHelper.swift */; };
+		BE36182F21E3CA0B0045D7E6 /* icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE36182E21E3CA0B0045D7E6 /* icon.jpg */; };
 		BE886F1421CC0C8100F6534F /* CSClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0821CC0C8000F6534F /* CSClientSocket.m */; };
 		BE886F1521CC0C8100F6534F /* ServerSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0921CC0C8000F6534F /* ServerSocket.m */; };
 		BE886F1621CC0C8100F6534F /* TCPContactSend.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886F0A21CC0C8000F6534F /* TCPContactSend.m */; };
@@ -59,6 +60,7 @@
 		BE27A29121DA492900DF451F /* ContactParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactParser.swift; sourceTree = "<group>"; };
 		BE27A29421DA4F4A00DF451F /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		BE319A7A21E095E300DBC2E8 /* InterfaceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceHelper.swift; sourceTree = "<group>"; };
+		BE36182E21E3CA0B0045D7E6 /* icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon.jpg; sourceTree = "<group>"; };
 		BE886F0721CC0C7F00F6534F /* ContactTransfer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ContactTransfer-Bridging-Header.h"; sourceTree = "<group>"; };
 		BE886F0821CC0C8000F6534F /* CSClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSClientSocket.m; sourceTree = "<group>"; };
 		BE886F0921CC0C8000F6534F /* ServerSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerSocket.m; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		BE27A28E21DA2FA000DF451F /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				BE36182E21E3CA0B0045D7E6 /* icon.jpg */,
 				BE06CEE621E2241900AEAD78 /* notification_save.mp3 */,
 				BE06CEE821E2245000AEAD78 /* notification_finished.mp3 */,
 				BE27A28F21DA2FBA00DF451F /* ContactData.swift */,
@@ -253,6 +256,7 @@
 				BE02EECF21CAD656004CB9CD /* LaunchScreen.storyboard in Resources */,
 				BE06CEE721E2241900AEAD78 /* notification_save.mp3 in Resources */,
 				BE02EECC21CAD656004CB9CD /* Assets.xcassets in Resources */,
+				BE36182F21E3CA0B0045D7E6 /* icon.jpg in Resources */,
 				BE02EECA21CAD654004CB9CD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -24,6 +24,7 @@ class SenderViewController: UIViewController {
     
     
     @IBOutlet var receiverButtonArray: [UIView]!
+    var removedIP:[String:Int] = [:]
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var tcpSendView: UIView!
     @IBOutlet weak var satusLabel: UILabel!
@@ -31,7 +32,7 @@ class SenderViewController: UIViewController {
     
     @IBOutlet weak var animationView: UIView!
     
-    @IBOutlet weak var searchStatus: UILabel!
+    
     
     var sendingContact:TCPContactSend?
     var sendCount:Int = 0
@@ -63,6 +64,7 @@ class SenderViewController: UIViewController {
         self.startBroadcastReciever()
     }
     
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.abortSendingOperation = true
@@ -86,21 +88,38 @@ class SenderViewController: UIViewController {
                     DispatchQueue.main.async {
                         let socketData = SocketData.init()
                         socketData.set(Data: dataPointer)
-//                        if !self.receiverArray.contains(where: { (soc_data) -> Bool in
-//                            return soc_data.senderIp.elementsEqual(socketData.senderIp)
-//                        })  {
+                        
+                        if self.removedIP.keys.contains(socketData.senderIp){
+                            if let __count =  self.removedIP[socketData.senderIp] {
+                                if __count > 0 {
+                                    let value = __count - 1
+                                    if value == 0 {
+                                        self.removedIP.removeValue(forKey: socketData.senderIp)
+                                    } else {
+                                        self.removedIP[socketData.senderIp] = value
+                                        return
+                                    }
+                                }
+                            }
+                        }
+                        
+                        if !self.receiverArray.contains(where: { (soc_data) -> Bool in
+                            return soc_data.senderIp.elementsEqual(socketData.senderIp)
+                        })  {
                             self.receiverArray.append(socketData)
                             self.createReceiverButton(socketData)
                         DispatchQueue.main.async {
-                            self.statusLabel.text = "New Receiver Found : \n\(socketData.senderName)"
+                            self.statusLabel.textColor = UIColor.init(rgb: 0x3BCB63)
+                            self.statusLabel.text = "New Receiver : \(socketData.senderName)"
                         }
-//                        } else if socketData.commStatus == .offline {
-//                            self.removeReceiver(socketData)
-//                        }
+                        } else if socketData.commStatus == .offline {
+                            self.removeReceiver(socketData)
+                        }
                     }
                 }
                 sleep(1)
             }
+            free(dataPointer)
         }
     }
     
@@ -150,11 +169,9 @@ class SenderViewController: UIViewController {
                     self.statusLabel.text = ""
                     self.satusLabel.text = "Archiving data...."
                     self.satusLabel.textColor = .black
-                    self.searchStatus.text = "Sending contacts..."
                 }
             }
             if let contactData = self.receiverArray.filter ({$0.senderIp.elementsEqual(ip_address)}).first {
-//                self.activityView.stopAnimating()
                 self.receiverData = contactData
                 
                 //create a random port for TCP connections
@@ -188,7 +205,6 @@ class SenderViewController: UIViewController {
                     //MARK: TCP CONTACT SEND
                     
                     if self.inititateConnection() {
-                        print("connection___success!!!!___")
                         
                         if let __sender = self.sendingContact {
                             DispatchQueue.main.async {
@@ -287,6 +303,32 @@ class SenderViewController: UIViewController {
     
     fileprivate func removeReceiver(_ socketData:SocketData){
         
+        DispatchQueue.main.async {
+            for view in self.receiverButtonArray {
+                guard let __button = view.viewWithTag(1212) as? UIButton ,
+                let name = (view.viewWithTag(1313) as? UILabel)?.text else {
+                    continue
+                }
+                self.statusLabel.textColor = .red
+                self.statusLabel.text = "\(name) is removed!"
+                if let idf = __button.restorationIdentifier {
+                    if idf.contains(socketData.senderIp) {
+                        view.isHidden = true
+                        __button.restorationIdentifier = nil
+                        if let __index = self.receiverButtonArray.firstIndex(of: view) {
+                            self.hasReceiverArray[__index] = false
+                        }
+                        DispatchQueue.global().async {
+                            self.removedIP[idf] = 5
+                            self.receiverArray = self.receiverArray.filter ({!$0.senderIp.elementsEqual(idf)})
+                            
+                        }
+                        break
+                    }
+                }
+            }
+        }
+        
     }
     
     var audioPlayer:AVAudioPlayer!
@@ -323,6 +365,7 @@ extension SenderViewController : TCPSendContactDelegate {
         print("sending \(self.sendCount)")
         DispatchQueue.main.async {
             self.satusLabel.text = "Suceessfully sent all contacts!"
+            self.statusLabel.text = "Please! Exit to initiate new transfer..."
         }
 //        if Int(length) == self.contactDataLen {
 //            if let __sender = self.sendingContact {

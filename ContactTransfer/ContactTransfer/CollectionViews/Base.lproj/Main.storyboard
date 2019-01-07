@@ -38,8 +38,8 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4VE-q5-h6K">
-                                        <rect key="frame" x="38" y="245.5" width="112" height="112"/>
-                                        <color key="backgroundColor" red="0.29569212150000002" green="0.39582416370000001" blue="0.40171104749999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="-21" y="187" width="229.5" height="229"/>
+                                        <color key="backgroundColor" white="1" alpha="0.73965669014084512" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="download">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -62,8 +62,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nto-PQ-prk">
-                                        <rect key="frame" x="225.5" y="245.5" width="112" height="112"/>
-                                        <color key="backgroundColor" red="0.29569212150000002" green="0.39582416370000001" blue="0.40171104749999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="156" y="176" width="251" height="251"/>
+                                        <color key="backgroundColor" white="1" alpha="0.73965669014084512" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="upload">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -86,26 +86,43 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Uy-Da-DN3">
-                                        <rect key="frame" x="228.5" y="373.5" width="105.5" height="18"/>
+                                        <rect key="frame" x="228.5" y="443" width="105.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receive Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxZ-KE-Ust">
-                                        <rect key="frame" x="31.5" y="373" width="124.5" height="18"/>
+                                        <rect key="frame" x="31.5" y="431.5" width="124.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Faster and secure contact transfer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdQ-LF-42e">
+                                        <rect key="frame" x="73.5" y="123" width="228.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contact" translatesAutoresizingMaskIntoConstraints="NO" id="FBt-lI-BPV">
+                                        <rect key="frame" x="137.5" y="8" width="100" height="99"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="P1c-z1-Sm6"/>
+                                            <constraint firstAttribute="height" constant="99" id="bKm-Rc-3bH"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Nto-PQ-prk" firstAttribute="centerX" secondItem="q1I-Qx-uIJ" secondAttribute="centerX" multiplier="1.5" id="0Vy-T7-YrR"/>
+                                    <constraint firstItem="TdQ-LF-42e" firstAttribute="centerX" secondItem="q1I-Qx-uIJ" secondAttribute="centerX" id="1vr-4n-sge"/>
                                     <constraint firstItem="sxZ-KE-Ust" firstAttribute="top" secondItem="4VE-q5-h6K" secondAttribute="bottom" constant="15.5" id="BHi-IO-Rnv"/>
                                     <constraint firstItem="sxZ-KE-Ust" firstAttribute="centerX" secondItem="4VE-q5-h6K" secondAttribute="centerX" id="G6C-40-s02"/>
                                     <constraint firstItem="4VE-q5-h6K" firstAttribute="centerX" secondItem="q1I-Qx-uIJ" secondAttribute="centerX" multiplier="0.5" id="Q6R-qE-G39"/>
+                                    <constraint firstItem="FBt-lI-BPV" firstAttribute="top" secondItem="q1I-Qx-uIJ" secondAttribute="top" constant="8" id="UcG-Sd-8hm"/>
                                     <constraint firstItem="Nto-PQ-prk" firstAttribute="centerY" secondItem="q1I-Qx-uIJ" secondAttribute="centerY" id="YbL-uL-UG5"/>
                                     <constraint firstItem="2Uy-Da-DN3" firstAttribute="centerX" secondItem="Nto-PQ-prk" secondAttribute="centerX" id="e54-BP-iI6"/>
+                                    <constraint firstItem="TdQ-LF-42e" firstAttribute="top" secondItem="FBt-lI-BPV" secondAttribute="bottom" constant="16" id="luz-df-KTF"/>
+                                    <constraint firstItem="FBt-lI-BPV" firstAttribute="centerX" secondItem="q1I-Qx-uIJ" secondAttribute="centerX" id="oCP-Op-EXQ"/>
                                     <constraint firstItem="2Uy-Da-DN3" firstAttribute="top" secondItem="Nto-PQ-prk" secondAttribute="bottom" constant="16" id="on7-C1-tTa"/>
                                     <constraint firstItem="4VE-q5-h6K" firstAttribute="centerY" secondItem="q1I-Qx-uIJ" secondAttribute="centerY" id="uyA-3r-etb"/>
                                 </constraints>
@@ -138,10 +155,10 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waf-Or-jfE">
-                                        <rect key="frame" x="62.5" y="216.5" width="250" height="170"/>
+                                        <rect key="frame" x="62.5" y="241.5" width="250" height="120"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="170" id="17a-IS-omc"/>
+                                            <constraint firstAttribute="height" constant="120" id="17a-IS-omc"/>
                                             <constraint firstAttribute="width" constant="250" id="MPF-G8-YbF"/>
                                         </constraints>
                                     </view>
@@ -152,7 +169,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Broadcasting my presence..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1EL-Xv-6Bj">
-                                        <rect key="frame" x="90" y="394.5" width="195" height="18"/>
+                                        <rect key="frame" x="90" y="369.5" width="195" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="0.84611575699999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -188,7 +205,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="q1I-Qx-uIJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="E5G-BO-pex"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="okX-n5-9Hq" secondAttribute="bottom" id="N1a-87-fNK"/>
@@ -212,6 +229,7 @@
                         <outlet property="buttonSend" destination="Nto-PQ-prk" id="lLF-es-ozA"/>
                         <outlet property="deviceNameLabel" destination="LOU-4u-Il6" id="sVX-0V-eKo"/>
                         <outlet property="erroStatusLabel" destination="D9B-nK-amL" id="xY6-bJ-v7V"/>
+                        <outlet property="iconImgVIew" destination="FBt-lI-BPV" id="Mbc-g2-tSs"/>
                         <outlet property="leadingSpace" destination="E5G-BO-pex" id="UxK-0q-P2t"/>
                         <outlet property="pulsView" destination="waf-Or-jfE" id="i3F-A8-DO4"/>
                         <outlet property="trailingSpace" destination="jEF-9y-b47" id="ahU-e5-8IY"/>
@@ -629,7 +647,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1313" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiver Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNO-xu-VCJ">
-                                        <rect key="frame" x="-18.5" y="88.5" width="112.5" height="14.5"/>
+                                        <rect key="frame" x="-18.5" y="82.5" width="112.5" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -642,7 +660,7 @@
                                     <constraint firstItem="ytw-IX-5sb" firstAttribute="centerY" secondItem="02l-oG-zj8" secondAttribute="centerY" id="PVq-9g-tQO"/>
                                     <constraint firstItem="ytw-IX-5sb" firstAttribute="centerX" secondItem="02l-oG-zj8" secondAttribute="centerX" id="T5a-5V-VWb"/>
                                     <constraint firstAttribute="width" constant="75" id="cTO-zh-UJq"/>
-                                    <constraint firstAttribute="bottom" secondItem="wNO-xu-VCJ" secondAttribute="bottom" constant="-28" id="cpD-vH-fmh"/>
+                                    <constraint firstAttribute="bottom" secondItem="wNO-xu-VCJ" secondAttribute="bottom" constant="-22" id="cpD-vH-fmh"/>
                                     <constraint firstAttribute="height" constant="75" id="gcC-k4-toe"/>
                                     <constraint firstItem="wNO-xu-VCJ" firstAttribute="width" secondItem="02l-oG-zj8" secondAttribute="width" multiplier="1.5" id="wEa-WV-7WC"/>
                                     <constraint firstItem="ytw-IX-5sb" firstAttribute="width" secondItem="02l-oG-zj8" secondAttribute="width" id="ym4-16-fcb"/>
@@ -662,7 +680,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1313" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiver Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1TB-ax-3be">
-                                        <rect key="frame" x="-18.5" y="88.5" width="112.5" height="14.5"/>
+                                        <rect key="frame" x="-18.5" y="82.5" width="112.5" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -675,7 +693,7 @@
                                     <constraint firstItem="QNL-NM-tP7" firstAttribute="centerX" secondItem="nLk-k9-Bth" secondAttribute="centerX" id="OGJ-E3-o9A"/>
                                     <constraint firstItem="QNL-NM-tP7" firstAttribute="centerY" secondItem="nLk-k9-Bth" secondAttribute="centerY" id="TB4-XJ-5S5"/>
                                     <constraint firstItem="QNL-NM-tP7" firstAttribute="height" secondItem="nLk-k9-Bth" secondAttribute="height" id="UPk-Hk-MSf"/>
-                                    <constraint firstAttribute="bottom" secondItem="1TB-ax-3be" secondAttribute="bottom" constant="-28" id="gEV-Ba-UN0"/>
+                                    <constraint firstAttribute="bottom" secondItem="1TB-ax-3be" secondAttribute="bottom" constant="-22" id="gEV-Ba-UN0"/>
                                     <constraint firstItem="1TB-ax-3be" firstAttribute="width" secondItem="nLk-k9-Bth" secondAttribute="width" multiplier="1.5" id="pEN-Zh-k4K"/>
                                     <constraint firstItem="1TB-ax-3be" firstAttribute="centerX" secondItem="nLk-k9-Bth" secondAttribute="centerX" id="z0v-kd-2Vd"/>
                                     <constraint firstAttribute="height" constant="75" id="z2X-cz-r94"/>
@@ -695,7 +713,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1313" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiver Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyk-bo-QuQ">
-                                        <rect key="frame" x="-18.5" y="88.5" width="112.5" height="14.5"/>
+                                        <rect key="frame" x="-18.5" y="82.5" width="112.5" height="14.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                         <nil key="textColor"/>
@@ -705,7 +723,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="Bdr-bZ-7XF"/>
-                                    <constraint firstAttribute="bottom" secondItem="wyk-bo-QuQ" secondAttribute="bottom" constant="-28" id="G8k-Ae-DJv"/>
+                                    <constraint firstAttribute="bottom" secondItem="wyk-bo-QuQ" secondAttribute="bottom" constant="-22" id="G8k-Ae-DJv"/>
                                     <constraint firstItem="wyk-bo-QuQ" firstAttribute="centerX" secondItem="kfu-RG-cvf" secondAttribute="centerX" id="ORE-QC-1EM"/>
                                     <constraint firstItem="18v-sH-CdX" firstAttribute="height" secondItem="kfu-RG-cvf" secondAttribute="height" id="SIx-pu-yLs"/>
                                     <constraint firstItem="18v-sH-CdX" firstAttribute="centerX" secondItem="kfu-RG-cvf" secondAttribute="centerX" id="VzI-NM-YOi"/>
@@ -729,7 +747,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1313" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiver Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e65-Ma-SOh">
-                                        <rect key="frame" x="-18.5" y="88.5" width="112.5" height="14.5"/>
+                                        <rect key="frame" x="-18.5" y="82.5" width="112.5" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -743,7 +761,7 @@
                                     <constraint firstItem="DcN-Kh-PtL" firstAttribute="centerY" secondItem="UB8-4D-hzL" secondAttribute="centerY" id="e5e-jz-v5d"/>
                                     <constraint firstItem="DcN-Kh-PtL" firstAttribute="width" secondItem="UB8-4D-hzL" secondAttribute="width" id="hFE-aq-ed8"/>
                                     <constraint firstItem="DcN-Kh-PtL" firstAttribute="height" secondItem="UB8-4D-hzL" secondAttribute="height" id="kua-pV-udQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="e65-Ma-SOh" secondAttribute="bottom" constant="-28" id="kwH-ci-bVX"/>
+                                    <constraint firstAttribute="bottom" secondItem="e65-Ma-SOh" secondAttribute="bottom" constant="-22" id="kwH-ci-bVX"/>
                                     <constraint firstItem="e65-Ma-SOh" firstAttribute="width" secondItem="UB8-4D-hzL" secondAttribute="width" multiplier="1.5" id="pjE-7S-Q0N"/>
                                     <constraint firstItem="e65-Ma-SOh" firstAttribute="centerX" secondItem="UB8-4D-hzL" secondAttribute="centerX" id="wRc-l9-d4c"/>
                                 </constraints>
@@ -762,7 +780,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1313" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiver Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjY-xH-24E">
-                                        <rect key="frame" x="-18.5" y="88.5" width="112.5" height="14.5"/>
+                                        <rect key="frame" x="-18.5" y="82.5" width="112.5" height="14.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                         <nil key="textColor"/>
@@ -777,7 +795,7 @@
                                     <constraint firstItem="qjY-xH-24E" firstAttribute="centerX" secondItem="paM-Dd-Zca" secondAttribute="centerX" id="ehs-L1-Q4R"/>
                                     <constraint firstItem="enG-3a-8iC" firstAttribute="width" secondItem="paM-Dd-Zca" secondAttribute="width" id="j0v-pf-7iW"/>
                                     <constraint firstAttribute="height" constant="75" id="jBk-Nm-mDn"/>
-                                    <constraint firstAttribute="bottom" secondItem="qjY-xH-24E" secondAttribute="bottom" constant="-28" id="tGC-R1-WIe"/>
+                                    <constraint firstAttribute="bottom" secondItem="qjY-xH-24E" secondAttribute="bottom" constant="-22" id="tGC-R1-WIe"/>
                                     <constraint firstItem="enG-3a-8iC" firstAttribute="height" secondItem="paM-Dd-Zca" secondAttribute="height" id="xIn-9f-qhx"/>
                                     <constraint firstItem="enG-3a-8iC" firstAttribute="centerX" secondItem="paM-Dd-Zca" secondAttribute="centerX" id="y51-pd-gRs"/>
                                 </constraints>
@@ -796,7 +814,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1313" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiver Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1h1-SD-25i">
-                                        <rect key="frame" x="-18.5" y="88.5" width="112.5" height="14.5"/>
+                                        <rect key="frame" x="-18.5" y="82.5" width="112.5" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -812,17 +830,11 @@
                                     <constraint firstItem="baj-SH-YjS" firstAttribute="height" secondItem="HvI-BD-Agh" secondAttribute="height" id="hRS-QU-7lY"/>
                                     <constraint firstAttribute="height" constant="75" id="l7e-CI-b9d"/>
                                     <constraint firstItem="baj-SH-YjS" firstAttribute="centerX" secondItem="HvI-BD-Agh" secondAttribute="centerX" id="ozq-64-Rji"/>
-                                    <constraint firstAttribute="bottom" secondItem="1h1-SD-25i" secondAttribute="bottom" constant="-28" id="vjX-6t-hY1"/>
+                                    <constraint firstAttribute="bottom" secondItem="1h1-SD-25i" secondAttribute="bottom" constant="-22" id="vjX-6t-hY1"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching for receiver..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCa-tO-pjP">
-                                <rect key="frame" x="104" y="629" width="167.5" height="18"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiver Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAd-13-E0f">
-                                <rect key="frame" x="137" y="611" width="101.5" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="searching receiver..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAd-13-E0f">
+                                <rect key="frame" x="121.5" y="72" width="132" height="16"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.79607843140000001" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -839,13 +851,11 @@
                             <constraint firstItem="UB8-4D-hzL" firstAttribute="top" secondItem="02l-oG-zj8" secondAttribute="bottom" constant="45" id="Sq3-jP-7jd"/>
                             <constraint firstItem="tAd-13-E0f" firstAttribute="centerX" secondItem="uva-UH-0M9" secondAttribute="centerX" id="VHw-BR-eyH"/>
                             <constraint firstItem="02l-oG-zj8" firstAttribute="top" secondItem="uva-UH-0M9" secondAttribute="top" constant="75" id="W9d-VZ-x13"/>
-                            <constraint firstItem="uva-UH-0M9" firstAttribute="bottom" secondItem="SCa-tO-pjP" secondAttribute="bottom" constant="20" id="gaQ-Ub-mjF"/>
+                            <constraint firstItem="tAd-13-E0f" firstAttribute="top" secondItem="uva-UH-0M9" secondAttribute="top" constant="8" id="gcP-Jp-jqG"/>
                             <constraint firstItem="wJW-Ea-FGn" firstAttribute="centerX" secondItem="uva-UH-0M9" secondAttribute="centerX" id="kxv-Ou-XfV"/>
                             <constraint firstItem="nLk-k9-Bth" firstAttribute="centerX" secondItem="uva-UH-0M9" secondAttribute="centerX" id="l5H-Rc-xMh"/>
                             <constraint firstItem="uva-UH-0M9" firstAttribute="trailing" secondItem="HvI-BD-Agh" secondAttribute="trailing" constant="32" id="l8J-Oh-MMW"/>
-                            <constraint firstItem="SCa-tO-pjP" firstAttribute="firstBaseline" secondItem="tAd-13-E0f" secondAttribute="baseline" constant="20" symbolType="layoutAnchor" id="mns-4Q-wQC"/>
                             <constraint firstItem="nLk-k9-Bth" firstAttribute="top" secondItem="uva-UH-0M9" secondAttribute="top" constant="40" id="oFq-N3-2hL"/>
-                            <constraint firstItem="SCa-tO-pjP" firstAttribute="centerX" secondItem="uva-UH-0M9" secondAttribute="centerX" id="uaJ-mj-UnQ"/>
                             <constraint firstItem="kfu-RG-cvf" firstAttribute="top" secondItem="uva-UH-0M9" secondAttribute="top" constant="75" id="vnd-og-VM0"/>
                             <constraint firstItem="paM-Dd-Zca" firstAttribute="top" secondItem="nLk-k9-Bth" secondAttribute="bottom" constant="45" id="ypk-xM-arH"/>
                         </constraints>
@@ -854,7 +864,6 @@
                     <connections>
                         <outlet property="animationView" destination="wJW-Ea-FGn" id="5RH-Gz-6VF"/>
                         <outlet property="satusLabel" destination="8hf-Hs-O9X" id="06F-fM-WNO"/>
-                        <outlet property="searchStatus" destination="SCa-tO-pjP" id="vB1-c4-rta"/>
                         <outlet property="statusLabel" destination="tAd-13-E0f" id="nOO-tO-XWz"/>
                         <outletCollection property="receiverButtonArray" destination="02l-oG-zj8" collectionClass="NSMutableArray" id="vOU-hr-ujy"/>
                         <outletCollection property="receiverButtonArray" destination="nLk-k9-Bth" collectionClass="NSMutableArray" id="pDb-eE-s32"/>
@@ -992,9 +1001,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="download" width="112.5" height="112.5"/>
+        <image name="contact" width="100" height="99"/>
+        <image name="download" width="229.7872314453125" height="229.7872314453125"/>
         <image name="profile" width="350" height="350"/>
-        <image name="upload" width="112.5" height="112.5"/>
+        <image name="upload" width="251.16279602050781" height="251.16279602050781"/>
         <image name="woman" width="64" height="64"/>
     </resources>
 </document>

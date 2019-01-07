@@ -15,6 +15,7 @@ import AVFoundation
 class TransferViewController: UIViewController {
     
     typealias SD = SocketData
+    @IBOutlet weak var iconImgVIew: UIImageView!
     typealias HVC = TransferViewController
     static let MSW = UIScreen.main.bounds.width
     static let MSH = UIScreen.main.bounds.height
@@ -48,9 +49,12 @@ class TransferViewController: UIViewController {
         super.viewDidLoad()
         for btn in [self.buttonSend, self.buttonRecv] {
             btn?.layer.cornerRadius = 8
-            btn?.layer.borderColor = UIColor.black.cgColor
+            btn?.layer.borderColor = UIColor.white.cgColor
             btn?.layer.borderWidth = 0.75
         }
+        self.iconImgVIew.layer.cornerRadius = self.iconImgVIew.frame.size.width/2
+        self.iconImgVIew.layer.masksToBounds = true
+        
         self.trailingSpace.constant = -HVC.MSW
         self.view.layoutIfNeeded()
         let client_ip = UnsafeMutablePointer<Int8>.allocate(capacity: 16)
@@ -68,8 +72,27 @@ class TransferViewController: UIViewController {
         }
         self.setErrorStatus(HasError:false)
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(broadcastOffline),
+                                               name: UIApplication.willResignActiveNotification, // UIApplication.didBecomeActiveNotification for swift 4.2+
+            object: nil)
         
+        let item = UIBarButtonItem.SystemItem.bookmarks
+        let editButton   = UIBarButtonItem(barButtonSystemItem: item, target: self,
+                                           action: #selector(didTapEditButton(_:)))
+        self.navigationItem.rightBarButtonItems = [editButton]
+    }
+    
+    @objc func didTapEditButton(_ sender:UIBarButtonItem){
+        guard let url = URL(string: "https://itunes.apple.com/us/developer/mostafizur-rahman/id1386969788?mt=8") else {
+            return //be safe
+        }
         
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
     }
     
     fileprivate func setErrorStatus(HasError err : Bool){
@@ -181,6 +204,7 @@ class TransferViewController: UIViewController {
     }
     
     fileprivate func stopQueue(){
+        self.broadcastOffline()
         self.acitivity?.removeFromSuperview()
         self.acitivity?.stopAnimating()
         self.acitivity = nil
@@ -298,6 +322,21 @@ class TransferViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    @objc func broadcastOffline(){
+        let parameters:[String : AnyObject] = ["DEVICE_OS" : 2 as AnyObject,
+                                               "DEVICE_MODEL" : UIDevice.modelName as AnyObject,
+                                               "SENDER_IP" : self.deviceIPAddress as AnyObject ,
+                                               "SENDER_NAME" : self.deviceName as AnyObject,
+                                               "RECEIV_IP" : ServerSocket.getBroadcastAddress() as AnyObject,
+                                               "RECEIV_NAME" : "BROADCAST" as AnyObject,
+                                               "COMM_STATUS" : SOStatus.offline.rawValue as AnyObject,
+                                               "COMM_PORT" : SD.BRDCAST_PORT as AnyObject]
+        let data = SocketData(dictionary: parameters)
+        let braodcastSocket = BroadcastDataSender()
+        _ = braodcastSocket.send(Data: data)
+        _ = braodcastSocket.send(Data: data)
+        _ = braodcastSocket.send(Data: data)
+    }
 }
 
 

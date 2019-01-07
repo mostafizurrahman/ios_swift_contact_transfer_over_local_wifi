@@ -49,10 +49,11 @@ class ReceiverViewController: UIViewController {
         self.activityView?.startAnimating()
         DispatchQueue.global().async {
             self.initiateConnections()
-            
         }
         // Do any additional setup after loading the view.
     }
+    
+    
     
     fileprivate func initiateConnections(){
         if let contactData = self.senderInfo {
@@ -96,7 +97,7 @@ class ReceiverViewController: UIViewController {
             self.errorLabel.text = "❌ Network Error! Terminate operation!\n(Details :\(__err))"
         } else {
             self.errorLabel.textColor = UIColor.init(rgb: 0x3BCB63)
-            self.errorLabel.text = "✅ Connection live. Contact receive in progress..."
+            self.errorLabel.text = "✅ Contact receive in progress..."
         }
     }
     
@@ -337,7 +338,10 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
         do {
             try contact_store.execute(saveRequest)
             DispatchQueue.main.async {
+//                self.lab
                 self.playNotification(name:"notification_finished")
+                self.errorLabel.text = "✅ Done! Contact added."
+                self.status.text = "Saved contact."
             }
         } catch {
             print("i dunno")
