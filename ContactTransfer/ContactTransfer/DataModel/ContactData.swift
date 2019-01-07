@@ -46,7 +46,41 @@ class ContactData {
     var contactSocials:[String:AnyObject] = [:]
     
     
-    init(withData contactData:Data){
+    init(withJson jsonData:[String : AnyObject]){
+        self.identifier = jsonData["identifier"] as? String ?? ""
+        self.contactName_given = jsonData["given"] as? String ?? ""
+        self.contactName_nickname = jsonData["nickname"] as? String ?? ""
+        self.contactName_family = jsonData["family"] as? String ?? ""
+        self.contactName_display = jsonData["display"] as? String ?? ""
+        self.nameSuffix = jsonData["suffix"] as? String ?? ""
+        self.namePrefix = jsonData["prefix"] as? String ?? ""
+        
+        self.contactHasImage = jsonData["has_image"] as? Bool ?? false
+        self.organizationName = jsonData["org"] as? String ?? ""
+        
+        self.jobTitle = jsonData["job"] as? String ?? ""
+        self.departmentName = jsonData["department"] as? String ?? ""
+        if let bd = jsonData["birthday"] as? String {
+            let array = bd.split(separator: "_")
+            if array.count > 2 {
+                var date = DateComponents()
+                date.day = Int(array[0]) ?? 0
+                date.month = Int(array[1]) ?? 0
+                date.year = Int(array[2]) ?? 0
+                self.contactBirthday = date
+            } else {
+                self.contactBirthday = nil
+            }
+        }
+        
+        self.contactPhoneNumber = jsonData["phones"] as? [String:AnyObject] ?? [:]
+        self.contactEmails = jsonData["emails"] as? [String:AnyObject] ?? [:]
+        self.contactWeburl = jsonData["webs"] as? [String:AnyObject] ?? [:]
+        self.contactSocials = jsonData["social"] as? [String:AnyObject] ?? [:]
+        self.contactAddress = jsonData["address"] as? [String:AnyObject] ?? [:]
+    }
+    
+    convenience init(withData contactData:Data){
         let lengthData = contactData.subdata(in: 0...7)
         let length = lengthData.withUnsafeBytes { (ptr: UnsafePointer<Int>) -> Int in
             return ptr.pointee
@@ -55,66 +89,38 @@ class ContactData {
         do {
             let jsonData = try JSONSerialization.jsonObject(with: rawContact,
                                                             options: []) as! [String : AnyObject]
-            self.identifier = jsonData["identifier"] as? String ?? ""
-            self.contactName_given = jsonData["given"] as? String ?? ""
-            self.contactName_nickname = jsonData["nickname"] as? String ?? ""
-            self.contactName_family = jsonData["family"] as? String ?? ""
-            self.contactName_display = jsonData["display"] as? String ?? ""
-            self.nameSuffix = jsonData["suffix"] as? String ?? ""
-            self.namePrefix = jsonData["prefix"] as? String ?? ""
+            self.init(withJson: jsonData)
             
-            self.contactHasImage = jsonData["has_image"] as? Bool ?? false
-            self.organizationName = jsonData["org"] as? String ?? ""
-            
-            self.jobTitle = jsonData["job"] as? String ?? ""
-            self.departmentName = jsonData["department"] as? String ?? ""
-            if let bd = jsonData["birthday"] as? String {
-                let array = bd.split(separator: "_")
-                if array.count > 2 {
-                    var date = DateComponents()
-                    date.day = Int(array[0]) ?? 0
-                    date.month = Int(array[1]) ?? 0
-                    date.year = Int(array[2]) ?? 0
-                    self.contactBirthday = date
-                } else {
-                    self.contactBirthday = nil
-                }
-            }
-            
-            self.contactPhoneNumber = jsonData["phones"] as? [String:AnyObject] ?? [:]
-            self.contactEmails = jsonData["emails"] as? [String:AnyObject] ?? [:]
-            self.contactWeburl = jsonData["webs"] as? [String:AnyObject] ?? [:]
-            self.contactSocials = jsonData["social"] as? [String:AnyObject] ?? [:]
-            self.contactAddress = jsonData["address"] as? [String:AnyObject] ?? [:]
             
         } catch {
+            self.init(withJson: [:])
             print(error)
         }
         
-        if contactData.count  > 100000 {
-            let image_length_data = contactData.subdata(in: length+8...length+31)
-            let image_length = image_length_data.withUnsafeBytes { (ptr: UnsafePointer<Int>) -> Int in
-                return ptr.pointee
-            }
-            let end_index = length+31+image_length
-            let image_data = contactData.subdata(in: length+32...end_index)
-            let image = UIImage(data: image_data)
-            if image != nil {
-                self.contactHasImage = true
-                self.contactImageData = image_data
-            }
-            
-            let thumb_length_data = contactData.subdata(in: end_index+1...end_index+23)
-            let thumb_length = thumb_length_data.withUnsafeBytes { (ptr: UnsafePointer<Int>) -> Int in
-                return ptr.pointee
-            }
-            let end_index2 = end_index+24+thumb_length
-            let thumb_data = contactData.subdata(in: end_index+25...end_index2)
-            let thumb = UIImage.init(data: thumb_data)
-            if thumb != nil {
-                self.contactThumbData = thumb_data
-            }
-        }
+//        if contactData.count  > 100000 {
+//            let image_length_data = contactData.subdata(in: length+8...length+31)
+//            let image_length = image_length_data.withUnsafeBytes { (ptr: UnsafePointer<Int>) -> Int in
+//                return ptr.pointee
+//            }
+//            let end_index = length+31+image_length
+//            let image_data = contactData.subdata(in: length+32...end_index)
+//            let image = UIImage(data: image_data)
+//            if image != nil {
+//                self.contactHasImage = true
+//                self.contactImageData = image_data
+//            }
+//
+//            let thumb_length_data = contactData.subdata(in: end_index+1...end_index+23)
+//            let thumb_length = thumb_length_data.withUnsafeBytes { (ptr: UnsafePointer<Int>) -> Int in
+//                return ptr.pointee
+//            }
+//            let end_index2 = end_index+24+thumb_length
+//            let thumb_data = contactData.subdata(in: end_index+25...end_index2)
+//            let thumb = UIImage.init(data: thumb_data)
+//            if thumb != nil {
+//                self.contactThumbData = thumb_data
+//            }
+//        }
     }
     
     init(withContact contact:CNContact){
@@ -308,6 +314,8 @@ class ContactData {
     }
     
     
+    
+    
     func toContact()->CNMutableContact {
         let contact = CNMutableContact()
         
@@ -378,6 +386,25 @@ class ContactData {
         contact.organizationName = self.organizationName
         contact.departmentName = self.departmentName
         return contact
+    }
+    
+    func toJson()->String {
+        var __data = [String:Any]()
+        let self_data = self.getMap()
+        __data[self.identifier] = self_data
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: __data, options: [])
+            // here "jsonData" is the dictionary encoded in JSON data
+            
+            
+            // you can now cast it with the right type
+            let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+            print(jsonString)
+            return jsonString
+        } catch {
+            print(error.localizedDescription)
+        }
+        return ""
     }
     
     static func getLabel(fromValues labelData:[String:AnyObject])->[CNLabeledValue<NSString>] {

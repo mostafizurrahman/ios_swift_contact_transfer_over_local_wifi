@@ -163,7 +163,7 @@
 - (long)receiveBytes:(void *)buf limit:(long)limit
 {
     struct timeval tv;
-    tv.tv_sec = 5;
+    tv.tv_sec = 3;
     tv.tv_usec = 0;
     fd_set read_fds;
     FD_ZERO(&read_fds);

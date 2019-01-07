@@ -11,7 +11,7 @@
 #import "ServerSocket.h"
 
 @protocol TCPSendContactDelegate <NSObject>
--(void)onContactSendSuccess:(int)length;
+-(void)onContactSendSuccess:(unsigned long)length;
 -(void)onContactSendError:(NSError *)sendError;
 -(void)onSendStatusReceived:(int)count;
 @end

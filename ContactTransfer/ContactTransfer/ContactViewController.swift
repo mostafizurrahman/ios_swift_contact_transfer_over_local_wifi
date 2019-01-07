@@ -357,6 +357,7 @@ extension ContactViewController:UISearchBarDelegate, UITableViewDelegate, UITabl
         let contactData = self.searchActive ?
             self.filterContacts[indexPath.row] :
             self.deviceContacts[indexPath.row]
+        
         tableCell.accessoryType = self.deselectedContacts.contains(contactData.identifier) ?
             .none : .checkmark
         tableCell.contactDelegate = self

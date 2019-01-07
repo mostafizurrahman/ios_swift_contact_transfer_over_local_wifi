@@ -31,6 +31,7 @@ class SenderViewController: UIViewController {
     
     @IBOutlet weak var animationView: UIView!
     
+    @IBOutlet weak var searchStatus: UILabel!
     
     var sendingContact:TCPContactSend?
     var sendCount:Int = 0
@@ -146,7 +147,10 @@ class SenderViewController: UIViewController {
                     for view in self.receiverButtonArray {
                         view.isHidden = true
                     }
-                    self.satusLabel.text = "Sending Contacts...."
+                    self.statusLabel.text = ""
+                    self.satusLabel.text = "Archiving data...."
+                    self.satusLabel.textColor = .black
+                    self.searchStatus.text = "Sending contacts..."
                 }
             }
             if let contactData = self.receiverArray.filter ({$0.senderIp.elementsEqual(ip_address)}).first {
@@ -157,13 +161,14 @@ class SenderViewController: UIViewController {
                 let comm_port = Int.random(in: 9000...9999)
                 self.receiverData?.commPort = comm_port
                 
+                let archived_data = self.getData()
                 let user_name = UserDefaults.standard.string(forKey: "UserName")
                 let parameters:[String : AnyObject] = ["DEVICE_OS" : OSType.iOS as AnyObject,
                                                        "DEVICE_MODEL" : UIDevice.modelName as AnyObject,
                                                        "SENDER_IP" : self.device_ip_address as AnyObject ,
                                                        "SENDER_NAME" : user_name as AnyObject,
                                                        "RECEIV_IP" : ip_address as AnyObject,
-                                                       "RECEIV_NAME" : "\(self.selectedContacts.count)" as AnyObject,
+                                                       "RECEIV_NAME" : "\(archived_data.count)" as AnyObject, //this line should be replaced whith proper data model
                                                        "COMM_STATUS" : SOStatus.receive.rawValue as AnyObject,
                                                        "COMM_PORT" : comm_port as AnyObject]
                 let socketData = SocketData(dictionary: parameters)
@@ -184,7 +189,13 @@ class SenderViewController: UIViewController {
                     
                     if self.inititateConnection() {
                         print("connection___success!!!!___")
-                        self.sendContactData()
+                        
+                        if let __sender = self.sendingContact {
+                            DispatchQueue.main.async {
+                                self.satusLabel.text = "Sending data...."
+                            }
+                            __sender.sendContact(archived_data)
+                        }
                     } else {
                         
                     }
@@ -193,23 +204,58 @@ class SenderViewController: UIViewController {
         }
     }
     
-    func sendContactData(){
-        if let __sender = self.sendingContact {
-            
-            while self.sendCount < self.selectedContacts.count
-            && !self.abortSendingOperation {
-                let contactData = self.selectedContacts[self.sendCount]
-                let raw_data = contactData.getData()
-                self.contactDataLen = raw_data.count
-                __sender.sendContact(raw_data)
-            }
-            
-            if let enddata = "END".data(using: .utf8) {
-                for _ in 0...5 {
-                    __sender.sendContact(enddata)
+    func getData()->Data{
+            var image_data = Data()
+            var contactString = "{"
+            for contactData in self.selectedContacts {
+                let contact_str = contactData.toJson()
+                contactString.append(String(contact_str.dropLast().dropFirst()))
+                contactString.append(",")
+                
+                if let imageData = contactData.contactImageData {
+                    guard let identifierData = contactData.identifier.data(using: .utf8) else {
+                        continue
+                    }
+                    guard let idfdCount = "\(identifierData.count)".data(using: .utf8) else {
+                        continue
+                    }
+                    let countString = "\(imageData.count)"
+                    guard let imageDataCount = countString.data(using: .utf8) else {
+                        continue
+                    }
+                    let strCount = "\(imageDataCount.count)"
+                    let counting =  strCount.count < 2 ?
+                    "0\(strCount)" : strCount
+                    guard let countData = counting.data(using: .utf8) else {
+                        continue
+                    }
+                    image_data.append(idfdCount)//2 len
+                    image_data.append(identifierData)//36 len
+                    image_data.append(countData) //2 len
+                    image_data.append(imageDataCount)//24 len
+                    image_data.append(imageData)
                 }
             }
-        }
+            contactString = String(contactString.dropLast())
+            contactString.append("}")
+            if let __data = contactString.data(using: .utf8) {
+                var send_data = Data()
+                if let countData = "\(__data.count)".data(using: .utf8) {
+                    print(countData.count)
+                    var countString = "\(countData.count)"
+                    if countString.count < 2 {
+                        countString = "0\(countData.count)"
+                    }
+                    if let subCount = countString.data(using: .utf8) {
+                        send_data.append(subCount)
+                        send_data.append(countData)
+                        send_data.append(__data)
+                        send_data.append(image_data)
+                    }
+                }
+                return send_data//837300
+            }
+        return Data()
     }
     
     func inititateConnection()->Bool{
@@ -273,22 +319,25 @@ class SenderViewController: UIViewController {
 
 
 extension SenderViewController : TCPSendContactDelegate {
-    func onContactSendSuccess(_ length: Int32) {
+    func onContactSendSuccess(_ length: UInt) { 
         print("sending \(self.sendCount)")
-        if Int(length) == self.contactDataLen {
-            if let __sender = self.sendingContact {
-                var statusLen = __sender.receiveStatus()
-                var maxTry = 20
-                while statusLen == -1 && maxTry > 0 {
-                    statusLen = __sender.receiveStatus()
-                    maxTry -= 1
-                }
-                if maxTry == 0 {
-                    self.abortSendingOperation = true
-                    print("unable to send data... aborting sending operations! receiver unavailable! Thank you good day")
-                }
-            }
+        DispatchQueue.main.async {
+            self.satusLabel.text = "Suceessfully sent all contacts!"
         }
+//        if Int(length) == self.contactDataLen {
+//            if let __sender = self.sendingContact {
+//                var statusLen = __sender.receiveStatus()
+//                var maxTry = 20
+//                while statusLen == -1 && maxTry > 0 {
+//                    statusLen = __sender.receiveStatus()
+//                    maxTry -= 1
+//                }
+//                if maxTry == 0 {
+//                    self.abortSendingOperation = true
+//                    print("unable to send data... aborting sending operations! receiver unavailable! Thank you good day")
+//                }
+//            }
+//        }
     }
     
     func onContactSendError(_ sendError: Error!) {
@@ -317,7 +366,7 @@ extension SenderViewController : TCPSendContactDelegate {
         self.abortSendingOperation = self.sendCount == self.selectedContacts.count
         DispatchQueue.main.async {
             self.satusLabel.text = "✅ Successfully sent \(self.sendCount) of \(self.selectedContacts.count) contacts."
-            self.statusLabel.text = "Sending in progress..."
+    
         }
         
         if self.abortSendingOperation  {

@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "CSClientSocket.h"
 #import "ServerSocket.h"
-#define MAX_DATA_LENGTH 8192
+#define MAX_DATA_LENGTH 8000
 
 @protocol TCPReceiveContactDelegate <NSObject>
-
+-(void)onDataCountRead:(unsigned long)dataCount;
 -(void)onContactReceivedSuccess:(NSData *)data;
 -(void)onContactReceiveError:(NSError *)receiveError;
 @end

@@ -854,6 +854,7 @@
                     <connections>
                         <outlet property="animationView" destination="wJW-Ea-FGn" id="5RH-Gz-6VF"/>
                         <outlet property="satusLabel" destination="8hf-Hs-O9X" id="06F-fM-WNO"/>
+                        <outlet property="searchStatus" destination="SCa-tO-pjP" id="vB1-c4-rta"/>
                         <outlet property="statusLabel" destination="tAd-13-E0f" id="nOO-tO-XWz"/>
                         <outletCollection property="receiverButtonArray" destination="02l-oG-zj8" collectionClass="NSMutableArray" id="vOU-hr-ujy"/>
                         <outletCollection property="receiverButtonArray" destination="nLk-k9-Bth" collectionClass="NSMutableArray" id="pDb-eE-s32"/>

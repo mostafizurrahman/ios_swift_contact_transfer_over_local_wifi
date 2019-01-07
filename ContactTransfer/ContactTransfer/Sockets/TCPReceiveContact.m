@@ -24,6 +24,7 @@
     long receiveDataLength;
     while ((receiveDataLength = [incomingSocket receiveBytes:data limit:dataCount]) > 0) {
         [incomingData appendBytes:data length:receiveDataLength];
+        [receiveDelegate onDataCountRead:receiveDataLength];
     }
     if ([incomingData length] > 0 && !incomingSocket.lastError) {
         [receiveDelegate onContactReceivedSuccess:incomingData];

@@ -21,8 +21,8 @@
 
 -(void)sendContact:(NSData *)data {
     
-    int32_t contactDataLength = (int32_t)[data length];
-    int32_t sendDataLength = (int32_t)[clientSocket sendBytes:[data bytes] count:contactDataLength];
+    unsigned long contactDataLength = [data length];
+    unsigned long sendDataLength = [clientSocket sendBytes:[data bytes] count:contactDataLength];
     if (sendDataLength >= 0) {
         [sendDelegate onContactSendSuccess:sendDataLength];
     } else {

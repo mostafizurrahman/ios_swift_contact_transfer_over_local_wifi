@@ -27,10 +27,13 @@ class ReceiverViewController: UIViewController {
     var activityView:NVActivityIndicatorView?
     var senderInfo:SocketData?
     var countactCount:Int = 0
-    var successCount:Int = 0
+    var successCount:UInt = 0
     var abortReceiveOperation = false
+    var receivedContacts:[ContactData] = []
+    
     
     @IBOutlet weak var contactNameLabel: UILabel!
+    
     
     var receiveContact:TCPReceiveContact?
     override func viewDidLoad() {
@@ -53,7 +56,7 @@ class ReceiverViewController: UIViewController {
     
     fileprivate func initiateConnections(){
         if let contactData = self.senderInfo {
-            if let count = Int(contactData.receiverName) {
+            if let count = Int(contactData.receiverName)  {
                 self.countactCount =  count
                 var is_connected = false
                 var index = 0
@@ -102,7 +105,6 @@ class ReceiverViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
     }
     
 
@@ -134,6 +136,52 @@ class ReceiverViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
+    
+    func process(ContacData data:Data){
+        
+    }
+    
+    func display(Info contactData:ContactData){
+        self.name.text = contactData.contactName_display
+//        self.progress.progress = Float(self.successCount)/Float(self.countactCount)
+//        self.status.text = "New contact saved..."
+        if contactData.contactPhoneNumber.count > 0 {
+            if let __key_value = contactData.contactPhoneNumber.first {
+                let __number = "\(__key_value.key) : \(__key_value.value as! String)"
+                self.mobile.text = __number
+                
+            }
+        } else {
+            self.mobile.text = "No mobile number found!"
+        }
+        if contactData.contactEmails.count > 0 {
+            if let __key_value = contactData.contactEmails.first {
+                let __number = "\(__key_value.key) : \(__key_value.value as! String)"
+                self.email.text = __number
+            }
+        } else {
+            self.email.text = "No email found!"
+        }
+        
+        if let __country = contactData.contactAddress["country"] as? String {
+            let city = contactData.contactAddress["city"] as? String ?? ""
+            let street = contactData.contactAddress["street"] as? String ?? ""
+            self.other.text = "St : \(street), City : \(city), Country : \(__country)"
+        } else if contactData.contactSocials.count  > 0{
+            if let social = contactData.contactSocials.first {
+                self.other.text = "\(social.key) : \(social.value)"
+            }
+        } else {
+            self.other.text = ""
+        }
+        
+        if let image_data = contactData.contactImageData {
+            let image = UIImage.init(data: image_data)
+            self.profile.image = image
+        } else {
+            self.profile.image = UIImage.init(named: "profile")
+        }
+    }
 }
 
 extension ReceiverViewController:AVAudioPlayerDelegate {
@@ -141,78 +189,124 @@ extension ReceiverViewController:AVAudioPlayerDelegate {
 }
 extension ReceiverViewController:TCPReceiveContactDelegate {
     func onContactReceivedSuccess(_ data: Data!) {
-        let end_data = data.subdata(in: 0...3)
-        if let str = String(data: end_data, encoding: .utf8) {
-            if str.contains("EN") {
-                print("finished contact receiving")
-                self.abortReceiveOperation = true
-                return
+        
+        NSLog("0")
+        self.abortReceiveOperation = true
+        receivedContacts.removeAll()
+        let lenData = data.subdata(in: 0...1)
+        let lenString = String(data: lenData, encoding: .utf8)
+        var countContact = 0
+        if let __lenStr = lenString,
+            let __len = Int(__lenStr) {
+            DispatchQueue.main.async {
+                self.status.text = "Extracting contacts...\nPlease! Wait."
+                self.playNotification(name:"notification_save")
             }
-        }
-        let contactData = ContactData.init(withData: data)
-        
-        
-        self.successCount += 1
-        
-        self.save(Contact:contactData)
-        
-        let status = "\(self.successCount)"
-        guard let __receiver = self.receiveContact else {
-            self.abortReceiveOperation = true
+            NSLog("one")
+            let contact_data = data.subdata(in: 2...2+__len-1)
+            if let len_string = String(data: contact_data, encoding: .utf8),
+                let contact_len = Int(len_string){
+                let startIndex = __len + 2
+                let jsonData = data.subdata(in: startIndex...startIndex+contact_len-1)
+                do {
+                    if let contactJson = try JSONSerialization.jsonObject(with: jsonData,
+                                                                          options: []) as? [String : AnyObject] {
+                        NSLog("two")
+                        for key in  contactJson.keys {
+                            if let __contact = contactJson[key] as? [String:AnyObject] {
+                                let contact = ContactData(withJson: __contact)
+                                self.receivedContacts.append(contact)
+                                if contact.contactHasImage {
+                                    self.receivedContacts.append(contact)
+                                } else {
+                                    countContact += 1
+                                    DispatchQueue.main.async {
+                                        self.save(Contact: contact)
+                                        self.display(Info: contact)
+                                    }
+                                }
+                            }
+                        }
+                        
+                        NSLog("three")
+                        var nxtIndex = startIndex+contact_len
+                        if nxtIndex < data.count-1 {
+                            while nxtIndex < data.count - 1{
+                                
+                                let idf_len_data = data.subdata(in: nxtIndex...nxtIndex+1)
+                                
+                                guard let idf_str_data = String(data: idf_len_data, encoding: .utf8) else {
+                                    break
+                                }
+                                guard let idf_count = Int(idf_str_data) else  {
+                                    break
+                                }
+                                let idf_data = data.subdata(in: nxtIndex+2...nxtIndex+idf_count+1)
+                                guard let idf_string = String(data: idf_data, encoding: .utf8) else {
+                                    break
+                                }
+                                print(idf_string)
+                                nxtIndex = nxtIndex+idf_count+2
+                                let len1_data = data.subdata(in: nxtIndex...nxtIndex+1)
+                                
+                                guard let len1_str = String(data: len1_data, encoding: .utf8) else {
+                                    break
+                                }
+                                guard let len1 = Int(len1_str) else {
+                                    break
+                                }
+                                let len2_data = data.subdata(in: nxtIndex+2...nxtIndex+1+len1)
+                                guard let len2_str = String(data:len2_data, encoding: .utf8) else {
+                                    break
+                                }
+                                guard let len2 = Int(len2_str) else {
+                                    break
+                                }
+                                let image_data = data.subdata(in: nxtIndex+2+len1...nxtIndex+1+len1+len2)
+                                nxtIndex = nxtIndex+2+len1+len2
+                                
+                                for contact in self.receivedContacts {
+                                    if contact.identifier.elementsEqual(idf_string) {
+                                        countContact += 1
+                                        contact.contactImageData = image_data
+                                        DispatchQueue.global().async {
+                                            self.save(Contact: contact)
+                                            DispatchQueue.main.async {
+                                                self.display(Info: contact)
+                                            }
+                                        }
+                                        break
+                                    }
+                                }
+                            }
+                            NSLog("Four")
+                            DispatchQueue.main.async {
+                                self.errorLabel.text = "✅ Done! \(countContact) Contacts added."
+                                self.playNotification(name:"notification_save")
+                                
+                            }
+                        }
+                        
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+        } else {
+            print("LENGTH DATA ERROR")
             return
         }
-        __receiver.sendStatus(status)
-        
+    }
+    
+    func onDataCountRead(_ dataCount: UInt) {
         DispatchQueue.main.async {
-            self.name.text = contactData.contactName_display
-            self.progress.progress = Float(self.successCount)/Float(self.countactCount)
-            self.status.text = "Received \(self.successCount) of \(self.countactCount) contacts."
-            if contactData.contactPhoneNumber.count > 0 {
-                if let __key_value = contactData.contactPhoneNumber.first {
-                    let __number = "\(__key_value.key) : \(__key_value.value as! String)"
-                    self.mobile.text = __number
-                    
-                }
-            } else {
-                self.mobile.text = "No mobile number found!"
-            }
-            if contactData.contactEmails.count > 0 {
-                if let __key_value = contactData.contactEmails.first {
-                    let __number = "\(__key_value.key) : \(__key_value.value as! String)"
-                    self.email.text = __number
-                }
-            } else {
-                self.email.text = "No email found!"
-            }
-            
-            if let __country = contactData.contactAddress["country"] as? String {
-                let city = contactData.contactAddress["city"] as? String ?? ""
-                let street = contactData.contactAddress["street"] as? String ?? ""
-                self.other.text = "St : \(street), City : \(city), Country : \(__country)"
-            } else if contactData.contactSocials.count  > 0{
-                if let social = contactData.contactSocials.first {
-                    self.other.text = "\(social.key) : \(social.value)"
-                }
-            } else {
-                self.other.text = ""
-            }
-            
-            if let image_data = contactData.contactImageData {
-                let image = UIImage.init(data: image_data)
-                self.profile.image = image
-            } else {
-                self.profile.image = UIImage.init(named: "profile")
-            }
-        }
-        
-        if self.successCount == self.countactCount {
-            
-            print("success received!! all contacts")
-            self.abortReceiveOperation = true
-            DispatchQueue.main.async {
-                self.errorLabel.text = "✅ Received and Saved Contacts..."
-                self.playNotification(name:"notification_save")
-                
+            self.successCount += dataCount
+            self.progress.progress = Float(self.successCount) / Float(self.countactCount)
+            let recv = String(format: "%0.2f%", self.progress.progress * 100.0)
+            self.status.text = "Data Received \(recv)"
+            if recv.elementsEqual("100.00%") {
+                self.status.textColor = UIColor.gray
+                self.status.text = "100% data received! Processing...."
             }
         }
     }
