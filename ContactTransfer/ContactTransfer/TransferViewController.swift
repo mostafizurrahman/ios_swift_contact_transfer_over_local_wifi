@@ -11,6 +11,7 @@ import Pulsator
 import Contacts
 import NVActivityIndicatorView
 import AVFoundation
+import GoogleMobileAds
 
 class TransferViewController: UIViewController {
     
@@ -19,7 +20,7 @@ class TransferViewController: UIViewController {
     typealias HVC = TransferViewController
     static let MSW = UIScreen.main.bounds.width
     static let MSH = UIScreen.main.bounds.height
-    
+    @IBOutlet weak var googleBannerView: GADBannerView!
     let broadcastQueue = DispatchQueue(label: "contact.broadcast", attributes: .concurrent)
     let receivingQueue = DispatchQueue(label: "contact.receiving", attributes: .concurrent)
     
@@ -81,7 +82,14 @@ class TransferViewController: UIViewController {
         let editButton   = UIBarButtonItem(barButtonSystemItem: item, target: self,
                                            action: #selector(didTapEditButton(_:)))
         self.navigationItem.rightBarButtonItems = [editButton]
+        guard let nav = (self.navigationController as? AdViewController) else {
+            return
+        }
+        weak var __self = self
+        nav.set(BannerAd: self.googleBannerView, withRoot: __self ?? self)
     }
+    
+    
     
     @objc func didTapEditButton(_ sender:UIBarButtonItem){
         guard let url = URL(string: "https://itunes.apple.com/us/developer/mostafizur-rahman/id1386969788?mt=8") else {

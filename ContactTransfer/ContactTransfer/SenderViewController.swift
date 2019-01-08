@@ -7,9 +7,11 @@
 //
 
 import UIKit
-import SwiftSocket
+
 import NVActivityIndicatorView
 import AVFoundation
+import GoogleMobileAds
+import StoreKit
 
 
 class SenderViewController: UIViewController {
@@ -26,7 +28,8 @@ class SenderViewController: UIViewController {
     @IBOutlet var receiverButtonArray: [UIView]!
     var removedIP:[String:Int] = [:]
     @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var tcpSendView: UIView!
+    
+    @IBOutlet weak var googleBannerView: GADBannerView!
     @IBOutlet weak var satusLabel: UILabel!
     
     
@@ -62,6 +65,15 @@ class SenderViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.startBroadcastReciever()
+        let item = UIBarButtonItem.SystemItem.bookmarks
+        let editButton   = UIBarButtonItem(barButtonSystemItem: item, target: self,
+                                           action: #selector(openFaceBook(_:)))
+        self.navigationItem.rightBarButtonItems = [editButton]
+        guard let nav = (self.navigationController as? AdViewController) else {
+            return
+        }
+        weak var __self = self
+        nav.set(BannerAd: self.googleBannerView, withRoot: __self ?? self)
     }
     
     
@@ -72,8 +84,26 @@ class SenderViewController: UIViewController {
     }
     
     deinit {
+        if let __itms = self.navigationItem.rightBarButtonItems?.first {
+            __itms.target = nil
+        }
         self.abortSendingOperation = true
         self.receiveBraodcast = false
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        if let touch_point = touches.first?.location(in: self.view) {
+            if self.animationView.frame.contains(touch_point) {
+                
+                if #available(iOS 10.3, *) {
+                    SKStoreReviewController.requestReview()
+                } else {
+                    // Fallback on earlier versions
+                }
+            }
+        }
     }
     
     fileprivate func startBroadcastReciever(){
@@ -356,6 +386,14 @@ class SenderViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    @objc func openFaceBook(_ sender: Any) {
+        guard  let imageUrl = URL(string: "https://www.facebook.com/imagebucket.hashtag/") else {
+            return
+        }
+        if UIApplication.shared.canOpenURL(imageUrl) {
+            UIApplication.shared.openURL(imageUrl)
+        }
+    }
 }
 
 
@@ -366,7 +404,11 @@ extension SenderViewController : TCPSendContactDelegate {
         DispatchQueue.main.async {
             self.satusLabel.text = "Suceessfully sent all contacts!"
             self.statusLabel.text = "Please! Exit to initiate new transfer..."
+            if let __nav = self.navigationController as? AdViewController {
+                __nav.showInterstitial()
+            }
         }
+        
 //        if Int(length) == self.contactDataLen {
 //            if let __sender = self.sendingContact {
 //                var statusLen = __sender.receiveStatus()
@@ -399,7 +441,9 @@ extension SenderViewController : TCPSendContactDelegate {
                                             handler: nil)
             alert.addAction(action)
             self.present(alert, animated: true, completion: nil)
-            
+            if let __nav = self.navigationController as? AdViewController {
+                __nav.showInterstitial()
+            }
         }
     }
     

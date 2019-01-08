@@ -9,13 +9,61 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ContactTransfer/SenderViewController.swift"
-            timestampString = "568579954.037406"
+            filePath = "ContactTransfer/ReceiverViewController.swift"
+            timestampString = "568587979.735467"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
+            landmarkName = "onContactReceivedSuccess(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ContactTransfer.ReceiverViewController.onContactReceivedSuccess(Swift.Optional&lt;Foundation.Data&gt;) -&gt; ()"
+                  moduleName = "ContactTransfer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mostafizurrahman/Documents/GitHub/ios_swift_contact_transfer_over_local_wifi/ios_swift_contact_transfer_over_local_wifi/ContactTransfer/ContactTransfer/ReceiverViewController.swift"
+                  timestampString = "568587979.940713"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "246"
+                  endingLineNumber = "246"
+                  offsetFromSymbolStart = "6308">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in ContactTransfer.ReceiverViewController.onContactReceivedSuccess(Swift.Optional&lt;Foundation.Data&gt;) -&gt; ()"
+                  moduleName = "ContactTransfer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mostafizurrahman/Documents/GitHub/ios_swift_contact_transfer_over_local_wifi/ios_swift_contact_transfer_over_local_wifi/ContactTransfer/ContactTransfer/ReceiverViewController.swift"
+                  timestampString = "568587979.942782"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "247"
+                  endingLineNumber = "247"
+                  offsetFromSymbolStart = "33">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ContactTransfer/ReceiverViewController.swift"
+            timestampString = "568587979.73552"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
+            landmarkName = "onContactReceivedSuccess(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

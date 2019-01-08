@@ -27,7 +27,7 @@ class ContactViewController: UIViewController {
     
     
     var detailContact:ContactData? = nil
-    
+    var count = 0
     
     @IBOutlet weak var bottomSpaceSelect: NSLayoutConstraint!
     @IBOutlet weak var bottomSpaceSendContact: NSLayoutConstraint!
@@ -72,6 +72,11 @@ class ContactViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.showAD()
+    }
     @objc func keyboardWillShow(notification: Notification) {
         let factor:CGFloat = UIScreen.main.nativeBounds.height > 2435 ? 2.65 : 2.5
         let bottomSpace:CGFloat = UIScreen.main.bounds.height / factor
@@ -79,6 +84,8 @@ class ContactViewController: UIViewController {
         self.bottomSpaceHideKeybord.constant = bottomSpace - 45
         self.bottomSpaceSendContact.constant = bottomSpace - 45
         self.bottomSpaceSelect.constant = bottomSpace - 45
+        
+        self.count += 1
         UIView.animate(withDuration: 0.4) {
             self.view.layoutIfNeeded()
         }
@@ -131,6 +138,7 @@ class ContactViewController: UIViewController {
     @IBAction func hideKeybord(_ sender: Any) {
         self.view.endEditing(true)
         self.searchBar.endEditing(true)
+        self.count += 1
     }
     
     @IBAction func changeSelection(_ sender: BorderButton) {
@@ -148,18 +156,21 @@ class ContactViewController: UIViewController {
             }
         }
         self.contactTableView.reloadData()
+        self.count += 1
     }
     
     @IBAction func sendSingleContact(_ sender: Any) {
         if let contact = self.detailContact {
             self.self.performSegue(withIdentifier: "SendSegue", sender: [contact])
         }
+        self.count += 1
     }
     
     @IBAction func doneContactView(_ sender: Any) {
         InterfaceHelper.animateOpacity(toInvisible: self.contactView, atDuration: 0.4) { (fin) in
             self.detailContact = nil
         }
+        self.count += 1
     }
     
     func present(Contact contactData:ContactData){
@@ -250,7 +261,7 @@ class ContactViewController: UIViewController {
         }
         
         InterfaceHelper.animateOpacity(toVisible: self.contactView, atDuration: 0.4) { (_finished) in
-            
+            self.count += 1
         }
     }
     
@@ -261,6 +272,7 @@ class ContactViewController: UIViewController {
                 scontacts.append(contact)
             }
         }
+        self.count += 1
         if scontacts.count > 0 {
             self.performSegue(withIdentifier: "SendSegue", sender: scontacts)
         } else {
@@ -272,6 +284,16 @@ class ContactViewController: UIViewController {
             }
             alertController.addAction(action)
             self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func showAD(){
+        self.count += 1
+        if self.count > 12 {
+            self.count = 0
+            if let __nav = self.navigationController as? AdViewController {
+                __nav.showInterstitial()
+            }
         }
     }
     
@@ -297,6 +319,7 @@ extension ContactViewController:UISearchBarDelegate, UITableViewDelegate, UITabl
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.count += 1
         DispatchQueue.global().async {
             self.filterContacts = self.deviceContacts.filter({ (contactData) -> Bool in
                 if contactData.contactName_display.lowercased().contains(searchText.lowercased()) {
@@ -349,6 +372,7 @@ extension ContactViewController:UISearchBarDelegate, UITableViewDelegate, UITabl
             tableRow.accessoryType = .none
             deselectedContacts.append(contactData.identifier)
         }
+        self.showAD()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -391,5 +415,7 @@ extension ContactViewController:ContactDetailsDelegate {
             self.filterContacts[indexPath.row]:
             self.deviceContacts[indexPath.row]
         self.present(Contact:contactData)
+        
+        self.showAD()
     }
 }

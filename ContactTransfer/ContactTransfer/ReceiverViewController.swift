@@ -7,14 +7,15 @@
 //
 
 import UIKit
-import SwiftSocket
 import NVActivityIndicatorView
 import Contacts
 import AVFoundation
-
+import GoogleMobileAds
+import StoreKit
 class ReceiverViewController: UIViewController {
     
     @IBOutlet weak var profile: UIImageView!
+    @IBOutlet weak var gogoleBannerView: GADBannerView!
     @IBOutlet weak var name:UILabel!
     @IBOutlet weak var mobile:UILabel!
     @IBOutlet weak var email:UILabel!
@@ -30,7 +31,7 @@ class ReceiverViewController: UIViewController {
     var successCount:UInt = 0
     var abortReceiveOperation = false
     var receivedContacts:[ContactData] = []
-    
+    var singleContact = false
     
     @IBOutlet weak var contactNameLabel: UILabel!
     
@@ -50,6 +51,16 @@ class ReceiverViewController: UIViewController {
         DispatchQueue.global().async {
             self.initiateConnections()
         }
+        
+        let item = UIBarButtonItem.SystemItem.bookmarks
+        let editButton   = UIBarButtonItem(barButtonSystemItem: item, target: self,
+                                           action: #selector(openFaceBook(_:)))
+        self.navigationItem.rightBarButtonItems = [editButton]
+        guard let nav = (self.navigationController as? AdViewController) else {
+            return
+        }
+        weak var __self = self
+        nav.set(BannerAd: self.gogoleBannerView, withRoot: __self ?? self)
         // Do any additional setup after loading the view.
     }
     
@@ -90,6 +101,19 @@ class ReceiverViewController: UIViewController {
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        if let touch_point = touches.first?.location(in: self.view) {
+            if self.animationView.frame.contains(touch_point) {
+                
+                if #available(iOS 10.3, *) {
+                    SKStoreReviewController.requestReview()
+                } else {
+                    // Fallback on earlier versions
+                }
+            }
+        }
+    }
     
     fileprivate func set(ErrorStatus error:String?) {
         if let __err = error{
@@ -102,7 +126,14 @@ class ReceiverViewController: UIViewController {
     }
     
     
-    
+    @objc func openFaceBook(_ sender: Any) {
+        guard  let imageUrl = URL(string: "https://www.facebook.com/imagebucket.hashtag/") else {
+            return
+        }
+        if UIApplication.shared.canOpenURL(imageUrl) {
+            UIApplication.shared.openURL(imageUrl)
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -229,6 +260,14 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
                             }
                         }
                         
+                        if countContact == 1 {
+                            DispatchQueue.main.async {
+                                if let __nav = self.navigationController as? AdViewController {
+                                    __nav.showInterstitial()
+                                }
+                            }
+                        }
+                        
                         NSLog("three")
                         var nxtIndex = startIndex+contact_len
                         if nxtIndex < data.count-1 {
@@ -284,7 +323,9 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
                             DispatchQueue.main.async {
                                 self.errorLabel.text = "✅ Done! \(countContact) Contacts added."
                                 self.playNotification(name:"notification_save")
-                                
+                                if let __nav = self.navigationController as? AdViewController {
+                                    __nav.showInterstitial()
+                                }
                             }
                         }
                         
@@ -330,6 +371,7 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
     }
     
     
+    
     func save(Contact contact:ContactData){
         let contact_store = CNContactStore()
         let saveRequest = CNSaveRequest()
@@ -342,6 +384,7 @@ extension ReceiverViewController:TCPReceiveContactDelegate {
                 self.playNotification(name:"notification_finished")
                 self.errorLabel.text = "✅ Done! Contact added."
                 self.status.text = "Saved contact."
+               
             }
         } catch {
             print("i dunno")
